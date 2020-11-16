@@ -18,9 +18,7 @@
                       <b-icon :icon="notif.icon" class="mt-2"></b-icon>
                     </td>
                     <td>
-                      <span style="margin-left:7px;width:20px;word-wrap: break-word">{{
-                        notif.text
-                      }}</span>
+                      <span style="margin-left:7px;width:20px;word-wrap: break-word">{{ notif.text }}</span>
                     </td>
                   </tr>
                 </table>
@@ -42,9 +40,7 @@
                   <p style="text-align:center" class="mb-2">51099290100</p>
                 </div>
               </b-dropdown-item>
-              <b-dropdown-item href="#" variant="danger">
-                <b-icon icon="power" variant="danger" class="mr-2"></b-icon>Keluar
-              </b-dropdown-item>
+              <b-dropdown-item href="#" variant="danger"> <b-icon icon="power" variant="danger" class="mr-2"></b-icon>Keluar </b-dropdown-item>
             </b-nav-item-dropdown>
           </b-navbar-nav>
         </b-collapse>
@@ -57,159 +53,288 @@
             <p><img src="./assets/logo.png" style="width:60px" /></p>
             <h5 class="mb-4">LPPM DLSU</h5>
           </div>
+
           <span v-for="(item, index) in sidebar_item">
-            <div
-              class="sidebar-item"
-              :class="item.class"
-              @click="changeRoute(index)"
-              v-if="item.icon"
-            >
-              <b-link :class="item.class + '-text'" class="item ml-4" :href="item.ref">
+            <div class="sidebar-item" :class="item.class" @click="changeRoute(index)" v-if="item.icon">
+              <!-- dropdown -->
+              <div v-if="item.dropdown">
+                <div>
+                  <b-dropdown variant="link" toggle-class="text-decoration-none" no-caret dropright>
+                    <!-- tombol dropdown -->
+                    <template#button-content>
+                      <b-link :class="item.class + '-text'" class="item ml-2">
+                          <b-icon :icon="item.icon"></b-icon>
+                          <span class="ml-3">{{item.title}}</span>
+                      </b-link>
+                    </template>
+
+                    <!-- isi dropdown -->
+                    <span v-for="list in item.dropdownList" >
+                      <b-dropdown-item :href="list.ref" style="z-index: 100;">
+                        <b-link class="-text item" :href="list.ref">
+                          <b-icon :icon="list.icon"></b-icon>
+                          <span class="ml-3">{{ list.title }}</span>
+                        </b-link>
+                      </b-dropdown-item>
+                    </span>
+                  </b-dropdown>
+
+                </div>
+              </div>
+
+              <b-link v-else :class="item.class + '-text'" class="item ml-4" :href="item.ref">
                 <b-icon :icon="item.icon"></b-icon>
                 <span class="ml-3">{{ item.title }}</span>
-          </b-link>
+              </b-link>
+            </div>
+
+            <p v-else class="ml-2 mt-4 sidebar-title">
+              <b>{{ item.title }}</b>
+              <b-icon icon="arrow90deg-right" rotate="90" class="ml-2"></b-icon>
+            </p>
+
+            <!-- keterangan -->
+          </span>
         </div>
-        <!-- keterangan -->
-        <p v-else class="ml-4" style="opacity:0.6;font-size:12px;text-transform:uppercase">
-          <b>{{ item.title }}</b>
-        </p>
-        <!-- if have child -->
-        <span v-if="item.childVisible == true">
-              <span v-for="child in item.child">
-                <div
-                  class="sidebar-item ml-3"
-                  @click="changeRoute(index)"
-                  v-if="child.icon"
-                >
-                  <b-link class="item ml-4" :href="item.ref">
-                    <b-icon :icon="child.icon"></b-icon>
-                    <span class="ml-3">{{ child.title }}</span>
-        </b-link>
       </div>
-      </span>
-      </span>
-      </span>
+      <div class="col-lg-9">
+        <div style="margin-top:90px;"></div>
+        <transition name="fade" mode="out-in">
+          <router-view></router-view>
+        </transition>
+      </div>
     </div>
-  </div>
-  <div class="col-lg-9">
-    <div style="margin-top:90px;"></div>
-    <transition name="fade" mode="out-in">
-      <router-view></router-view>
-    </transition>
-  </div>
-  </div>
   </div>
 </template>
 
 <script>
-export default
-{
-  data()
-  {
+export default {
+  data() {
     return {
       auth_level: 1,
       sidebar_item: [
-      {
-        title: "Dashboard",
-        icon: "house",
-        ref: "/#/",
-        class: "active",
-        hasChild: true,
-        childVisible: true,
-        child: [
         {
-          title: "....",
+          title: "Dashboard",
           icon: "house",
-          ref: "/#/JlTelkomLingkarleherryan"
+          ref: "/#/",
+          class: "",
         },
         {
-          title: "...",
-          icon: "house",
-          ref: "/#/JlTelkomLingkarleherryan"
-        }]
-      },
-      {
-        title: "JURNAL"
-      },
-      {
-        title: "Jurnal",
-        icon: "journals",
-        hasChild: false,
-        ref: "/#/jurnal",
-        class: ""
-      },
-      {
-        title: "Tambah Jurnal",
-        icon: "journal-plus",
-        hasChild: false,
-        ref: "/#/tambah-jurnal",
-        class: ""
-      },
-      {
-        title: "Pengaturan Jurnal",
-        icon: "journal-code",
-        hasChild: false,
-        ref: "/#",
-        class: ""
-      },
-      {
-        title: "AKUN"
-      },
-      {
-        title: "Forum",
-        icon: "chat",
-        hasChild: false,
-        ref: "/",
-        class: ""
-      },
-      {
-        title: "Dosen",
-        icon: "people",
-        hasChild: false,
-        ref: "/#/dosen",
-        class: ""
-      }],
+          title: "Pelaporan Penelitian",
+        },
+        {
+          title: "Tambah Pelaporan",
+          icon: "journal-plus",
+          class: "",
+          dropdown: true,
+          dropdownList: [
+            {
+              title: "Peneliti Asing",
+              ref: "/#/penelitian-tambah/peneliti-asing",
+              icon:"plus-square",
+              class:"",
+            },
+            {
+              title: "Publikasi Jurnal",
+              ref: "/#/penelitian-tambah/publikasi-jurnal",
+              icon:"plus-square",
+            },
+            {
+              title: "Pemakalah Forum Ilmiah Seminar/Lokakarya",
+              ref: "/#/penelitian-tambah/pemakalah-forum",
+              icon:"plus-square",
+            },
+            {
+              title: "Hibah Ditlitabmas",
+              ref: "/#/penelitian-tambah/hibah-ditlitabmas",
+              icon:"plus-square",
+            },
+            {
+              title: "Hibah nonditlitabmas",
+              ref: "/#/penelitian-tambah/hibah-nonditlitabmas",
+              icon:"plus-square",
+            },
+            {
+              title: "Penyelenggaraan Forum Ilmiah Seminar/Lokakarya",
+              ref: "/#/penelitian-tambah/penyelenggaraan-forum",
+              icon:"plus-square",
+            },
+            {
+              title: "Buku Ajar",
+              ref: "/#/penelitian-tambah/penelitian-tambah",
+              icon:"plus-square",
+            },
+            {
+              title: "Hak Kekayaan Intelektual/HKI",
+              ref: "/#/penelitian-tambah/",
+              icon:"plus-square",
+            },
+            {
+              title: "Kontrak Kerja",
+              ref: "/#/penelitian-tambah/kontrak-kerja",
+              icon:"plus-square",
+            },
+            {
+              title: "Unit Bisnis Hasil Riset",
+              ref: "/#/penelitian-tambah/unit-bhr",
+              icon:"plus-square",
+            },
+            {
+              title: "Luaran Lainnya",
+              ref: "/#/penelitian-tambah/luaran-lainnya",
+              icon:"plus-square",
+            },
+          ],
+        },
+        {
+          title: "Lihat Pelaporan",
+          icon: "journals",
+          ref: "/#/tambah-jurnal",
+          class: "",
+          dropdown: true,
+          dropdownList: [
+            {
+              title: "Peneliti Asing",
+              ref: "/#/penelitian-lihat/peneliti-asing",
+              icon:"plus-square",
+            },
+            {
+              title: "Publikasi Jurnal",
+              ref: "/#/penelitian-lihat/publikasi-jurnal",
+              icon:"plus-square",
+            },
+            {
+              title: "Pemakalah Forum Ilmiah Seminar/Lokakarya",
+              ref: "/#/penelitian-lihat/pemakalah-forum",
+              icon:"plus-square",
+            },
+            {
+              title: "Hibah Ditlitabmas",
+              ref: "/#/penelitian-lihat/hibah-ditlitabmas",
+              icon:"plus-square",
+            },
+            {
+              title: "Hibah nonditlitabmas",
+              ref: "/#/penelitian-lihat/hibah-nonditlitabmas",
+              icon:"plus-square",
+            },
+            {
+              title: "Penyelenggaraan Forum Ilmiah Seminar/Lokakarya",
+              ref: "/#/penelitian-lihat/penyelenggaraan-forum",
+              icon:"plus-square",
+            },
+            {
+              title: "Buku Ajar",
+              ref: "/#/penelitian-lihat/buku-ajar",
+              icon:"plus-square",
+            },
+            {
+              title: "Hak Kekayaan Intelektual/HKI",
+              ref: "/#/penelitian-lihat/hki",
+              icon:"plus-square",
+            },
+            {
+              title: "Kontrak Kerja",
+              ref: "/#/penelitian-lihat/kontrak-kerja",
+              icon:"plus-square",
+            },
+            {
+              title: "Unit Bisnis Hasil Riset",
+              ref: "/#/penelitian-lihat/unit-bhr",
+              icon:"plus-square",
+            },
+            {
+              title: "Luaran Lainnya",
+              ref: "/#/penelitian-lihat/luaran-lainnya",
+              icon:"plus-square",
+            },
+          ],
+
+        },
+        {
+          title: "Pelaporan PkM",
+        },
+        {
+          title: "Tambah Pelaporan",
+          icon: "journal-plus",
+          class: "",
+          dropdown: true,
+          dropdownList: [
+            {
+              title: "peneliti asing",
+              ref: "/#/penelitian/peneliti-asing",
+              icon:"plus-square",
+            },
+            {
+              title: "publikasi jurnal",
+              ref: "/#/petualang2",
+              icon:"plus",
+            },
+            {
+              title: "test3",
+              icon:"plus-square",
+            },
+            {
+              title: "test42",
+              icon:"plus-square",
+            },
+            {
+              title: "test5",
+              icon:"plus-square",
+            },
+          ],
+        },
+        {
+          title: "Lihat Pelaporan",
+          icon: "Journals",
+          class: "",
+          dropdown: true,
+          dropdownList: [
+            {
+              title: "peneliti asing",
+              ref: "/#/penelitian/peneliti-asing",
+              icon:"plus-square",
+            },
+            {
+              title: "publikasi jurnal",
+              ref: "/#/petualang2",
+              icon:"plus",
+            },
+            {
+              title: "test3",
+              icon:"plus-square",
+            },
+            {
+              title: "test42",
+              icon:"plus-square",
+            },
+            {
+              title: "test5",
+              icon:"plus-square",
+            },
+          ],
+        },
+      ],
 
       notification: [
-      {
-        icon: "journals",
-        text: "Jurnal Realtech Berhasil Ditambah"
-      }]
+        {
+          icon: "journals",
+          text: "Jurnal Realtech Berhasil Ditambah",
+        },
+      ],
     };
   },
-  methods:
-  {
-    changeRoute: function(index)
-    {
-      if (this.sidebar_item[index].hasChild)
-      {
-        if (this.sidebar_item[index].childVisible)
-        {
-          this.sidebar_item[index].childVisible = false;
-        }
-        else
-        {
-          this.sidebar_item[index].childVisible = true;
-        }
-      }
-
-      for (var i = 0; i < this.sidebar_item.length; i++)
-      {
-        if (i == index)
-        {
+  methods: {
+    changeRoute: function(index) {
+      for (var i = 0; i < this.sidebar_item.length; i++) {
+        if (i == index) {
           this.sidebar_item[i].class = "active";
-        }
-        else
-        {
+        } else {
           this.sidebar_item[i].class = "";
-          if (this.sidebar_item[i].hasChild)
-          {
-            this.sidebar_item[i].childVisible = false;
-          }
         }
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -247,6 +372,12 @@ export default
   box-shadow: 7px 0px 21px 0px rgba(50, 50, 50, 0.1);
   z-index: 99;
   background-color: #fff;
+}
+
+.sidebar-title {
+  opacity: 0.8;
+  font-size: 12px;
+  text-transform: uppercase;
 }
 
 .sidebar .sidebar-item {

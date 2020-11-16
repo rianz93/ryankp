@@ -1,21 +1,28 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Vue from "vue";
+import VueRouter from "vue-router";
 
-Vue.use(VueRouter)
+// PELAPORAN PENELITIAN TAMBAH
+import penelitiAsingTambah from "../views/penelitian/peneliti-asing-tambah.vue";
+
+// PELAPORAN PENELITIAN LIHAT
+import penelitiAsingLihat from "../views/penelitian/peneliti-asing-lihat.vue";
+
+Vue.use(VueRouter);
 
 const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home
-  }
-]
+	{
+		path: "/penelitian-tambah/peneliti-asing",
+		component: penelitiAsingTambah,
+	},
+	{
+		path: "/penelitian-lihat/peneliti-asing",
+		component: penelitiAsingLihat,
+	}
+	]
+
 
 const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
   routes
 })
 
-export default router
+export default router;
