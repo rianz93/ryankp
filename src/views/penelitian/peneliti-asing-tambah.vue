@@ -42,7 +42,7 @@
 						name: "tanggalTinggal",
 						type: "periodic",
 					}
-				]
+				],
 				url:'/penelitian/insertPenlitiAsing.php',
 
 			}
