@@ -1,26 +1,57 @@
 <template>
 	<div>
-		<h3>Pengaturan Akun</h3>
-
-		<!-- nama pengguna -->
-	  	<p class="mt-3 mb-1">Nama</p>
-	  	<b-form-input placeholder= "Edit Nama">
-	  	</b-form-input> 
-
-	  	<!-- id pengguna -->
-	  	<p class="mt-3 mb-1">ID</p>
-	  	<b-form-input placeholder= "Edit ID">
-	  	</b-form-input> 
-
-	  	<!-- password -->
-	  	<b-form @submit.stop.prevent>
-    		<p class="mt-3 mb-1" for="text-password">Password</p>
-    		<b-input type="password" aria-describedby="password-help-block"></b-input>
-    		
-	    	<b-form-text> Password harus berisi 8-20 panjang karakter
-		    </b-form-text>
-   		</b-form>
-
+		<h3>Data Peneliti Asing</h3>
+		<FormData :inputTypes="inputTypes" :url="url" ></FormData>
 	</div>
 </template>
+<script>
+	import FormData from '../Component/FormData.vue';
+	export default{
 
+		data(){
+			return{
+				inputTypes:[
+					{
+						label: "Tahun :",
+						name: "tahun",
+						type: "date",
+					},
+					{
+						label: "Nama :",
+						name: "nama",
+						type:"text",
+					},
+					{
+						label: "Jenis Kelamin :",
+						name: "jenisKelamin",
+						type:"select",
+						option:["Pria","Perempuan"],
+					},
+					{
+						label: "Akademik :",
+						name: "akademik",
+						type:"text",
+					},
+					{
+						label: "Negara :",
+						name: "negara",
+						type:"text",
+					},
+					{	
+						label: "Tanggal Tinggal :",
+						name: "tanggalTinggal",
+						type: "periodic",
+					}
+				]
+				url:'/penelitian/insertPenlitiAsing.php',
+
+			}
+		},
+		components:{
+			FormData
+		},
+		methods : {
+			
+		}
+	}
+</script>
