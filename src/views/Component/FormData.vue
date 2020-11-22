@@ -44,7 +44,7 @@
 							<b-input
 								:value="tanggalSampaiDengan(inputValue)"
 								placeholder="Pilih tanggal"
-								class="bg-white form-control text-gray-700 w-full py-1 px-2 appearance-none border rounded-r focus:outline-none focus:border-blue-500"
+								class="bg-white"
 								@click="
 									togglePopover({ placement: 'auto-start' })
 								"
@@ -83,3 +83,5 @@ export default {
 	},
 };
 </script>
+
+<style></style>
