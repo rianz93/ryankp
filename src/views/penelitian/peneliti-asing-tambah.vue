@@ -25,7 +25,7 @@
 						label: "Jenis Kelamin :",
 						name: "jenisKelamin",
 						type:"select",
-						option:["Pria","Perempuan"],
+						options:["Pria","Perempuan"],
 					},
 					{
 						label: "Akademik :",
