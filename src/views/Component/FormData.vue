@@ -28,6 +28,7 @@
 				</b-form-select>
 			</b-form-group>
 
+			<!-- DATA PERIODIC .. SAMPAI DENGAN .. -->
 			<b-form-group
 				v-if="data.type == 'periodic'"
 				:label-for="data.name + index"
@@ -43,7 +44,7 @@
 						<div class="flex items-center">
 							<b-input
 								:value="tanggalSampaiDengan(inputValue)"
-								placeholder="Pilih tanggal"
+								placeholder="Pilih range tanggal .. SD .."
 								class="bg-white"
 								@click="
 									togglePopover({ placement: 'auto-start' })
@@ -53,9 +54,22 @@
 						</div>
 					</template>
 				</v-date-picker>
+				<button @click="cetak()">test</button>
 			</b-form-group>
-			<button @click="cetak()">test</button>
+
+			<b-form-group
+				v-if="data.type == 'file'"
+				:label-for="data.name + index"
+				:label="data.label"
+			>
+				<b-form-file
+					:id="data.name + index"
+					@change="onChangeFileSelected($event, data.name)"
+				>
+				</b-form-file>
+			</b-form-group>
 		</span>
+		<b-button variant="success" @click="sendDataPost()">Submit</b-button>
 	</b-form>
 </template>
 
@@ -73,12 +87,33 @@ export default {
 	methods: {
 		cetak() {
 			console.log(this.formData);
-			
-			console.log(this.formData.tanggalTinggal.start.getDate());
-			console.log(typeof(this.formData.nama))
 		},
+
+		// FORMAT TANGGAL SD
 		tanggalSampaiDengan(value) {
 			if (value.start != null) return value.start + " SD " + value.end;
+		},
+
+		// SIMPAN FILE DALAM OBJECT
+		onChangeFileSelected(event, modelName) {
+			this.formData[modelName] = event.target.files[0];
+		},
+
+		// KIRIM DATA
+		sendDataPost() {
+			let fd = new FormData();
+			for (var item in this.formData) {
+				fd.append(item, this.formData[item]);
+			}
+
+			
+			axios
+				.post(API_ENDPOINT + this.url, fd, {
+					headers:{
+						'Content-Type': 'multipart/form-data'
+					}
+				})
+				.then((response) => console.log(response));
 		},
 	},
 };

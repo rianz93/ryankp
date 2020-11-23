@@ -41,8 +41,13 @@ export default {
 					name: "tanggalTinggal",
 					type: "periodic",
 				},
+				{
+					label: "upload berkas",
+					name: "berkas",
+					type: "file",
+				}
 			],
-			url: "/penelitian/insertPenlitiAsing.php",
+			url: "/penelitian/insertPenelitiAsing.php",
 		};
 	},
 	components: {
