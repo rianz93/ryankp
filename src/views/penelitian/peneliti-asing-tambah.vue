@@ -13,7 +13,7 @@ export default {
 				{
 					label: "Tahun :",
 					name: "tahun",
-					type: "date",
+					type: "year",
 				},
 				{
 					label: "Nama :",
@@ -41,11 +41,11 @@ export default {
 					name: "tanggalTinggal",
 					type: "periodic",
 				},
-				{
-					label: "upload berkas",
-					name: "berkas",
-					type: "file",
-				}
+				// {
+				// 	label: "upload berkas",
+				// 	name: "berkas",
+				// 	type: "file",
+				// }
 			],
 			url: "/penelitian/insertPenelitiAsing.php",
 		};

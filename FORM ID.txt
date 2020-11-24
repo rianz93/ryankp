@@ -1,5 +1,5 @@
 ~~~~PELAPORAN PENELITIAN~~~~
-Peneliti asing 		: PA000
-Hibah Ditlitabmas 	: HD000
-Hibah NonDitlitabmas 	: HND000 
+Peneliti asing 		: PA0
+Hibah Ditlitabmas 	: HD0
+Hibah NonDitlitabmas 	: HND0 
 
