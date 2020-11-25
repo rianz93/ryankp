@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<h3>Data Peneliti Asing</h3>
-		<FormData :inputTypes="inputTypes" :url="url"></FormData>
+		<FormData :inputTypes="inputTypes" :url="url" ></FormData>
 	</div>
 </template>
 <script>
@@ -14,6 +14,7 @@ export default {
 					label: "Tahun :",
 					name: "tahun",
 					type: "year",
+					value: "test",
 				},
 				{
 					label: "Nama :",
@@ -25,21 +26,28 @@ export default {
 					name: "jenisKelamin",
 					type: "select",
 					options: ["Pria", "Perempuan"],
+					value: "",
 				},
 				{
 					label: "Akademik :",
 					name: "akademik",
 					type: "text",
+					value: "",
 				},
 				{
 					label: "Negara :",
 					name: "negara",
 					type: "text",
+					value: "",
 				},
 				{
 					label: "Tanggal Tinggal :",
 					name: "tanggalTinggal",
 					type: "periodic",
+					value: {
+						start: "",
+						end: "",
+					},
 				},
 				// {
 				// 	label: "upload berkas",
@@ -47,6 +55,9 @@ export default {
 				// 	type: "file",
 				// }
 			],
+			// NAMA TABLE, DAN NAMA ID DALAM TABLE (PRIMARY KEY)
+			
+
 			url: "/penelitian/insertPenelitiAsing.php",
 		};
 	},

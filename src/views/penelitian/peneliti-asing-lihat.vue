@@ -12,7 +12,7 @@
 				</div>
 			</div>
 		</div>
-		<Tables :table_data_head = "table_data.head" :table_data_body="table_data.body"></Tables>
+		<Tables :table_data_head = "table_data.head" :table_data_body="table_data.body" :table_content="tableContent"></Tables>
 	</div>
 </template>
 
@@ -25,13 +25,20 @@ export default {
 	data() {
 		return {
 			table_data: [],
+			componentName: "tambah-peneliti-asing",
+
+			// DATA YANG DIGUNAKAN UNTUK HAPUS DATA DALAM DATABASE
+			tableContent: {
+				namaTable: "peneliti_asing",
+				namaId: "peneliti_id",
+			},
 		};
 	},
 	components:{
 		Tables
 	},
 	methods: {
-		getData: function() {
+		getData() {
 			var app = this;
 			axios
 				.get(API_ENDPOINT + "/penelitian/getPenelitiAsing.php")
@@ -42,6 +49,8 @@ export default {
 				.catch(function(error) {});
 		},
 	},
+	
+
 	created() {
 		this.getData();
 	},

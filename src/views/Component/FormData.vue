@@ -36,7 +36,9 @@
 						:id="data.name + index"
 						type="text"
 						pattern="\d*"
+						value="2019"
 						v-model="formData[data.name]"
+
 						maxlength="4"
 						placeholder="YYYY"
 					>
