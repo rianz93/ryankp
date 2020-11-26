@@ -38,7 +38,6 @@
 						pattern="\d*"
 						value="2019"
 						v-model="formData[data.name]"
-
 						maxlength="4"
 						placeholder="YYYY"
 					>
@@ -119,10 +118,10 @@
 				</b-form-group>
 			</span>
 			<b-button variant="success" type="submit" @click="sendDataPost"
-				>Submit</b-button
-			>
+				>Submit <b-icon icon="box-arrow-in-up-right"></b-icon>
+			</b-button>
 			<!-- JIKA INGIN CEK DATA AKTIFKAN INI -->
-			<button @click="cetak()">test</button>
+			<button @click="cetak()" icon="box-arrow-in-up-right">test</button>
 		</b-form>
 	</div>
 </template>
@@ -161,11 +160,11 @@ export default {
 
 		// CONVERT TANGGAL (STRING) KE FORMAT YYYY-MM-DD
 		convertTanggalToString(str) {
-			var date 	= new Date(str),
-				mnth 	= ("0" + (date.getMonth() + 1)).slice(-2),
-				day 	= ("0" + date.getDate()).slice(-2);
+			var date = new Date(str),
+				mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+				day = ("0" + date.getDate()).slice(-2);
 
-			// MASUKKAN KE DALAM ARRAY DAN JOIN LEWAT '-' 
+			// MASUKKAN KE DALAM ARRAY DAN JOIN LEWAT '-'
 			return [date.getFullYear(), mnth, day].join("-");
 		},
 
@@ -187,7 +186,12 @@ export default {
 				if (item == "tanggalTinggal") {
 					for (var list in this.formData[item]) {
 						// CONVERT TANGGAL (STRING) KE FORMAT YYYY-MM-DD
-						fd.append("tanggal" + list, this.convertTanggalToString(this.formData[item][list]));
+						fd.append(
+							"tanggal" + list,
+							this.convertTanggalToString(
+								this.formData[item][list]
+							)
+						);
 					}
 				}
 
