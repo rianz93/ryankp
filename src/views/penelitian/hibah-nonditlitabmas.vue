@@ -3,8 +3,8 @@
 		<div class="container">
 			<div class="row">
 				<div class="col">
-					<h3>Peneliti Asing</h3>
-					<p>Kelola data peneliti asing.</p>
+					<h3>Hibah NonDitlitabmas</h3>
+					<p>Kelola data hibah nonditlitabmas.</p>
 				</div>
 				<div class="col mt-3 filter"">
 					<b-form-input size="md" class="mr-sm-2" placeholder="Cari peneliti asing"></b-form-input>
@@ -12,7 +12,7 @@
 				</div>
 			</div>
 		</div>
-		<Tables :table_data_head = "table_data.head" :table_data_body="table_data.body" :table_content="tableContent"></Tables>
+		<Tables :table_data_head = "table_data.head" :table_data_body="table_data.body"></Tables>
 	</div>
 </template>
 
@@ -25,23 +25,16 @@ export default {
 	data() {
 		return {
 			table_data: [],
-			componentName: "tambah-peneliti-asing",
-
-			// DATA YANG DIGUNAKAN UNTUK HAPUS DATA DALAM DATABASE
-			tableContent: {
-				namaTable: "peneliti_asing",
-				namaId: "peneliti_id",
-			},
 		};
 	},
 	components:{
 		Tables
 	},
 	methods: {
-		getData() {
+		getData: function() {
 			var app = this;
 			axios
-				.get(API_ENDPOINT + "/penelitian/getPenelitiAsing.php")
+				.get(API_ENDPOINT + "/penelitian/getHibahNonDitlitabmas.php")
 				.then(function(response) {
 					console.log(response.data);
 					app.table_data = response.data;
@@ -49,8 +42,6 @@ export default {
 				.catch(function(error) {});
 		},
 	},
-	
-
 	created() {
 		this.getData();
 	},

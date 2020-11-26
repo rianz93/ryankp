@@ -1,26 +1,69 @@
 <template>
 	<div>
-		<h3>Pengaturan Akun</h3>
-
-		<!-- nama pengguna -->
-	  	<p class="mt-3 mb-1">Nama</p>
-	  	<b-form-input placeholder= "Edit Nama">
-	  	</b-form-input> 
-
-	  	<!-- id pengguna -->
-	  	<p class="mt-3 mb-1">ID</p>
-	  	<b-form-input placeholder= "Edit ID">
-	  	</b-form-input> 
-
-	  	<!-- password -->
-	  	<b-form @submit.stop.prevent>
-    		<p class="mt-3 mb-1" for="text-password">Password</p>
-    		<b-input type="password" aria-describedby="password-help-block"></b-input>
-    		
-	    	<b-form-text> Password harus berisi 8-20 panjang karakter
-		    </b-form-text>
-   		</b-form>
-
+		<h3>Data Peneliti Asing</h3>
+		<FormData :inputTypes="inputTypes" :url="url" ></FormData>
 	</div>
 </template>
+<script>
+import FormData from "../Component/FormData.vue";
+export default {
+	data() {
+		return {
+			inputTypes: [
+				{
+					label: "Tahun :",
+					name: "tahun",
+					type: "year",
+					value: "test",
+				},
+				{
+					label: "Nama :",
+					name: "nama",
+					type: "text",
+				},
+				{
+					label: "Jenis Kelamin :",
+					name: "jenisKelamin",
+					type: "select",
+					options: ["Pria", "Perempuan"],
+					value: "",
+				},
+				{
+					label: "Akademik :",
+					name: "akademik",
+					type: "text",
+					value: "",
+				},
+				{
+					label: "Negara :",
+					name: "negara",
+					type: "text",
+					value: "",
+				},
+				{
+					label: "Tanggal Tinggal :",
+					name: "tanggalTinggal",
+					type: "periodic",
+					value: {
+						start: "",
+						end: "",
+					},
+				},
+				// {
+				// 	label: "upload berkas",
+				// 	name: "berkas",
+				// 	type: "file",
+				// }
+			],
+			// NAMA TABLE, DAN NAMA ID DALAM TABLE (PRIMARY KEY)
+			
 
+			url: "/penelitian/insertPenelitiAsing.php",
+		};
+	},
+	components: {
+		FormData,
+	},
+	methods: {},
+};
+</script>

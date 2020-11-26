@@ -11,10 +11,12 @@
     "bootstrap": "^4.5.3",
     "bootstrap-vue": "^2.19.0",
     "core-js": "^3.6.5",
-    "v-calendar": "^2.0.2",
+    "sweetalert": "^2.1.2",
+    "v-calendar": "^2.1.1",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
-    "vue-select": "^3.10.8"
+    "vue-select": "^3.10.8",
+    "vue-sweetalert2": "^4.1.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",

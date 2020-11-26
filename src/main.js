@@ -2,7 +2,9 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import vSelect from 'vue-select'
-import VCalendar from 'v-calendar';
+import VCalendar from 'v-calendar'
+import VueSweetalert2 from 'vue-sweetalert2';
+
 
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
@@ -13,10 +15,9 @@ import 'vue-select/dist/vue-select.css'
 Vue.use(BootstrapVue)
 // Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin)
+Vue.use(VueSweetalert2);
 Vue.component('v-select', vSelect)
-Vue.use(VCalendar, {
-  componentPrefix: 'vc',  // Use <vc-calendar /> instead of <v-calendar />
-});
+Vue.use(VCalendar);
 Vue.config.productionTip = false
 
 

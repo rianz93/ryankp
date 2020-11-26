@@ -1,28 +1,60 @@
 <template>
 	<div>
+		<span>
+			<!-- JIKA DATA BERHASIL DI HAPUS -->
+			<b-alert
+				variant="primary"
+				:show="sucessStatus"
+				dismissible
+				@dismissed="dismissSuccess()"
+			>
+				Data Berhasil di Hapus!
+			</b-alert>
+		</span>
+
 		<table class="table table-striped mt-4">
 			<thead>
 				<tr>
 					<!-- HEADER -->
-					<th scope="col" v-for="head in table_data_head">{{ head }}</th>
+					<th scope="col" v-for="head in table_data_head">
+						{{ head }}
+					</th>
 					<th scope="col">Aksi</th>
 				</tr>
 			</thead>
 			<tbody>
 				<!-- DATA DALAM DATABASE -->
-				<tr v-for="body in table_data_body" >
-
-					<th v-for="item in body" v-if="item.type !='id'"  >
-						<span v-if="Array.isArray(item.title) ">
-							<span v-for="item_data in item.title" class="item">{{ item_data }}
+				<tr v-for="(body, index) in table_data_body">
+					<th v-for="item in body" v-if="item.type != 'id'">
+						<!-- JIKA DATA ARRAY -->
+						<span v-if="Array.isArray(item.title)">
+							<span v-for="item_data in item.title" class="item">
+								{{ item_data }}
 							</span>
 						</span>
-						<span v-else class="item">{{ item.title }}</span>
+						<!-- JIKA DATA BUKAN ARRAY -->
+						<span v-else class="item">{{
+							numberWithCommas(item.title, item.type)
+						}}</span>
 					</th>
 					<th>
 						<span class="aksi">
-							<b-icon class="icon text-success" icon="arrow-up-right-square-fill"></b-icon>
-							<b-icon class="icon text-primary" icon="archive-fill"></b-icon>
+							<b-icon
+								class="icon text-success"
+								icon="arrow-up-right-square-fill"
+							></b-icon>
+							<b-icon
+								class="icon text-danger"
+								icon="trash-fill"
+								@click="
+									hapusData(
+										table_data_body[index][0]['title']
+									)
+								"
+							></b-icon>
+							<button
+								@click="check(table_data_body[index])"
+							></button>
 						</span>
 					</th>
 				</tr>
@@ -32,10 +64,68 @@
 </template>
 
 <script>
+import { API_ENDPOINT } from "../../functions/universal.js";
+const axios = require("axios");
+
 export default {
-	props: ["table_data_head", "table_data_body"],
+	props: ["table_data_head", "table_data_body", "table_content"],
 	data() {
-		return {};
+		return {
+			sucessStatus: false,
+		};
+	},
+	methods: {
+		dismissSuccess() {
+			this.sucessStatus = false;
+		},
+
+		hapusData(dataId) {
+			this.$swal({
+				title: "Apa anda yakin ingin menghapus data?",
+				text: "Data yang terhapus tidak bisa dikembalikan!",
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonText: "Hapus",
+				cancelButtonText: "Batal",
+				showCloseButton: true,
+			}).then((result) => {
+				if (result.value) {
+					let valueId = dataId;
+					let namaId = this.table_content["namaId"];
+					let namaTable = this.table_content["namaTable"];
+					axios
+						.get(
+							API_ENDPOINT +
+								"/deleteData.php?id=" +
+								valueId +
+								"&namaId=" +
+								namaId +
+								"&namaTable=" +
+								namaTable
+						)
+						.then((response) => console.log(response.data));
+					this.sucessStatus = true;
+					this.$parent.getData();
+				} else {
+					
+				}
+			});
+		},
+
+		check(row) {
+			console.log(row);
+		},
+		// UBAH INT MENJADI RUPIAH
+		numberWithCommas(title, type) {
+			if (type != "int") {
+				return title;
+			} else {
+				return (
+					"Rp. " +
+					title.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+				);
+			}
+		},
 	},
 };
 </script>
