@@ -28,10 +28,22 @@
 					<th v-for="item in body" v-if="item.type != 'id'">
 						<!-- JIKA DATA ARRAY -->
 						<span v-if="Array.isArray(item.title)">
-							<span v-for="item_data in item.title" class="item">
+
+							<!-- JIKA DATA PERIODIC (TANGGAL SD) -->
+							<span v-if="item.type == 'periodic'" class="item">
+								<span>{{ range(item.title) }}</span>
+							</span>
+
+							<!-- PENULIS JURNAL -->
+							<span
+								v-else
+								v-for="item_data in item.title"
+								class="item"
+							>
 								{{ item_data }}
 							</span>
 						</span>
+
 						<!-- JIKA DATA BUKAN ARRAY -->
 						<span v-else class="item">{{
 							numberWithCommas(item.title, item.type)
@@ -52,9 +64,9 @@
 									)
 								"
 							></b-icon>
-							<button
+							<!-- <button
 								@click="check(table_data_body[index])"
-							></button>
+							></button> -->
 						</span>
 					</th>
 				</tr>
@@ -79,11 +91,16 @@ export default {
 			this.sucessStatus = false;
 		},
 
+		// PRINT DATA PERIODIC
+		range(rangeTgl) {
+			return rangeTgl[0] + " SD " + rangeTgl[1];
+		},
+
 		hapusData(dataId) {
 			this.$swal({
 				title: "Apa anda yakin ingin menghapus data?",
 				text: "Data yang terhapus tidak bisa dikembalikan!",
-				icon: 'warning',
+				icon: "warning",
 				showCancelButton: true,
 				confirmButtonText: "Hapus",
 				cancelButtonText: "Batal",
@@ -107,7 +124,6 @@ export default {
 					this.sucessStatus = true;
 					this.$parent.getData();
 				} else {
-					
 				}
 			});
 		},
@@ -131,13 +147,17 @@ export default {
 </script>
 
 <style scoped>
+table {
+	font-size: 14px;
+}
+
 .item {
 	font-weight: normal;
 }
 
 .aksi {
 	font-weight: normal;
-	font-size: 20px;
+	font-size: 16px;
 }
 
 .icon {
