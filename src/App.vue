@@ -35,9 +35,9 @@
                     <b-avatar variant="primary" text="CL"></b-avatar>
                   </p>
                   <p style="text-align:center" class="mb-0">
-                    <b>Chrisdityra Lengkey</b>
+                    <b>Ryan Erlando Supit</b>
                   </p>
-                  <p style="text-align:center" class="mb-2">51099290100</p>
+                  <p style="text-align:center" class="mb-2">17013047</p>
                 </div>
               </b-dropdown-item>
               <b-dropdown-item href="#" variant="danger"> <b-icon icon="power" variant="danger" class="mr-2"></b-icon>Keluar </b-dropdown-item>
@@ -59,6 +59,7 @@
               <!-- dropdown -->
               <div v-if="item.dropdown">
                 <div>
+                  
                   <b-dropdown variant="link" toggle-class="text-decoration-none" no-caret dropright>
                     <!-- tombol dropdown -->
                     <template#button-content>

@@ -212,6 +212,7 @@ export default {
 					if (response.data.status == "berhasil") {
 						this.alertStatus = false;
 						this.sucessStatus = true;
+						this.formData = {};
 					} else {
 						this.sucessStatus = false;
 						this.alertStatus = true;

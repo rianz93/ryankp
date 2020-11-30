@@ -8,18 +8,19 @@
 				</div>
 				<div class="col mt-3"">
 					<div class="row">
-						  <b-input-group size="md" class="col" >
-						      <b-input-group-prepend is-text>
-						        <b-icon icon="search" size="sm"></b-icon>
-						      </b-input-group-prepend>
-						      <b-form-input type="search" placeholder="Cari Judul"></b-form-input>
-						    </b-input-group>
-						    <b-input-group size="md" class="col" >
-						      <b-input-group-prepend is-text>
-						        <b-icon icon="filter-circle" size="sm"></b-icon>
-						      </b-input-group-prepend>
-						      <b-form-input type="search" placeholder="Cari Tahun"></b-form-input>
-						    </b-input-group>
+					  	<b-input-group size="md" class="col" >
+					      <b-input-group-prepend is-text>
+					        <b-icon icon="search" size="sm"></b-icon>
+					      </b-input-group-prepend>
+					      <b-form-input type="search" placeholder="Cari Judul"></b-form-input>
+					    </b-input-group>
+
+					    <b-input-group size="md" class="col" >
+					      <b-input-group-prepend is-text>
+					        <b-icon icon="filter-circle" size="sm"></b-icon>
+					      </b-input-group-prepend>
+					      <b-form-input type="search" placeholder="Cari Tahun"></b-form-input>
+					    </b-input-group>
 					</div>
 				</div>
 			</div>

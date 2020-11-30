@@ -25,7 +25,7 @@ export default {
 					label: "Jenis Kelamin :",
 					name: "jenisKelamin",
 					type: "select",
-					options: ["Pria", "Perempuan"],
+					options: ["Pria", "Wanita"],
 					value: "",
 				},
 				{
