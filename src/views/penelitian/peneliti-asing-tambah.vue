@@ -14,12 +14,13 @@ export default {
 					label: "Tahun :",
 					name: "tahun",
 					type: "year",
-					value: "test",
+					value: "",
 				},
 				{
 					label: "Nama :",
 					name: "nama",
 					type: "text",
+					value: "",
 				},
 				{
 					label: "Jenis Kelamin :",
@@ -53,7 +54,7 @@ export default {
 				// 	label: "upload berkas",
 				// 	name: "berkas",
 				// 	type: "file",
-				// }
+				// },
 			],
 			// NAMA TABLE, DAN NAMA ID DALAM TABLE (PRIMARY KEY)
 			

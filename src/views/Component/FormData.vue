@@ -36,7 +36,6 @@
 						:id="data.name + index"
 						type="text"
 						pattern="\d*"
-						value="2019"
 						v-model="formData[data.name]"
 						maxlength="4"
 						placeholder="YYYY"
@@ -139,10 +138,21 @@ export default {
 			sucessStatus: false,
 		};
 	},
+
+	created(){
+		console.log(this.inputTypes);
+		for(var data in this.inputTypes){
+			this.formData[this.inputTypes[data]['name']] = this.inputTypes[data]['value'];
+		}
+	},
+
 	methods: {
+			
+	
 		// JIKA INGIN CEK DATA AKTIFKAN INI
 		cetak() {
 			console.log(this.formData);
+			console.log(this.inputTypes);
 		},
 
 		dismissAlert() {
@@ -160,6 +170,7 @@ export default {
 
 		// CONVERT TANGGAL (STRING) KE FORMAT YYYY-MM-DD
 		convertTanggalToString(str) {
+
 			var date = new Date(str),
 				mnth = ("0" + (date.getMonth() + 1)).slice(-2),
 				day = ("0" + date.getDate()).slice(-2);
@@ -170,6 +181,7 @@ export default {
 
 		// FORMAT TANGGAL SD
 		tanggalSampaiDengan(value) {
+			console.log(value);
 			if (value.start != null) return value.start + " s/d " + value.end;
 		},
 

@@ -79,7 +79,6 @@
 
 <script>
 import { API_ENDPOINT } from "../../functions/universal.js";
-import jspdf from "jspdf";
 const axios = require("axios");
 
 export default {
