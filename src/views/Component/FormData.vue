@@ -89,7 +89,7 @@
 							<div class="flex items-center">
 								<b-input
 									:value="tanggalSampaiDengan(inputValue)"
-									placeholder="Pilih range tanggal .. SD .."
+									placeholder="Pilih range tanggal .. s/d .."
 									class="bg-white"
 									required
 									@click="
@@ -170,7 +170,7 @@ export default {
 
 		// FORMAT TANGGAL SD
 		tanggalSampaiDengan(value) {
-			if (value.start != null) return value.start + " SD " + value.end;
+			if (value.start != null) return value.start + " s/d " + value.end;
 		},
 
 		// SIMPAN FILE DALAM OBJECT
@@ -212,7 +212,7 @@ export default {
 					if (response.data.status == "berhasil") {
 						this.alertStatus = false;
 						this.sucessStatus = true;
-						this.formData = {};
+						// this.formData = {};
 					} else {
 						this.sucessStatus = false;
 						this.alertStatus = true;

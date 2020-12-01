@@ -12,7 +12,7 @@
 			</b-alert>
 		</span>
 
-		<table class="table table-striped mt-4">
+		<table class="table table-striped mt-4" ref="exportContentPdf">
 			<thead>
 				<tr>
 					<!-- HEADER -->
@@ -28,7 +28,6 @@
 					<th v-for="item in body" v-if="item.type != 'id'">
 						<!-- JIKA DATA ARRAY -->
 						<span v-if="Array.isArray(item.title)">
-
 							<!-- JIKA DATA PERIODIC (TANGGAL SD) -->
 							<span v-if="item.type == 'periodic'" class="item">
 								<span>{{ range(item.title) }}</span>
@@ -52,6 +51,11 @@
 					<th>
 						<span class="aksi">
 							<b-icon
+								v-if="table_data_body[index][table_data_body[index].length-1]['type']=='file'"
+								class="icon text-primary"
+								icon="file-earmark-arrow-down-fill"
+							></b-icon>
+							<b-icon
 								class="icon text-success"
 								icon="arrow-up-right-square-fill"
 							></b-icon>
@@ -64,19 +68,18 @@
 									)
 								"
 							></b-icon>
-							<!-- <button
-								@click="check(table_data_body[index])"
-							></button> -->
 						</span>
 					</th>
 				</tr>
 			</tbody>
 		</table>
+		<button @click="test"></button>
 	</div>
 </template>
 
 <script>
 import { API_ENDPOINT } from "../../functions/universal.js";
+import jspdf from "jspdf";
 const axios = require("axios");
 
 export default {
@@ -87,13 +90,16 @@ export default {
 		};
 	},
 	methods: {
+		test(value){
+			console.log(this.table_data_body[0]);
+		},
 		dismissSuccess() {
 			this.sucessStatus = false;
 		},
 
 		// PRINT DATA PERIODIC
 		range(rangeTgl) {
-			return rangeTgl[0] + " SD " + rangeTgl[1];
+			return rangeTgl[0] + " s/d " + rangeTgl[1];
 		},
 
 		hapusData(dataId) {
@@ -122,11 +128,12 @@ export default {
 						)
 						.then((response) => console.log(response.data));
 					this.sucessStatus = true;
-					this.$parent.getData();
-				} else {
+					setTimeout(() => this.$parent.getData(), 400);
 				}
 			});
 		},
+
+		
 
 		check(row) {
 			console.log(row);

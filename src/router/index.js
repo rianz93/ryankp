@@ -6,9 +6,9 @@ import penelitiAsingTambah from "../views/penelitian/peneliti-asing-tambah.vue";
 
 // PELAPORAN PENELITIAN LIHAT
 import penelitiAsingLihat from "../views/penelitian/peneliti-asing-lihat.vue";
-import hibahDitlitabmas from "../views/penelitian/hibah-ditlitabmas-lihat.vue";
-import hibahNonditlitabmas from "../views/penelitian/hibah-nonditlitabmas.vue";
-import penelitianJurnal from "../views/penelitian/publikasi-jurnal-lihat.vue";
+import hibahDitlitabmasLihat from "../views/penelitian/hibah-ditlitabmas-lihat.vue";
+import hibahNonditlitabmasLihat from "../views/penelitian/hibah-nonditlitabmas-lihat.vue";
+import penelitianJurnalLihat from "../views/penelitian/publikasi-jurnal-lihat.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -19,15 +19,15 @@ const routes = [
 	},
 	{
 		path:"/penelitian-lihat/hibah-ditlitabmas",
-		component: hibahDitlitabmas,
+		component: hibahDitlitabmasLihat,
 	},
 	{
 		path:"/penelitian-lihat/hibah-nonditlitabmas",
-		component: hibahNonditlitabmas
+		component: hibahNonditlitabmasLihat,
 	},
 	{
 		path: "/penelitian-lihat/publikasi-jurnal",
-		component: penelitianJurnal
+		component: penelitianJurnalLihat,
 	},
 
 	// PATH TAMBAH

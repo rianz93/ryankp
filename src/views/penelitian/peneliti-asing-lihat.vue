@@ -8,25 +8,20 @@
 				</div>
 				<div class="col mt-3"">
 					<div class="row">
-					  	<b-input-group size="md" class="col" >
-					      <b-input-group-prepend is-text>
-					        <b-icon icon="search" size="sm"></b-icon>
-					      </b-input-group-prepend>
-					      <b-form-input type="search" placeholder="Cari Judul"></b-form-input>
-					    </b-input-group>
-
 					    <b-input-group size="md" class="col" >
 					      <b-input-group-prepend is-text>
 					        <b-icon icon="filter-circle" size="sm"></b-icon>
 					      </b-input-group-prepend>
-					      <b-form-input type="search" placeholder="Cari Tahun"></b-form-input>
+					      <b-form-input type="search" v-model="filterTahun" placeholder="Cari Tahun"></b-form-input>
 					    </b-input-group>
 					</div>
 				</div>
 			</div>
 		</div>
-		<Tables :table_data_head = "table_data.head" :table_data_body="table_data.body" :table_content="tableContent"></Tables>
+
+		<Tables :table_data_head = "table_data.head" :table_data_body="filteredData" :table_content="tableContent"></Tables>
 	</div>
+
 </template>
 
 <script>
@@ -39,6 +34,8 @@ export default {
 		return {
 			table_data: [],
 			componentName: "tambah-peneliti-asing",
+
+			filterTahun:'',
 
 			// DATA YANG DIGUNAKAN UNTUK HAPUS DATA DALAM DATABASE
 			tableContent: {
@@ -58,9 +55,24 @@ export default {
 				.then(function(response) {
 					console.log(response.data);
 					app.table_data = response.data;
+					console.log(app.table_data);
 				})
 				.catch(function(error) {});
 		},
+
+	},
+	computed: {
+
+			filteredData(){
+				return this.table_data.body.filter(data => {
+
+					let datas = data[1].title.toLowerCase().includes(this.filterTahun);
+
+					return datas;
+				});
+			
+			}
+
 	},
 	
 
@@ -70,8 +82,4 @@ export default {
 };
 </script>
 
-<style scoped>	
-		/*filter{
-			display:flex;
-		}*/
-</style>
+

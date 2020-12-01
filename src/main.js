@@ -3,7 +3,8 @@ import App from './App.vue'
 import router from './router'
 import vSelect from 'vue-select'
 import VCalendar from 'v-calendar'
-import VueSweetalert2 from 'vue-sweetalert2';
+import VueSweetalert2 from 'vue-sweetalert2'
+
 
 
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'

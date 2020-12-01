@@ -38,6 +38,10 @@ export default {
 	data() {
 		return {
 			table_data: [],
+			tableContent:{
+				namaTable: "hibah_nonditlitabmas",
+				namaId: "hibah_nonditlitabmas_id",
+			}
 		};
 	},
 	components:{
