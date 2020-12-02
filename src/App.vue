@@ -167,7 +167,7 @@ export default {
             },
             {
               title: "Hak Kekayaan Intelektual/HKI",
-              ref: "/#/penelitian-tambah/",
+              ref: "/#/penelitian-tambah/hki",
               icon:"plus-square",
             },
             {

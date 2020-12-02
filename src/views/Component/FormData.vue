@@ -120,7 +120,7 @@
 				>Submit <b-icon icon="box-arrow-in-up-right"></b-icon>
 			</b-button>
 			<!-- JIKA INGIN CEK DATA AKTIFKAN INI -->
-			<button @click="cetak()" icon="box-arrow-in-up-right">test</button>
+			<!-- <button @click="cetak()" icon="box-arrow-in-up-right">test</button> -->
 		</b-form>
 	</div>
 </template>
@@ -140,7 +140,6 @@ export default {
 	},
 
 	created(){
-		console.log(this.inputTypes);
 		for(var data in this.inputTypes){
 			this.formData[this.inputTypes[data]['name']] = this.inputTypes[data]['value'];
 		}
@@ -150,10 +149,10 @@ export default {
 			
 	
 		// JIKA INGIN CEK DATA AKTIFKAN INI
-		cetak() {
-			console.log(this.formData);
-			console.log(this.inputTypes);
-		},
+		// cetak() {
+		// 	console.log(this.formData);
+		// 	console.log(this.inputTypes);
+		// },
 
 		dismissAlert() {
 			this.alertStatus = false;

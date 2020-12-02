@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 
 // PELAPORAN PENELITIAN TAMBAH
 import penelitiAsingTambah from "../views/penelitian/peneliti-asing-tambah.vue";
+import penelitianHkiTambah from "../views/penelitian/penelitian-hki-tambah.vue";
 
 // PELAPORAN PENELITIAN LIHAT
 import penelitiAsingLihat from "../views/penelitian/peneliti-asing-lihat.vue";
@@ -36,6 +37,12 @@ const routes = [
 		name: "tambah-peneliti-asing",
 		component: penelitiAsingTambah,
 		props: true,
+	},
+	{
+		path: "/penelitian-tambah/hki",
+		name: "tambah-penelitian-hki",
+		component:penelitianHkiTambah,
+		props:true
 	},
 	]
 
