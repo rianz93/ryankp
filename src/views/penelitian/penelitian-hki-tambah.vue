@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<h3>Data Hak Kekayaan Intelektual</h3>
+		<h3>Data Hak Kekayaan Intelektual (HKI)</h3>
 		<FormData :inputTypes="inputTypes" :url="url" ></FormData>
 	</div>
 </template>
