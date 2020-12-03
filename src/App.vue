@@ -162,7 +162,7 @@ export default {
             },
             {
               title: "Buku Ajar",
-              ref: "/#/penelitian-tambah/penelitian-tambah",
+              ref: "/#/penelitian-tambah/bukuAjar",
               icon:"plus-square",
             },
             {

@@ -1,10 +1,13 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
+// KOMPONEN UTAMA
+import dashboard from "../views/Component/Dashboard.vue";
+
 // PELAPORAN PENELITIAN TAMBAH
 import penelitiAsingTambah from "../views/penelitian/peneliti-asing-tambah.vue";
 import penelitianHkiTambah from "../views/penelitian/penelitian-hki-tambah.vue";
-
+import penelitianBukuAjarTambah from "../views/penelitian/penelitian-bukuAjar-tambah.vue";
 // PELAPORAN PENELITIAN LIHAT
 import penelitiAsingLihat from "../views/penelitian/peneliti-asing-lihat.vue";
 import hibahDitlitabmasLihat from "../views/penelitian/hibah-ditlitabmas-lihat.vue";
@@ -14,6 +17,10 @@ Vue.use(VueRouter);
 
 const routes = [
 	// PATH LIHAT
+	{
+		path:"/",
+		component: dashboard,
+	},
 	{
 		path: "/penelitian-lihat/peneliti-asing",
 		component: penelitiAsingLihat,
@@ -42,6 +49,12 @@ const routes = [
 		path: "/penelitian-tambah/hki",
 		name: "tambah-penelitian-hki",
 		component:penelitianHkiTambah,
+		props:true
+	},
+	{
+		path: "/penelitian-tambah/bukuAjar",
+		name: "tambah-penelitian-bukuAjar",
+		component:penelitianBukuAjarTambah,
 		props:true
 	},
 	]

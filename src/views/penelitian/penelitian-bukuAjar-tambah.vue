@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<h3>Data Hak Kekayaan Intelektual</h3>
+		<h3>Data Buku Ajar</h3>
 		<FormData :inputTypes="inputTypes" :url="url" ></FormData>
 	</div>
 </template>
@@ -17,7 +17,7 @@ export default {
 					value: "",
 				},
 				{
-					label: "Nama :",
+					label: "Nama Dosen:",
 					name: "nama",
 					type: "text",
 					value: "",
@@ -29,39 +29,32 @@ export default {
 					value: "",
 				},
 				{
-					label: "Judul :",
-					name: "judul",
+					label: "Judul Buku :",
+					name: "judulBuku",
 					type: "text",
 					value: "",
 				},
 				{
-					label: "Jenis :",
-					name: "jenis",
-					type:"select",
-					options: ["Hak Cipta", "Hak Guna"],
+					label: "Penerbit :",
+					name: "penerbit",
+					type:"text",
 					value: "",
 				},
 				{
-					label: "No Pendaftaran :",
-					name: "noPendaftaran",
+					label: "ISBN :",
+					name: "isbn",
 					type: "text",
 					value:"",
 				},
 				{
-					label: "Status :",
+					label: "Jumlah Halaman :",
 					name: "status",
-					type:"select",
-					options:["Granted","diusulkan"],
-					value:"",
+					type:"int",
+					valua:'',
 				},
+				
 				{
-					label: "No HKI :",
-					name: "noHki",
-					type: "text",
-					value:"",
-				},
-				{
-					label: "Upload berkas",
+					label: "Upload halaman cover",
 					name: "berkas",
 					type: "file",
 				},

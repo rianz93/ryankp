@@ -6,9 +6,10 @@
 				variant="danger"
 				:show="alertStatus"
 				dismissible
+				fade
 				@dismissed="dismissAlert()"
 			>
-				Data Gagal di Simpan!
+				{{alertText}}
 			</b-alert>
 
 			<!-- ALERT JIKA DATA BERHASIL DI SIMPAN -->
@@ -16,6 +17,7 @@
 				variant="success"
 				:show="sucessStatus"
 				dismissible
+				fade
 				@dismissed="dismissSuccess()"
 			>
 				Data Berhasil di Simpan!
@@ -52,6 +54,20 @@
 					<b-input
 						:id="data.name + index"
 						type="text"
+						v-model="formData[data.name]"
+						required
+					></b-input>
+				</b-form-group>
+
+				<!-- DATA INT -->
+				<b-form-group
+					v-if="data.type == 'int'"
+					:label-for="data.name + index"
+					:label="data.label"
+				>
+					<b-input
+						:id="data.name + index"
+						type="number	"
 						v-model="formData[data.name]"
 						required
 					></b-input>
@@ -116,11 +132,11 @@
 					</b-form-file>
 				</b-form-group>
 			</span>
-			<b-button variant="success" type="submit" @click="sendDataPost"
+			<b-button variant="success" type="submit" class="mb-4 btn-block" @click="sendDataPost"
 				>Submit <b-icon icon="box-arrow-in-up-right"></b-icon>
 			</b-button>
 			<!-- JIKA INGIN CEK DATA AKTIFKAN INI -->
-			<!-- <button @click="cetak()" icon="box-arrow-in-up-right">test</button> -->
+			<button @click="cetak()" icon="box-arrow-in-up-right">test</button>
 		</b-form>
 	</div>
 </template>
@@ -136,6 +152,7 @@ export default {
 			formData: {},
 			alertStatus: false,
 			sucessStatus: false,
+			alertText:"Data Gagal di Simpan!"
 		};
 	},
 
@@ -149,12 +166,15 @@ export default {
 			
 	
 		// JIKA INGIN CEK DATA AKTIFKAN INI
-		// cetak() {
-		// 	console.log(this.formData);
-		// 	console.log(this.inputTypes);
-		// },
+		cetak() {
+			console.log(this.formData);
+			console.log(this.inputTypes);
+		},
 
 		dismissAlert() {
+			if(this.alertText==="Mohon untuk melengkapi data!"){
+				this.alertText="Data Gagal di Simpan!";
+			}
 			this.alertStatus = false;
 		},
 
@@ -172,7 +192,7 @@ export default {
 
 			var date = new Date(str),
 				mnth = ("0" + (date.getMonth() + 1)).slice(-2),
-				day = ("0" + date.getDate()).slice(-2);
+				day  = ("0" + date.getDate()).slice(-2);
 
 			// MASUKKAN KE DALAM ARRAY DAN JOIN LEWAT '-'
 			return [date.getFullYear(), mnth, day].join("-");
@@ -180,7 +200,6 @@ export default {
 
 		// FORMAT TANGGAL SD
 		tanggalSampaiDengan(value) {
-			console.log(value);
 			if (value.start != null) return value.start + " s/d " + value.end;
 		},
 
@@ -191,6 +210,15 @@ export default {
 
 		// KIRIM DATA
 		sendDataPost() {
+			// MELAKUKAN CEK JIKA ADA FIELD YANG BELUM TERISI
+			for(let item in this.formData){
+				if(this.formData[item]=="" || this.formData[item]==null){
+					this.alertText   = "Mohon untuk melengkapi data!";
+					this.alertStatus = true;
+					return false;
+				}
+			}
+
 			let fd = new FormData();
 			for (var item in this.formData) {
 				// CEK JIKA DATA ADALAH TANGGAL TINGGAL (RANGE)

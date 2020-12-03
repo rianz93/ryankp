@@ -5,6 +5,7 @@
 			<b-alert
 				variant="primary"
 				:show="sucessStatus"
+				fade
 				dismissible
 				@dismissed="dismissSuccess()"
 			>
@@ -50,6 +51,7 @@
 					</th>
 					<th>
 						<span class="aksi">
+							<!-- JIKA PELAPORAN MEMILIKI BERKAS/FILE -->
 							<b-icon
 								v-if="table_data_body[index][table_data_body[index].length-1]['type']=='file'"
 								class="icon text-primary"
@@ -131,8 +133,6 @@ export default {
 				}
 			});
 		},
-
-		
 
 		check(row) {
 			console.log(row);
