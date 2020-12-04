@@ -3,8 +3,8 @@
 		<div class="container">
 			<div class="row">
 				<div class="col">
-					<h3>Peneliti Asing</h3>
-					<p>Kelola data peneliti asing.</p>
+					<h3>Hak Kekayaan Intelektual</h3>
+					<p>Kelola data HKI.</p>
 				</div>
 				<div class="col mt-3"">
 					<div class="row">
@@ -18,9 +18,8 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<Tables :table_data_head = "table_data.head" :table_data_body="filteredData" :table_content="tableContent" ></Tables>
-		
 	</div>
 
 </template>
@@ -34,14 +33,15 @@ export default {
 	data() {
 		return {
 			table_data: [],
-			componentName: "tambah-peneliti-asing",
+			componentName: "tambah-penelitian-hki",
 
 			filterTahun:'',
+			componentKey:0,
 
 			// DATA YANG DIGUNAKAN UNTUK HAPUS DATA DALAM DATABASE
 			tableContent: {
-				namaTable: "peneliti_asing",
-				namaId: "peneliti_id",
+				namaTable: "penelitian_hki",
+				namaId: "hki_id",
 			},
 		};
 	},
@@ -52,13 +52,10 @@ export default {
 		getData() {
 			var app = this;
 			axios
-				.get(API_ENDPOINT + "/penelitian/getPenelitiAsing.php")
+				.get(API_ENDPOINT + "/penelitian/getHki.php")
 				.then(function(response) {
-					console.log(response);
-					
 					app.table_data = response.data;
 					console.log(app.table_data);
-					
 				})
 				.catch(function(error) {});
 		},
@@ -70,11 +67,13 @@ export default {
 				if(this.table_data_body==null){
 					return null;
 				}
+				else
 				return this.table_data.body.filter(data => {
 
 					let datas = data[1].title.toLowerCase().includes(this.filterTahun);
-
+					console.log(datas);
 					return datas;
+
 				});
 			
 			}

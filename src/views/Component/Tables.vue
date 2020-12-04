@@ -13,7 +13,11 @@
 			</b-alert>
 		</span>
 
-		<table class="table table-striped mt-4" ref="exportContentPdf">
+		<table
+			class="table table-striped mt-4"
+			ref="exportContentPdf"
+			v-if="table_data_head == !null"
+		>
 			<thead>
 				<tr>
 					<!-- HEADER -->
@@ -26,7 +30,10 @@
 			<tbody>
 				<!-- DATA DALAM DATABASE -->
 				<tr v-for="(body, index) in table_data_body">
-					<th v-for="item in body" v-if="item.type != 'id'">
+					<th
+						v-for="item in body"
+						v-if="item.type != 'id' && item.type != 'file'"
+					>
 						<!-- JIKA DATA ARRAY -->
 						<span v-if="Array.isArray(item.title)">
 							<!-- JIKA DATA PERIODIC (TANGGAL SD) -->
@@ -52,11 +59,23 @@
 					<th>
 						<span class="aksi">
 							<!-- JIKA PELAPORAN MEMILIKI BERKAS/FILE -->
-							<b-icon
-								v-if="table_data_body[index][table_data_body[index].length-1]['type']=='file'"
-								class="icon text-primary"
-								icon="file-earmark-arrow-down-fill"
-							></b-icon>
+							<a
+								v-if="
+									table_data_body[index][
+										table_data_body[index].length - 1
+									]['type'] == 'file'
+								"
+								:href="
+									table_data_body[index][
+										table_data_body[index].length - 1
+									]['title']
+								"
+								><b-icon
+									class="icon text-primary"
+									icon="file-earmark-arrow-down-fill"
+								></b-icon
+							></a>
+
 							<b-icon
 								class="icon text-success"
 								icon="arrow-up-right-square-fill"
@@ -75,7 +94,13 @@
 				</tr>
 			</tbody>
 		</table>
-		<button @click="test"></button>
+
+		<div v-else>
+			<hr />
+			<h3> <b-icon icon="arrow-return-left" class="mr-4"></b-icon><i>Data kosong</i><b-icon icon="arrow-return-right" class="ml-4"></b-icon></h3>
+			<hr />
+		</div>
+		<!-- <button @click="test"></button> -->
 	</div>
 </template>
 
@@ -91,9 +116,10 @@ export default {
 		};
 	},
 	methods: {
-		test(value){
+		test(value) {
 			console.log(this.table_data_body[0]);
 		},
+
 		dismissSuccess() {
 			this.sucessStatus = false;
 		},
@@ -169,5 +195,12 @@ table {
 .icon {
 	cursor: pointer;
 	margin-right: 5px;
+}
+
+body h3 {
+	text-align: center;
+	font-size: 18px;
+	margin: 10px 0 0 0;
+	line-height: 1;
 }
 </style>

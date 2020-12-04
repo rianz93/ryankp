@@ -132,58 +132,58 @@ export default {
             {
               title: "Peneliti Asing",
               ref: "/#/penelitian-tambah/peneliti-asing",
-              icon:"plus-square",
+              icon:"arrow-bar-right",
               class:"",
             },
             {
               title: "Publikasi Jurnal",
               ref: "/#/penelitian-tambah/publikasi-jurnal",
-              icon:"plus-square",
+              icon:"arrow-bar-right",
             },
             {
               title: "Pemakalah Forum Ilmiah Seminar/Lokakarya",
               ref: "/#/penelitian-tambah/pemakalah-forum",
-              icon:"plus-square",
+              icon:"arrow-bar-right",
             },
             {
               title: "Hibah Ditlitabmas",
               ref: "/#/penelitian-tambah/hibah-ditlitabmas",
-              icon:"plus-square",
+              icon:"arrow-bar-right",
             },
             {
               title: "Hibah nonditlitabmas",
               ref: "/#/penelitian-tambah/hibah-nonditlitabmas",
-              icon:"plus-square",
+              icon:"arrow-bar-right",
             },
             {
               title: "Penyelenggaraan Forum Ilmiah Seminar/Lokakarya",
               ref: "/#/penelitian-tambah/penyelenggaraan-forum",
-              icon:"plus-square",
+              icon:"arrow-bar-right",
             },
             {
               title: "Buku Ajar",
               ref: "/#/penelitian-tambah/bukuAjar",
-              icon:"plus-square",
+              icon:"arrow-bar-right",
             },
             {
               title: "Hak Kekayaan Intelektual/HKI",
               ref: "/#/penelitian-tambah/hki",
-              icon:"plus-square",
+              icon:"arrow-bar-right",
             },
             {
               title: "Kontrak Kerja",
               ref: "/#/penelitian-tambah/kontrak-kerja",
-              icon:"plus-square",
+              icon:"arrow-bar-right",
             },
             {
               title: "Unit Bisnis Hasil Riset",
               ref: "/#/penelitian-tambah/unit-bhr",
-              icon:"plus-square",
+              icon:"arrow-bar-right",
             },
             {
               title: "Luaran Lainnya",
               ref: "/#/penelitian-tambah/luaran-lainnya",
-              icon:"plus-square",
+              icon:"arrow-bar-right",
             },
           ],
         },
@@ -197,57 +197,57 @@ export default {
             {
               title: "Peneliti Asing",
               ref: "/#/penelitian-lihat/peneliti-asing",
-              icon:"plus-square",
+              icon:"arrow-bar-left",
             },
             {
               title: "Publikasi Jurnal",
               ref: "/#/penelitian-lihat/publikasi-jurnal",
-              icon:"plus-square",
+              icon:"arrow-bar-left",
             },
             {
               title: "Pemakalah Forum Ilmiah Seminar/Lokakarya",
               ref: "/#/penelitian-lihat/pemakalah-forum",
-              icon:"plus-square",
+              icon:"arrow-bar-left",
             },
             {
               title: "Hibah Ditlitabmas",
               ref: "/#/penelitian-lihat/hibah-ditlitabmas",
-              icon:"plus-square",
+              icon:"arrow-bar-left",
             },
             {
               title: "Hibah nonditlitabmas",
               ref: "/#/penelitian-lihat/hibah-nonditlitabmas",
-              icon:"plus-square",
+              icon:"arrow-bar-left",
             },
             {
               title: "Penyelenggaraan Forum Ilmiah Seminar/Lokakarya",
               ref: "/#/penelitian-lihat/penyelenggaraan-forum",
-              icon:"plus-square",
+              icon:"arrow-bar-left",
             },
             {
               title: "Buku Ajar",
               ref: "/#/penelitian-lihat/buku-ajar",
-              icon:"plus-square",
+              icon:"arrow-bar-left",
             },
             {
               title: "Hak Kekayaan Intelektual/HKI",
               ref: "/#/penelitian-lihat/hki",
-              icon:"plus-square",
+              icon:"arrow-bar-left",
             },
             {
               title: "Kontrak Kerja",
               ref: "/#/penelitian-lihat/kontrak-kerja",
-              icon:"plus-square",
+              icon:"arrow-bar-left",
             },
             {
               title: "Unit Bisnis Hasil Riset",
               ref: "/#/penelitian-lihat/unit-bhr",
-              icon:"plus-square",
+              icon:"arrow-bar-left",
             },
             {
               title: "Luaran Lainnya",
               ref: "/#/penelitian-lihat/luaran-lainnya",
-              icon:"plus-square",
+              icon:"arrow-bar-left",
             },
           ],
 
@@ -264,7 +264,7 @@ export default {
             {
               title: "peneliti asing",
               ref: "/#/penelitian/peneliti-asing",
-              icon:"plus-square",
+              icon:"arrow-bar-right",
             },
             {
               title: "publikasi jurnal",
@@ -273,15 +273,15 @@ export default {
             },
             {
               title: "test3",
-              icon:"plus-square",
+              icon:"arrow-bar-right",
             },
             {
               title: "test42",
-              icon:"plus-square",
+              icon:"arrow-bar-right",
             },
             {
               title: "test5",
-              icon:"plus-square",
+              icon:"arrow-bar-right",
             },
           ],
         },
@@ -294,7 +294,7 @@ export default {
             {
               title: "peneliti asing",
               ref: "/#/penelitian/peneliti-asing",
-              icon:"plus-square",
+              icon:"arrow-bar-right",
             },
             {
               title: "publikasi jurnal",
@@ -303,15 +303,15 @@ export default {
             },
             {
               title: "test3",
-              icon:"plus-square",
+              icon:"arrow-bar-right",
             },
             {
               title: "test42",
-              icon:"plus-square",
+              icon:"arrow-bar-right",
             },
             {
               title: "test5",
-              icon:"plus-square",
+              icon:"arrow-bar-right",
             },
           ],
         },

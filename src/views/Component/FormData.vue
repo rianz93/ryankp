@@ -9,7 +9,7 @@
 				fade
 				@dismissed="dismissAlert()"
 			>
-				{{alertText}}
+				{{ alertText }}
 			</b-alert>
 
 			<!-- ALERT JIKA DATA BERHASIL DI SIMPAN -->
@@ -132,11 +132,15 @@
 					</b-form-file>
 				</b-form-group>
 			</span>
-			<b-button variant="success" type="submit" class="mb-4 btn-block" @click="sendDataPost"
+			<b-button
+				variant="success"
+				type="submit"
+				class="mb-4 btn-block"
+				@click="sendDataPost"
 				>Submit <b-icon icon="box-arrow-in-up-right"></b-icon>
 			</b-button>
 			<!-- JIKA INGIN CEK DATA AKTIFKAN INI -->
-			<button @click="cetak()" icon="box-arrow-in-up-right">test</button>
+			<!-- <button @click="cetak()" icon="box-arrow-in-up-right">test</button> -->
 		</b-form>
 	</div>
 </template>
@@ -152,19 +156,19 @@ export default {
 			formData: {},
 			alertStatus: false,
 			sucessStatus: false,
-			alertText:"Data Gagal di Simpan!"
+			alertText: "Data Gagal di Simpan!",
 		};
 	},
 
-	created(){
-		for(var data in this.inputTypes){
-			this.formData[this.inputTypes[data]['name']] = this.inputTypes[data]['value'];
+	created() {
+		for (var data in this.inputTypes) {
+			this.formData[this.inputTypes[data]["name"]] = this.inputTypes[
+				data
+			]["value"];
 		}
 	},
 
 	methods: {
-			
-	
 		// JIKA INGIN CEK DATA AKTIFKAN INI
 		cetak() {
 			console.log(this.formData);
@@ -172,8 +176,8 @@ export default {
 		},
 
 		dismissAlert() {
-			if(this.alertText==="Mohon untuk melengkapi data!"){
-				this.alertText="Data Gagal di Simpan!";
+			if (this.alertText === "Mohon untuk melengkapi data!") {
+				this.alertText = "Data Gagal di Simpan!";
 			}
 			this.alertStatus = false;
 		},
@@ -189,7 +193,6 @@ export default {
 
 		// CONVERT TANGGAL (STRING) KE FORMAT YYYY-MM-DD
 		convertTanggalToString(str) {
-
 			var date = new Date(str),
 				mnth = ("0" + (date.getMonth() + 1)).slice(-2),
 				day  = ("0" + date.getDate()).slice(-2);
@@ -211,11 +214,24 @@ export default {
 		// KIRIM DATA
 		sendDataPost() {
 			// MELAKUKAN CEK JIKA ADA FIELD YANG BELUM TERISI
-			for(let item in this.formData){
-				if(this.formData[item]=="" || this.formData[item]==null){
-					this.alertText   = "Mohon untuk melengkapi data!";
+			for (let item in this.formData) {
+				console.log(typeof this.formData[item]);
+				if (this.formData[item] == "" || this.formData[item] == null) {
+					this.alertText = "Mohon untuk melengkapi data!";
 					this.alertStatus = true;
 					return false;
+				} else if (
+					typeof this.formData[item] == "object" &&
+					item == "tanggalTinggal"
+				) {
+					if (
+						this.formData[item]["start"] == null ||
+						this.formData[item]["end"] == null
+					) {
+						this.alertText = "Mohon untuk melengkapi data!";
+						this.alertStatus = true;
+						return false;
+					}
 				}
 			}
 

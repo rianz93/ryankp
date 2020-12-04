@@ -1,5 +1,7 @@
 {
+
   "name": "ryankp",
+  "proxy": "http://localhost/ryankp/penelitian/berkas/",
   "version": "0.1.0",
   "private": true,
   "scripts": {

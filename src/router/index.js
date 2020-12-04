@@ -9,6 +9,7 @@ import penelitiAsingTambah from "../views/penelitian/peneliti-asing-tambah.vue";
 import penelitianHkiTambah from "../views/penelitian/penelitian-hki-tambah.vue";
 import penelitianBukuAjarTambah from "../views/penelitian/penelitian-bukuAjar-tambah.vue";
 // PELAPORAN PENELITIAN LIHAT
+import penelitianHkiLihat from "../views/penelitian/penelitian-hki-lihat.vue";
 import penelitiAsingLihat from "../views/penelitian/peneliti-asing-lihat.vue";
 import hibahDitlitabmasLihat from "../views/penelitian/hibah-ditlitabmas-lihat.vue";
 import hibahNonditlitabmasLihat from "../views/penelitian/hibah-nonditlitabmas-lihat.vue";
@@ -20,6 +21,10 @@ const routes = [
 	{
 		path:"/",
 		component: dashboard,
+	},
+	{
+		path:"/penelitian-lihat/hki",
+		component: penelitianHkiLihat,
 	},
 	{
 		path: "/penelitian-lihat/peneliti-asing",
