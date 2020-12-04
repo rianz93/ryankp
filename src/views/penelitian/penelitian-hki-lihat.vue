@@ -64,7 +64,7 @@ export default {
 	computed: {
 
 			filteredData(){
-				if(this.table_data_body==null){
+				if(this.table_data.body==null){
 					return null;
 				}
 				else

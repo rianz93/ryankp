@@ -8,6 +8,7 @@
 				dismissible
 				fade
 				@dismissed="dismissAlert()"
+				ref="alert"
 			>
 				{{ alertText }}
 			</b-alert>
@@ -126,10 +127,12 @@
 					:label="data.label"
 				>
 					<b-form-file
+						ref="file"
 						:id="data.name + index"
 						@change="onChangeFileSelected($event, data.name)"
 					>
 					</b-form-file>
+					<div class="errorText mt-1" ><i>{{ errorText }}</i></div>
 				</b-form-group>
 			</span>
 			<b-button
@@ -157,6 +160,7 @@ export default {
 			alertStatus: false,
 			sucessStatus: false,
 			alertText: "Data Gagal di Simpan!",
+			errorText:null,
 		};
 	},
 
@@ -209,6 +213,17 @@ export default {
 		// SIMPAN FILE DALAM OBJECT
 		onChangeFileSelected(event, modelName) {
 			this.formData[modelName] = event.target.files[0];
+			if(event.target.files[0]['name'].split(".").pop()!="pdf"){
+				this.formData[modelName] = null;
+				this.alertText 	 = "Hanya menerima extensi .pdf";
+				this.alertStatus = true;
+				this.errorText 	 = "Mohon untuk memasukkan file berextensi PDF"
+
+				console.log("DATA TIDAK BENAR");
+			}else{
+				this.errorText = null;
+				this.alertStatus = false;
+			}
 		},
 
 		// KIRIM DATA
@@ -232,6 +247,10 @@ export default {
 						this.alertStatus = true;
 						return false;
 					}
+				}else if(typeof this.formData[item] == "object" && item=="berkas" && this.formData[item]['name']==null){
+					this.alertText = "Mohon untuk melengkapi data!";
+					this.alertStatus = true;
+					return false;
 				}
 			}
 
@@ -278,4 +297,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+	.errorText{
+		color:red;
+	}
+</style>
