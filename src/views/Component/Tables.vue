@@ -13,10 +13,16 @@
 			</b-alert>
 		</span>
 
+		<div v-if="table_data_head==null">
+			<hr />
+			<h3> <b-icon icon="arrow-return-left" class="mr-4"></b-icon><i>Data kosong</i><b-icon icon="arrow-return-right" class="ml-4"></b-icon></h3>
+			<hr />
+		</div>
+
 		<table
 			class="table table-striped mt-4"
 			ref="exportContentPdf"
-			v-if="table_data_head == !null"
+			v-else
 		>
 			<thead>
 				<tr>
@@ -95,11 +101,7 @@
 			</tbody>
 		</table>
 
-		<div v-else>
-			<hr />
-			<h3> <b-icon icon="arrow-return-left" class="mr-4"></b-icon><i>Data kosong</i><b-icon icon="arrow-return-right" class="ml-4"></b-icon></h3>
-			<hr />
-		</div>
+		
 		<!-- <button @click="test"></button> -->
 	</div>
 </template>

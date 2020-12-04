@@ -67,9 +67,9 @@ export default {
 	computed: {
 
 			filteredData(){
-				if(this.table_data_body==null){
+				if(this.table_data.body==null){
 					return null;
-				}
+				}else
 				return this.table_data.body.filter(data => {
 
 					let datas = data[1].title.toLowerCase().includes(this.filterTahun);
