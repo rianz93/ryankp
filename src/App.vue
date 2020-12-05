@@ -9,30 +9,12 @@
             <b-nav-item-dropdown right>
               <!-- Using 'button-content' slot -->
               <template #button-content>
-                <b-icon icon="bell" class="mt-2"></b-icon>
-              </template>
-              <b-dropdown-item href="#" v-for="notif in notification">
-                <table style="border:none">
-                  <tr>
-                    <td>
-                      <b-icon :icon="notif.icon" class="mt-2"></b-icon>
-                    </td>
-                    <td>
-                      <span style="margin-left:7px;width:20px;word-wrap: break-word">{{ notif.text }}</span>
-                    </td>
-                  </tr>
-                </table>
-              </b-dropdown-item>
-            </b-nav-item-dropdown>
-            <b-nav-item-dropdown right>
-              <!-- Using 'button-content' slot -->
-              <template #button-content>
                 <b-avatar icon="star-fill"></b-avatar>
               </template>
               <b-dropdown-item href="#/akun">
                 <div>
                   <p style="text-align:center" class="mb-2 mt-2">
-                    <b-avatar variant="primary" text="CL"></b-avatar>
+                    <b-avatar variant="primary" text="RES"></b-avatar>
                   </p>
                   <p style="text-align:center" class="mb-0">
                     <b>Ryan Erlando Supit</b>
@@ -59,7 +41,6 @@
               <!-- dropdown -->
               <div v-if="item.dropdown">
                 <div>
-                  
                   <b-dropdown variant="link" toggle-class="text-decoration-none" no-caret dropright>
                     <!-- tombol dropdown -->
                     <template#button-content>
@@ -79,12 +60,11 @@
                       </b-dropdown-item>
                     </span>
                   </b-dropdown>
-
                 </div>
               </div>
 
               <b-link v-else :class="item.class + '-text'" class="item ml-4" :href="item.ref">
-                <b-icon :icon="item.icon"></b-icon>
+                <b-icon :icon="item.icon" class="first-child"></b-icon>
                 <span class="ml-3">{{ item.title }}</span>
               </b-link>
             </div>
@@ -115,7 +95,7 @@ export default {
       auth_level: 1,
       sidebar_item: [
         {
-          title: "Dashboard",
+          title: "Beranda",
           icon: "house",
           ref: "/#/",
           class: "",
@@ -133,7 +113,6 @@ export default {
               title: "Peneliti Asing",
               ref: "/#/penelitian-tambah/peneliti-asing",
               icon:"arrow-bar-right",
-              class:"",
             },
             {
               title: "Publikasi Jurnal",
@@ -431,5 +410,9 @@ export default {
 .fade-enter,
 .fade-leave-active {
   opacity: 0;
+}
+
+.first-child{
+  width: 20px; height: 20px
 }
 </style>

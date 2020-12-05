@@ -1,6 +1,28 @@
 <template>
 	<div>
 		<span>
+			<div style="height: 12px">
+				<span style="right:20px; position: absolute;">
+					<b-button
+						size="sm"
+						variant="danger"
+						class="export-tombol"
+						@click="download"
+					>
+						Export PDF
+						<b-icon icon="journal-bookmark-fill" class="ml-1"></b-icon>
+					</b-button>
+					<b-button
+						size="sm"
+						variant="info"
+						class="export-tombol ml-2"
+						@click="download"
+					>
+						Export XLS
+						<b-icon icon="file-earmark-spreadsheet-fill" class="ml-1" ></b-icon>
+					</b-button>
+				</span>
+			</div>
 			<!-- JIKA DATA BERHASIL DI HAPUS -->
 			<b-alert
 				variant="primary"
@@ -13,17 +35,17 @@
 			</b-alert>
 		</span>
 
-		<div v-if="table_data_head==null">
+		<div v-if="table_data_head == null">
 			<hr />
-			<h3> <b-icon icon="arrow-return-left" class="mr-4"></b-icon><i>Data kosong</i><b-icon icon="arrow-return-right" class="ml-4"></b-icon></h3>
+			<h3>
+				<b-icon icon="arrow-return-left" class="mr-4"></b-icon
+				><i>Data kosong</i
+				><b-icon icon="arrow-return-right" class="ml-4"></b-icon>
+			</h3>
 			<hr />
 		</div>
 
-		<table
-			class="table table-striped mt-4"
-			ref="exportContentPdf"
-			v-else
-		>
+		<table class="table table-striped mt-4"  v-else>
 			<thead>
 				<tr>
 					<!-- HEADER -->
@@ -82,10 +104,14 @@
 								></b-icon
 							></a>
 
-							<b-icon
-								class="icon text-success"
-								icon="arrow-up-right-square-fill"
-							></b-icon>
+							<router-link
+								:to="{ name: table_content.componentName }"
+								><b-icon
+									class="icon text-success"
+									icon="arrow-up-right-square-fill"
+								></b-icon
+							></router-link>
+
 							<b-icon
 								class="icon text-danger"
 								icon="trash-fill"
@@ -101,12 +127,57 @@
 			</tbody>
 		</table>
 
-		
+		<!-- TABLE CLONE UNTUK EXPORT -->
+		<table class="table table-striped mt-4" id="my-table" style="display: none;">
+			<thead>
+				<tr>
+					<!-- HEADER -->
+					<th scope="col" v-for="head in table_data_head">
+						{{ head }}
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!-- DATA DALAM DATABASE -->
+				<tr v-for="(body, index) in table_data_body">
+					<th
+						v-for="item in body"
+						v-if="item.type != 'id' && item.type != 'file'"
+					>
+						<!-- JIKA DATA ARRAY -->
+						<span v-if="Array.isArray(item.title)">
+							<!-- JIKA DATA PERIODIC (TANGGAL SD) -->
+							<span v-if="item.type == 'periodic'" class="item">
+								<span>{{ range(item.title) }}</span>
+							</span>
+
+							<!-- PENULIS JURNAL -->
+							<span
+								v-else
+								v-for="item_data in item.title"
+								class="item"
+							>
+								{{ item_data }}
+							</span>
+						</span>
+
+						<!-- JIKA DATA BUKAN ARRAY -->
+						<span v-else class="item">{{
+							numberWithCommas(item.title, item.type)
+						}}</span>
+					</th>
+				</tr>
+			</tbody>
+		</table>
+		<!-- TABLE CLONE UNTUK EXPORT -->
 		<!-- <button @click="test"></button> -->
 	</div>
 </template>
 
 <script>
+import jspdf from "jspdf";
+import html2canvas from "html2canvas";
+
 import { API_ENDPOINT } from "../../functions/universal.js";
 const axios = require("axios");
 
@@ -117,7 +188,14 @@ export default {
 			sucessStatus: false,
 		};
 	},
+
 	methods: {
+		download() {
+			let doc = new jspdf("p", "pt");
+			doc.autoTable({ html: "#my-table" });
+			doc.save("Generated.pdf");
+		},
+
 		test(value) {
 			console.log(this.table_data_body[0]);
 		},
@@ -182,11 +260,11 @@ export default {
 
 <style scoped>
 table {
-	font-size: 14px;
+	font-size: 13px;
 }
 
 .item {
-	font-weight: normal;
+	font-weight: lighter;
 }
 
 .aksi {
@@ -197,6 +275,9 @@ table {
 .icon {
 	cursor: pointer;
 	margin-right: 5px;
+}
+.export-tombol{
+	font-size: 12px;
 }
 
 body h3 {

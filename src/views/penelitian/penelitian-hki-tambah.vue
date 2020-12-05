@@ -11,7 +11,7 @@ export default {
 		return {
 			inputTypes: [
 				{
-					label: "Tahun :",
+					label: "Tahun Pelaksanaan:",
 					name: "tahun",
 					type: "year",
 					value: null,

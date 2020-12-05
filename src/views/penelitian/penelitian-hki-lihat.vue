@@ -8,6 +8,13 @@
 				</div>
 				<div class="col mt-3"">
 					<div class="row">
+						<b-input-group size="md" class="col" >
+					      <b-input-group-prepend is-text>
+					        <b-icon icon="search" size="sm"></b-icon>
+					      </b-input-group-prepend>
+					      <b-form-input type="search" v-model= "filterJudul"placeholder="Cari Judul"></b-form-input>
+					    </b-input-group>
+
 					    <b-input-group size="md" class="col" >
 					      <b-input-group-prepend is-text>
 					        <b-icon icon="filter-circle" size="sm"></b-icon>
@@ -36,7 +43,7 @@ export default {
 			componentName: "tambah-penelitian-hki",
 
 			filterTahun:'',
-			componentKey:0,
+			filterJudul:'',
 
 			// DATA YANG DIGUNAKAN UNTUK HAPUS DATA DALAM DATABASE
 			tableContent: {
@@ -71,6 +78,7 @@ export default {
 				return this.table_data.body.filter(data => {
 
 					let datas = data[1].title.toLowerCase().includes(this.filterTahun);
+					datas = data[4].title.toLowerCase().includes(this.filterJudul);
 					console.log(datas);
 					return datas;
 

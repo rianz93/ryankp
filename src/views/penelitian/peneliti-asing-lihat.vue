@@ -34,7 +34,7 @@ export default {
 	data() {
 		return {
 			table_data: [],
-			componentName: "tambah-peneliti-asing",
+			
 
 			filterTahun:'',
 
@@ -42,6 +42,7 @@ export default {
 			tableContent: {
 				namaTable: "peneliti_asing",
 				namaId: "peneliti_id",
+				componentName: "tambah-peneliti-asing",
 			},
 		};
 	},
