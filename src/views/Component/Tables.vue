@@ -7,7 +7,7 @@
 						size="sm"
 						variant="danger"
 						class="export-tombol"
-						@click="download"
+						@click="downloadPdf"
 					>
 						Export PDF
 						<b-icon icon="journal-bookmark-fill" class="ml-1"></b-icon>
@@ -16,7 +16,7 @@
 						size="sm"
 						variant="info"
 						class="export-tombol ml-2"
-						@click="download"
+						@click="downloadXls"
 					>
 						Export XLS
 						<b-icon icon="file-earmark-spreadsheet-fill" class="ml-1" ></b-icon>
@@ -175,8 +175,10 @@
 </template>
 
 <script>
+import xlsx from "xlsx"
 import jspdf from "jspdf";
 import html2canvas from "html2canvas";
+import autoTable from "jspdf-autotable"
 
 import { API_ENDPOINT } from "../../functions/universal.js";
 const axios = require("axios");
@@ -190,10 +192,14 @@ export default {
 	},
 
 	methods: {
-		download() {
+		downloadPdf() {
 			let doc = new jspdf("p", "pt");
 			doc.autoTable({ html: "#my-table" });
 			doc.save("Generated.pdf");
+		},
+		downloadXls() {
+			let worksheet = xlsx.utils.table_to_book(document.getElementById('my-table'));
+			xlsx.writeFile(worksheet,"Generated.xls");
 		},
 
 		test(value) {
