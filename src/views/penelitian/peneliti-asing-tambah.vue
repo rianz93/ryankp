@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<h3>Data Peneliti Asing</h3>
-		<FormData :inputTypes="inputTypes" :url="url" ></FormData>
+		<FormData :inputTypes="inputTypes" :url="url" :fieldId="fieldId"></FormData>
 	</div>
 </template>
 <script>
@@ -58,7 +58,7 @@ export default {
 			],
 			// NAMA TABLE, DAN NAMA ID DALAM TABLE (PRIMARY KEY)
 			
-
+			fieldId: null,
 			url: "/penelitian/insertPenelitiAsing.php",
 		};
 	},

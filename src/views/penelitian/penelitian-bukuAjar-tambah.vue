@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<h3>Data Buku Ajar</h3>
-		<FormData :inputTypes="inputTypes" :url="url" ></FormData>
+		<FormData :inputTypes="inputTypes" :url="url" :fieldId="fieldId" ></FormData>
 	</div>
 </template>
 <script>
@@ -61,7 +61,7 @@ export default {
 			],
 			// NAMA TABLE, DAN NAMA ID DALAM TABLE (PRIMARY KEY)
 			
-
+			fieldId: null,
 			url: "/penelitian/insertHki.php",
 		};
 	},

@@ -105,11 +105,7 @@
 						</b-form-input>
 					</b-form-group>
 					<b-form-group>
-						<b-form-input					
-							:value="currency"
-							type="text"
-							disabled
-						>
+						<b-form-input :value="currency" type="text" disabled>
 						</b-form-input>
 					</b-form-group>
 				</span>
@@ -152,6 +148,7 @@
 				>
 					<b-form-file
 						ref="file"
+						:placeholder="formData['berkas'].split('/').pop()"
 						:id="data.name + index"
 						@change="onChangeFileSelected($event, data.name)"
 					>
@@ -169,7 +166,7 @@
 				>Simpan Data <b-icon icon="box-arrow-in-up-right"></b-icon>
 			</b-button>
 			<!-- JIKA INGIN CEK DATA AKTIFKAN INI -->
-			<!-- <button @click="cetak()" icon="box-arrow-in-up-right">test</button> -->
+			<button @click="cetak()" icon="box-arrow-in-up-right">test</button>
 		</b-form>
 	</div>
 </template>
@@ -179,7 +176,7 @@ import { API_ENDPOINT } from "../../functions/universal.js";
 const axios = require("axios");
 
 export default {
-	props: ["inputTypes", "url"],
+	props: ["inputTypes", "url", "fieldId"],
 	data() {
 		return {
 			formData: {},
@@ -187,7 +184,7 @@ export default {
 			sucessStatus: false,
 			alertText: "Data Gagal di Simpan!",
 			errorText: null,
-			currency:null,
+			currency: null,
 		};
 	},
 
@@ -198,16 +195,18 @@ export default {
 			]["value"];
 		}
 	},
-	
+
 	methods: {
 		numberWithCommas(value) {
 			console.log(value);
-			if (value!=null) this.currency = ("Rp. " +value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."));
+			if (value != null)
+				this.currency =
+					"Rp. " +
+					value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 		},
 		// JIKA INGIN CEK DATA AKTIFKAN INI
 		cetak() {
 			console.log(this.formData);
-			console.log(this.inputTypes);
 		},
 
 		dismissAlert() {
@@ -230,7 +229,7 @@ export default {
 		convertTanggalToString(str) {
 			var date = new Date(str),
 				mnth = ("0" + (date.getMonth() + 1)).slice(-2),
-				day = ("0" + date.getDate()).slice(-2);
+				day  = ("0" + date.getDate()).slice(-2);
 
 			// MASUKKAN KE DALAM ARRAY DAN JOIN LEWAT '-'
 			return [date.getFullYear(), mnth, day].join("-");
@@ -260,18 +259,17 @@ export default {
 
 		// KIRIM DATA
 		sendDataPost() {
+			let fd = new FormData();
 			// MELAKUKAN CEK JIKA ADA FIELD YANG BELUM TERISI
+
 			for (let item in this.formData) {
 				console.log(typeof this.formData[item]);
-				if (this.formData[item] == "" || this.formData[item] == null) {
+				if (this.formData[item] == null || this.formData[item] == "") {
 					this.alertText = "Mohon untuk melengkapi data!";
 					this.alertStatus = true;
 					document.documentElement.scrollTop = 0;
 					return false;
-				} else if (
-					typeof this.formData[item] == "object" &&
-					item == "tanggalTinggal"
-				) {
+				} else if (item == "tanggalTinggal") {
 					if (
 						this.formData[item]["start"] == null ||
 						this.formData[item]["end"] == null
@@ -279,20 +277,12 @@ export default {
 						this.alertText = "Mohon untuk melengkapi data!";
 						this.alertStatus = true;
 						return false;
+						document.documentElement.scrollTop = 0;
 					}
-				} else if (
-					typeof this.formData[item] == "object" &&
-					item == "berkas" &&
-					this.formData[item]["name"] == null
-				) {
-					this.alertText = "Mohon untuk melengkapi data!";
-					this.alertStatus = true;
-					document.documentElement.scrollTop = 0;
-					return false;
 				}
 			}
 
-			let fd = new FormData();
+			if (this.fieldId != null) fd.append("id", this.fieldId);
 			for (var item in this.formData) {
 				// CEK JIKA DATA ADALAH TANGGAL TINGGAL (RANGE)
 				if (item == "tanggalTinggal") {
@@ -312,7 +302,6 @@ export default {
 					fd.append(item, this.formData[item]);
 				}
 			}
-
 			axios
 				.post(API_ENDPOINT + this.url, fd, {
 					headers: {
@@ -324,10 +313,12 @@ export default {
 					if (response.data.status == "berhasil") {
 						this.alertStatus = false;
 						this.sucessStatus = true;
-						// this.formData = {};
+						document.documentElement.scrollTop = 0;
+						this.formData = {};
 					} else {
 						this.sucessStatus = false;
 						this.alertStatus = true;
+						document.documentElement.scrollTop = 0;
 					}
 				});
 		},

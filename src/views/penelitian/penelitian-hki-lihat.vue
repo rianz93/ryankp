@@ -66,6 +66,16 @@ export default {
 				})
 				.catch(function(error) {});
 		},
+		filteredTahun(value){
+				if(value == null){
+					return this.table_data_body;
+				}else{
+				return value.filter(data=>{
+					let datas = data[4].title.toLowerCase().includes(this.filterJudul);
+					return datas;
+				});
+				}
+		}
 
 	},
 	computed: {
@@ -74,17 +84,19 @@ export default {
 				if(this.table_data.body==null){
 					return null;
 				}
-				else
-				return this.table_data.body.filter(data => {
-
+				else{
+				let table_data = this.filteredTahun(this.table_data.body);
+				return table_data.filter(data => {
 					let datas = data[1].title.toLowerCase().includes(this.filterTahun);
-					datas = data[4].title.toLowerCase().includes(this.filterJudul);
 					console.log(datas);
 					return datas;
 
 				});
+				}
 			
 			}
+
+			
 
 	},
 	

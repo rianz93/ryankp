@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<h3>Data Hak Kekayaan Intelektual (HKI)</h3>
-		<FormData :inputTypes="inputTypes" :url="url" ></FormData>
+		<FormData :inputTypes="inputTypes" :url="url" :fieldId="fieldId"></FormData>
 	</div>
 </template>
 <script>
@@ -64,11 +64,12 @@ export default {
 					label: "Upload berkas",
 					name: "berkas",
 					type: "file",
+					value:null,
 				},
 			],
 			// NAMA TABLE, DAN NAMA ID DALAM TABLE (PRIMARY KEY)
 			
-
+			fieldId: "HK491",
 			url: "/penelitian/insertHki.php",
 		};
 	},
