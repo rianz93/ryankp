@@ -26,7 +26,7 @@
 		</span>
 
 		<!-- FORM -->
-		<b-form @submit.prevent="onSubmit">
+		<b-form @submit.prevent="onSubmit" id="isian">
 			<span v-for="(data, index) in inputTypes">
 				<!-- DATA TAHUN -->
 				<b-form-group
@@ -148,7 +148,7 @@
 				>
 					<b-form-file
 						ref="file"
-						:placeholder="formData['berkas'].split('/').pop()"
+						:placeholder="getExt(formData['berkas'])"
 						:id="data.name + index"
 						@change="onChangeFileSelected($event, data.name)"
 					>
@@ -166,7 +166,7 @@
 				>Simpan Data <b-icon icon="box-arrow-in-up-right"></b-icon>
 			</b-button>
 			<!-- JIKA INGIN CEK DATA AKTIFKAN INI -->
-			<button @click="cetak()" icon="box-arrow-in-up-right">test</button>
+			<!-- <button @click="cetak()" icon="box-arrow-in-up-right">test</button> -->
 		</b-form>
 	</div>
 </template>
@@ -197,6 +197,14 @@ export default {
 	},
 
 	methods: {
+		getExt(value) {
+			if (value != null && typeof(this.formData["berkas"]) == "string") {
+				return this.formData["berkas"].split("/").pop();
+			} else {
+				return "Mohon untuk mengisi berkas..";
+			}
+		},
+
 		numberWithCommas(value) {
 			console.log(value);
 			if (value != null)
@@ -229,7 +237,7 @@ export default {
 		convertTanggalToString(str) {
 			var date = new Date(str),
 				mnth = ("0" + (date.getMonth() + 1)).slice(-2),
-				day  = ("0" + date.getDate()).slice(-2);
+				day = ("0" + date.getDate()).slice(-2);
 
 			// MASUKKAN KE DALAM ARRAY DAN JOIN LEWAT '-'
 			return [date.getFullYear(), mnth, day].join("-");
@@ -315,6 +323,7 @@ export default {
 						this.sucessStatus = true;
 						document.documentElement.scrollTop = 0;
 						this.formData = {};
+						document.getElementById("#isian").reset;
 					} else {
 						this.sucessStatus = false;
 						this.alertStatus = true;

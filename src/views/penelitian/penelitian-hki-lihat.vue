@@ -66,15 +66,9 @@ export default {
 				})
 				.catch(function(error) {});
 		},
-		filteredTahun(value){
-				if(value == null){
-					return this.table_data_body;
-				}else{
-				return value.filter(data=>{
-					let datas = data[4].title.toLowerCase().includes(this.filterJudul);
-					return datas;
-				});
-				}
+		filteredTahun(value){ if(value == null){ return this.table_data_body; }else{
+return value.filter(data=>{ let datas =
+data[4].title.toLowerCase().includes(this.filterJudul); return datas; }); }
 		}
 
 	},
