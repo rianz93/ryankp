@@ -32,7 +32,7 @@
       <div class="col-lg-3">
         <div class="sidebar">
           <div class="m-1 mt-4 ml-4">
-            <p><img src="./assets/logo.png" style="width:60px" /></p>
+            <p><img src="./assets/logo.png" style="width:80px;" class="ml-2" /></p>
             <h5 class="mb-4">LPPM DLSU</h5>
           </div>
 

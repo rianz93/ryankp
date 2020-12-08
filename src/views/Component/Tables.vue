@@ -114,7 +114,7 @@
 								></a>
 
 								<router-link
-									:to="{ name: table_content.componentName }"
+									:to="{ name: table_content.componentName, params: {editData : table_data_body[index]} }"
 									><b-icon
 										class="icon text-success"
 										icon="arrow-up-right-square-fill"
@@ -210,6 +210,7 @@ export default {
 			doc.autoTable({ html: "#my-table" });
 			doc.save("Generated.pdf");
 		},
+		
 		downloadXls() {
 			let worksheet = xlsx.utils.table_to_book(
 				document.getElementById("my-table")

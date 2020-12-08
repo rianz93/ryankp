@@ -101,4 +101,10 @@ data[4].title.toLowerCase().includes(this.filterJudul); return datas; }); }
 };
 </script>
 
+<style scoped>
 
+.custom-file-input ~ .custom-file-label[data-browse]::after {
+     content: "Telusuri"; 
+}
+
+</style>
