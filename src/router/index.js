@@ -6,6 +6,7 @@ import dashboard from "../views/Component/Dashboard.vue";
 import Akun from "../views/Component/akun.vue";
 
 // PELAPORAN PENELITIAN TAMBAH
+import penelitianJurnalTambah from "../views/penelitian/penelitian-jurnal-tambah.vue";
 import penelitiAsingTambah from "../views/penelitian/peneliti-asing-tambah.vue";
 import penelitianHkiTambah from "../views/penelitian/penelitian-hki-tambah.vue";
 import penelitianBukuAjarTambah from "../views/penelitian/penelitian-bukuAjar-tambah.vue";
@@ -76,6 +77,12 @@ const routes = [
 		component:penelitianBukuAjarTambah,
 		props:true,
 	},
+	{
+		path: "/penelitian-tambah/publikasi-jurnal",
+		name: "tambah-penelitian-jurnal",
+		component: penelitianJurnalTambah,
+		props:true,
+	}
 	]
 
 

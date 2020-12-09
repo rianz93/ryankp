@@ -41,10 +41,42 @@
 						pattern="\d*"
 						v-model="formData[data.name]"
 						maxlength="4"
-						placeholder="YYYY"
+						placeholder="TTTT"
 					>
 					</b-input>
 				</b-form-group>
+
+				<!-- DATA PENULIS -->
+				<div v-if="data.type == 'penulis'" class="mb-3">
+					<b-form-group
+						:label-for="data.name + index"
+						:label="data.label"
+						v-for="j in penulisCounter"
+					>
+						<span style="display: flex">
+							<b-input
+								:id="data.name + index"
+								type="text"
+								v-model="formData[data.name]"
+								required
+								:placeholder="'Penulis ' + j"
+							></b-input>
+						</span>
+					</b-form-group>
+					<b-button
+						variant="success"
+						class="btn-sm"
+						@click="++penulisCounter"
+						>Tambah Penulis <b-icon icon="plus-circle"></b-icon
+					></b-button>
+					<b-button
+						variant="danger"
+						class="btn-sm ml-2"
+						@click="penulisCounter=1"
+						>Reset Penulis
+						<b-icon icon="arrow-counterclockwise"></b-icon
+					></b-button>
+				</div>
 
 				<!-- DATA TEXT -->
 				<b-form-group
@@ -188,6 +220,7 @@ export default {
 			alertText: "Data Gagal di Simpan!",
 			errorText: null,
 			currency: null,
+			penulisCounter: 1,
 		};
 	},
 
@@ -199,18 +232,18 @@ export default {
 		}
 	},
 
-	mounted(){
-		if(this.formData['dana']){
-			this.numberWithCommas(this.formData['dana']);
+	mounted() {
+		if (this.formData["dana"]) {
+			this.numberWithCommas(this.formData["dana"]);
 		}
 	},
 
 	methods: {
-		resetForm(){
-			this.$refs.formAny.reset()
+		resetForm() {
+			this.$refs.formAny.reset();
 		},
 		getExt(value) {
-			if (value != null && typeof(this.formData["berkas"]) == "string") {
+			if (value != null && typeof this.formData["berkas"] == "string") {
 				return this.formData["berkas"].split("/").pop();
 			} else {
 				return "Mohon untuk mengisi berkas..";
