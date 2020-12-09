@@ -7,6 +7,7 @@
 <script>
 import FormData from "../Component/FormData.vue";
 export default {
+	props: ["editData"],
 	data() {
 		return {
 			inputTypes: [
@@ -64,18 +65,36 @@ export default {
 					label: "Upload berkas",
 					name: "berkas",
 					type: "file",
-					value:null,
+					value: null,
 				},
 			],
 			// NAMA TABLE, DAN NAMA ID DALAM TABLE (PRIMARY KEY)
 			
-			fieldId: "HK491",
+			fieldId: null,
 			url: "/penelitian/insertHki.php",
 		};
+	},
+	created(){
+		this.editChecker();
 	},
 	components: {
 		FormData,
 	},
-	methods: {},
-};
+	methods: {
+		check(){
+			console.log(this.editData);
+			// console.log(this.inputTypes);
+		},
+		editChecker() {
+			if (this.editData) {
+				this.fieldId = this.editData[0]["title"];
+				for (let index = 0; index <= this.inputTypes.length; index++) {
+					this.inputTypes[index]["value"] = this.editData[
+						index + 1
+					]["title"];
+				}
+			}
+		},
+	},
+}
 </script>

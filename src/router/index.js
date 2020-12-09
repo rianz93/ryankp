@@ -68,13 +68,13 @@ const routes = [
 		path: "/penelitian-tambah/hki",
 		name: "tambah-penelitian-hki",
 		component:penelitianHkiTambah,
-		props:true
+		props:true,
 	},
 	{
 		path: "/penelitian-tambah/bukuAjar",
 		name: "tambah-penelitian-bukuAjar",
 		component:penelitianBukuAjarTambah,
-		props:true
+		props:true,
 	},
 	]
 

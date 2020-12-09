@@ -49,6 +49,7 @@ export default {
 			tableContent: {
 				namaTable: "penelitian_hki",
 				namaId: "hki_id",
+				componentName: "tambah-penelitian-hki",
 			},
 		};
 	},
@@ -66,14 +67,17 @@ export default {
 				})
 				.catch(function(error) {});
 		},
-		filteredTahun(value){ if(value == null){ return this.table_data_body; }else{
-return value.filter(data=>{ let datas =
-data[4].title.toLowerCase().includes(this.filterJudul); return datas; }); }
+		filteredTahun(value){ 
+		if(value == null){ 
+			return this.table_data_body; 
 		}
+		else{
+			return value.filter(data=>{ let datas =
+			data[4].title.toLowerCase().includes(this.filterJudul); return datas; }); } }
 
-	},
+		},
+
 	computed: {
-
 			filteredData(){
 				if(this.table_data.body==null){
 					return null;
@@ -84,14 +88,9 @@ data[4].title.toLowerCase().includes(this.filterJudul); return datas; }); }
 					let datas = data[1].title.toLowerCase().includes(this.filterTahun);
 					console.log(datas);
 					return datas;
-
 				});
 				}
-			
 			}
-
-			
-
 	},
 	
 
@@ -101,10 +100,4 @@ data[4].title.toLowerCase().includes(this.filterJudul); return datas; }); }
 };
 </script>
 
-<style scoped>
 
-.custom-file-input ~ .custom-file-label[data-browse]::after {
-     content: "Telusuri"; 
-}
-
-</style>

@@ -7,6 +7,7 @@
 <script>
 import FormData from "../Component/FormData.vue";
 export default {
+	props:["editData"],
 	data() {
 		return {
 			inputTypes: [
@@ -50,13 +51,29 @@ export default {
 			],
 			// NAMA TABLE, DAN NAMA ID DALAM TABLE (PRIMARY KEY)
 			
-
+			fieldId: null,
 			url: "/penelitian/insertHibahditlitabmas.php",
 		};
 	},
+	created(){
+		this.editChecker();
+	},
+
 	components: {
 		FormData,
 	},
-	methods: {},
+
+	methods: {
+		editChecker() {
+			if (this.editData) {
+				this.fieldId = this.editData[0]["title"];
+				for (let index = 0; index <= this.inputTypes.length; index++) {
+					this.inputTypes[index]["value"] = this.editData[
+						index + 1
+					]["title"];
+				}
+			}
+		},
+	},
 };
 </script>

@@ -45,6 +45,7 @@ export default {
 			tableContent: {
 				namaTable: "hibah_ditlitabmas",
 				namaId: "hibah_id",
+				componentName: "tambah-hibah-ditlitabmas",
 			},
 		};
 	},

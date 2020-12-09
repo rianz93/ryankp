@@ -120,7 +120,6 @@
 										icon="arrow-up-right-square-fill"
 									></b-icon
 								></router-link>
-
 								<b-icon
 									class="icon text-danger"
 									icon="trash-fill"
@@ -219,7 +218,7 @@ export default {
 		},
 
 		test(value) {
-			console.log(this.table_data_body[0]);
+			console.log(value);
 		},
 
 		dismissSuccess() {

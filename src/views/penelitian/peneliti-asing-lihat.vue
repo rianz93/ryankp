@@ -38,7 +38,7 @@ export default {
 
 			filterTahun:'',
 
-			// DATA YANG DIGUNAKAN UNTUK HAPUS DATA DALAM DATABASE
+			// DATA YANG DIGUNAKAN UNTUK HAPUS DAN EDIT
 			tableContent: {
 				namaTable: "peneliti_asing",
 				namaId: "peneliti_id",

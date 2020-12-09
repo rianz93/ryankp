@@ -14,55 +14,56 @@ export default {
 					label: "Tahun :",
 					name: "tahun",
 					type: "year",
-					value: "",
+					value: null,
 				},
 				{
-					label: "Nama Dosen:",
+					label: "Nama Dosen :",
 					name: "nama",
 					type: "text",
-					value: "",
+					value: null,
 				},
 				{
 					label: "NIDN :",
 					name: "nidn",
 					type: "text",
-					value: "",
+					value: null,
 				},
 				{
 					label: "Judul Buku :",
 					name: "judulBuku",
 					type: "text",
-					value: "",
+					value: null,
 				},
 				{
 					label: "Penerbit :",
 					name: "penerbit",
 					type:"text",
-					value: "",
+					value: null,
 				},
 				{
 					label: "ISBN :",
 					name: "isbn",
 					type: "text",
-					value:"",
+					value: null,
 				},
 				{
 					label: "Jumlah Halaman :",
-					name: "status",
-					type:"int",
-					valua:'',
+					name: "jumlahHalaman",
+					type: "int",
+					value: null,
 				},
 				
 				{
 					label: "Upload halaman cover",
 					name: "berkas",
 					type: "file",
+					value: null,
 				},
 			],
 			// NAMA TABLE, DAN NAMA ID DALAM TABLE (PRIMARY KEY)
 			
 			fieldId: null,
-			url: "/penelitian/insertHki.php",
+			url: "/penelitian/insertBuku.php",
 		};
 	},
 	components: {

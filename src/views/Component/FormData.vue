@@ -26,7 +26,7 @@
 		</span>
 
 		<!-- FORM -->
-		<b-form @submit.prevent="onSubmit" id="isian">
+		<b-form @submit.prevent="onSubmit" ref="formAny">
 			<span v-for="(data, index) in inputTypes">
 				<!-- DATA TAHUN -->
 				<b-form-group
@@ -68,7 +68,7 @@
 				>
 					<b-input
 						:id="data.name + index"
-						type="number	"
+						type="number"
 						v-model="formData[data.name]"
 						required
 					></b-input>
@@ -100,15 +100,18 @@
 							v-model="formData[data.name]"
 							required
 							type="number"
+							@change="numberWithCommas(formData[data.name])"
 							@keyup="numberWithCommas(formData[data.name])"
 						>
 						</b-form-input>
 					</b-form-group>
+					<!-- DISABLED INPUT UNTUK MENAMPILKAN RUPIAH -->
 					<b-form-group>
 						<b-form-input :value="currency" type="text" disabled>
 						</b-form-input>
 					</b-form-group>
 				</span>
+
 				<!-- DATA PERIODIC .. SAMPAI DENGAN .. -->
 				<b-form-group
 					v-if="data.type == 'periodic'"
@@ -196,7 +199,16 @@ export default {
 		}
 	},
 
+	mounted(){
+		if(this.formData['dana']){
+			this.numberWithCommas(this.formData['dana']);
+		}
+	},
+
 	methods: {
+		resetForm(){
+			this.$refs.formAny.reset()
+		},
 		getExt(value) {
 			if (value != null && typeof(this.formData["berkas"]) == "string") {
 				return this.formData["berkas"].split("/").pop();
@@ -253,9 +265,9 @@ export default {
 			this.formData[modelName] = event.target.files[0];
 			if (event.target.files[0]["name"].split(".").pop() != "pdf") {
 				this.formData[modelName] = null;
-				this.alertText = "Hanya menerima extensi .pdf";
+				this.alertText = "Hanya menerima ekstensi PDF";
 				this.alertStatus = true;
-				this.errorText = "Mohon untuk memasukkan file berextensi PDF";
+				this.errorText = "Mohon untuk memasukkan file berekstensi PDF";
 				document.documentElement.scrollTop = 0;
 
 				console.log("DATA TIDAK BENAR");
@@ -271,7 +283,6 @@ export default {
 			// MELAKUKAN CEK JIKA ADA FIELD YANG BELUM TERISI
 
 			for (let item in this.formData) {
-				console.log(typeof this.formData[item]);
 				if (this.formData[item] == null || this.formData[item] == "") {
 					this.alertText = "Mohon untuk melengkapi data!";
 					this.alertStatus = true;
@@ -319,11 +330,13 @@ export default {
 				.then((response) => {
 					console.log(response.data);
 					if (response.data.status == "berhasil") {
+						// SETELAH BERHASIL MEMASUKKAN DATA ALERT DAN RESET FORM
 						this.alertStatus = false;
 						this.sucessStatus = true;
-						document.documentElement.scrollTop = 0;
 						this.formData = {};
-						document.getElementById("#isian").reset;
+						this.fieldId = null;
+						this.resetForm();
+						document.documentElement.scrollTop = 0;
 					} else {
 						this.sucessStatus = false;
 						this.alertStatus = true;
