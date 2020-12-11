@@ -88,7 +88,7 @@ export default {
 		editChecker() {
 			if (this.editData) {
 				this.fieldId = this.editData[0]["title"];
-				for (let index = 0; index <= this.inputTypes.length; index++) {
+				for (let index = 0; index < this.inputTypes.length; index++) {
 					this.inputTypes[index]["value"] = this.editData[
 						index + 1
 					]["title"];

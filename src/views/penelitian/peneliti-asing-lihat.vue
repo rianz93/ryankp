@@ -20,16 +20,13 @@
 		</div>
 		
 		<Tables :table_data_head = "table_data.head" :table_data_body="filteredData" :table_content="tableContent" ></Tables>
-		
 	</div>
-
 </template>
 
 <script>
 import { API_ENDPOINT } from "../../functions/universal.js";
 import Tables from "../Component/Tables.vue";
 const axios = require("axios");
-
 export default {
 	data() {
 		return {
@@ -38,7 +35,7 @@ export default {
 
 			filterTahun:'',
 
-			// DATA YANG DIGUNAKAN UNTUK HAPUS DAN EDIT
+			// DATA YANG DIGUNAKAN UNTUK HAPUS DATA DALAM DATABASE
 			tableContent: {
 				namaTable: "peneliti_asing",
 				namaId: "peneliti_id",

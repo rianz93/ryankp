@@ -29,7 +29,7 @@
       </b-navbar>
     </div>
     <div class="row mr-5" style="z-index:99">
-      <div class="col-lg-3">
+      <div class="col-lg-3" style="max-width: 20%;">
         <div class="sidebar">
           <div class="m-1 mt-4 ml-4">
             <p><img src="./assets/logo.png" style="width:80px;" class="ml-2" /></p>
@@ -78,7 +78,7 @@
           </span>
         </div>
       </div>
-      <div class="col-lg-9">
+      <div class="col-lg-10" style="margin-left: 270px">
         <div style="margin-top:90px;"></div>
         <transition name="fade" mode="out-in">
           <router-view></router-view>

@@ -80,15 +80,24 @@
 
 								<!-- PENULIS JURNAL -->
 								<span
-									v-else
+									v-else-if="item.type == 'penulis'"
 									v-for="item_data in item.title"
 									class="item"
 								>
-									{{ item_data }}
+									<li><b-icon icon="dot"></b-icon>{{item_data}}</li>
+								</span>
+							</span>
+							
+							<span v-else-if ="item.type =='jurnal'" class="item nama-jurnal">
+								<b>{{item.title.nama }}</b><hr>
+								<span class="item-jurnal">
+									ISSN : {{item.title.issn }}<br>
+									Volume :  {{item.title.volume }}<br>
+									Halaman :  {{item.title.halaman }}<br>
+									Nomor :  {{item.title.nomor }}
 								</span>
 							</span>
 
-							<!-- JIKA DATA BUKAN ARRAY -->
 							<span v-else class="item">{{
 								numberWithCommas(item.title, item.type)
 							}}</span>
@@ -280,6 +289,17 @@ export default {
 </script>
 
 <style scoped>
+body h3 {
+	text-align: center;
+	font-size: 18px;
+	margin: 10px 0 0 0;
+	line-height: 1;
+}
+li{
+	white-space: nowrap;
+    display:table-cell;
+}
+
 table {
 	font-size: 13px;
 }
@@ -301,10 +321,15 @@ table {
 	font-size: 12px;
 }
 
-body h3 {
-	text-align: center;
-	font-size: 18px;
-	margin: 10px 0 0 0;
-	line-height: 1;
+.nama-jurnal{
+	font-size: 11px;
 }
+.nama-jurnal hr{
+	margin: 6px 0;
+}
+.item-jurnal{
+	white-space: nowrap;
+}
+
+
 </style>

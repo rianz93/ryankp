@@ -52,12 +52,14 @@
 						:label-for="data.name + index"
 						:label="data.label"
 						v-for="j in penulisCounter"
+						class="fadeInput"
 					>
+					
 						<span style="display: flex">
 							<b-input
 								:id="data.name + index"
 								type="text"
-								v-model="formData[data.name]"
+								v-model="formData[data.name][j-1]"
 								required
 								:placeholder="'Penulis ' + j"
 							></b-input>
@@ -72,7 +74,7 @@
 					<b-button
 						variant="danger"
 						class="btn-sm ml-2"
-						@click="penulisCounter=1"
+						@click="resetPenulis"
 						>Reset Penulis
 						<b-icon icon="arrow-counterclockwise"></b-icon
 					></b-button>
@@ -201,8 +203,9 @@
 				>Simpan Data <b-icon icon="box-arrow-in-up-right"></b-icon>
 			</b-button>
 			<!-- JIKA INGIN CEK DATA AKTIFKAN INI -->
-			<!-- <button @click="cetak()" icon="box-arrow-in-up-right">test</button> -->
+			
 		</b-form>
+		<b-button @click="cetak()" icon="box-arrow-in-up-right">test</b-button>
 	</div>
 </template>
 
@@ -239,9 +242,15 @@ export default {
 	},
 
 	methods: {
+		resetPenulis(){
+			this.formData['penulis'] = [];
+			this.penulisCounter=1;
+		},
+
 		resetForm() {
 			this.$refs.formAny.reset();
 		},
+
 		getExt(value) {
 			if (value != null && typeof this.formData["berkas"] == "string") {
 				return this.formData["berkas"].split("/").pop();
@@ -260,6 +269,9 @@ export default {
 		// JIKA INGIN CEK DATA AKTIFKAN INI
 		cetak() {
 			console.log(this.formData);
+			this.formData['jenisJurnal'] = null;
+			this.resetForm();
+			this.penulisCounter = 1;
 		},
 
 		dismissAlert() {
@@ -282,7 +294,7 @@ export default {
 		convertTanggalToString(str) {
 			var date = new Date(str),
 				mnth = ("0" + (date.getMonth() + 1)).slice(-2),
-				day = ("0" + date.getDate()).slice(-2);
+				day  = ("0" + date.getDate()).slice(-2);
 
 			// MASUKKAN KE DALAM ARRAY DAN JOIN LEWAT '-'
 			return [date.getFullYear(), mnth, day].join("-");
@@ -348,7 +360,12 @@ export default {
 						);
 					}
 				}
-
+				else if(item == "penulis"){
+					for(let list in this.formData[item]){
+						fd.append("penulis"+list,this.formData[item][list]);
+					}
+					fd.append("totalPenulis", this.formData[item].length);
+				}
 				// JIKA DATA SINGLE ITEM
 				else {
 					fd.append(item, this.formData[item]);
@@ -367,7 +384,12 @@ export default {
 						this.alertStatus = false;
 						this.sucessStatus = true;
 						this.formData = {};
-						this.fieldId = null;
+						if(this.fieldId != null){
+							this.fieldId = null;
+						}
+						
+
+						this.penulisCounter = 1;
 						this.resetForm();
 						document.documentElement.scrollTop = 0;
 					} else {
@@ -382,7 +404,22 @@ export default {
 </script>
 
 <style scoped>
+@keyframes slideInFromLeft {
+  0% {
+    opacity: 0
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .errorText {
 	color: red;
 }
+
+.fadeInput{
+	 animation: 0.5s ease-out 0s 1 slideInFromLeft;
+}
+
+
 </style>

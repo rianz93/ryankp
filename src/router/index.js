@@ -17,7 +17,7 @@ import penelitianHkiLihat from "../views/penelitian/penelitian-hki-lihat.vue";
 import penelitiAsingLihat from "../views/penelitian/peneliti-asing-lihat.vue";
 import hibahDitlitabmasLihat from "../views/penelitian/hibah-ditlitabmas-lihat.vue";
 import hibahNonditlitabmasLihat from "../views/penelitian/hibah-nonditlitabmas-lihat.vue";
-import penelitianJurnalLihat from "../views/penelitian/publikasi-jurnal-lihat.vue";
+import penelitianJurnalLihat from "../views/penelitian/penelitian-jurnal-lihat.vue";
 Vue.use(VueRouter);
 
 const routes = [

@@ -16,7 +16,7 @@
 						label: "Jenis Jurnal",
 						name: "jenisJurnal",
 						type: "select",
-						options:['Jurnal Internasional', 'Jurnal Nasional Terakreditasi', 'Jurnal Nasional tidak Terakreditasi'],
+						options:["Jurnal Internasional", "Jurnal Nasional Terakreditasi", "Jurnal Nasional tidak Terakreditasi"],
 						value: null,
 					},
 					{
@@ -35,7 +35,7 @@
 						label: "Nama Penulis :",
 						name: "penulis",
 						type: "penulis",
-						value: null,
+						value: [],
 					},
 					{
 						label: "Nama Jurnal :",
@@ -81,6 +81,8 @@
 					}
 					
 				],
+				fieldId: null,
+				url: "/penelitian/insertJurnal.php",
 			}
 		},
 		components: {
