@@ -161,11 +161,17 @@
 		<table
 			class="table table-striped mt-4"
 			id="my-table"
-			style="display: none;"
+			style="display: none"
 		>
 			<thead>
-				<tr>
+				<tr v-if="export_body !=null">
 					<!-- HEADER -->
+					<th scope="col" v-for="head in jurnalHeadExport">
+						{{ head }}
+					</th>
+				</tr>
+
+				<tr v-else>
 					<th scope="col" v-for="head in table_data_head">
 						{{ head }}
 					</th>
@@ -173,8 +179,36 @@
 			</thead>
 			<tbody>
 				<!-- DATA DALAM DATABASE -->
+				<tr v-if="export_body!=null" v-for="(body, index) in export_body">
+					<th
+						v-for="item in body"
+						v-if="item.type != 'id' && item.type != 'file'"
+					>
+						<!-- JIKA DATA ARRAY -->
+						<span v-if="Array.isArray(item.title)">
+							<!-- JIKA DATA PERIODIC (TANGGAL SD) -->
+							<span v-if="item.type == 'periodic'" class="item">
+								<span>{{ range(item.title) }}</span>
+							</span>
 
-				<tr v-for="(body, index) in table_data_body">
+							<!-- PENULIS JURNAL -->
+							<span
+								v-else
+								v-for="item_data in item.title"
+								class="item"
+							>
+								{{ item_data }}
+							</span>
+						</span>
+
+						<!-- JIKA DATA BUKAN ARRAY -->
+						<span v-else class="item">{{
+							numberWithCommas(item.title, item.type)
+						}}</span>
+					</th>
+				</tr>
+
+				<tr v-if="export_body==null" v-for="(body, index) in table_data_body">
 					<th
 						v-for="item in body"
 						v-if="item.type != 'id' && item.type != 'file'"
