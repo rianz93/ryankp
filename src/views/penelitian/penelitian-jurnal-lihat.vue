@@ -12,20 +12,20 @@
 					      <b-input-group-prepend is-text>
 					        <b-icon icon="search" size="sm"></b-icon>
 					      </b-input-group-prepend>
-					      <b-form-input type="search" placeholder="Cari Judul"></b-form-input>
+					      <b-form-input type="search" v-model= "filterJudul" placeholder="Cari Judul"></b-form-input>
 					    </b-input-group>
 
 					    <b-input-group size="md" class="col" >
 					      <b-input-group-prepend is-text>
 					        <b-icon icon="filter-circle" size="sm"></b-icon>
 					      </b-input-group-prepend>
-					      <b-form-input type="search" placeholder="Cari Tahun"></b-form-input>
+					      <b-form-input type="search" v-model="filterTahun" placeholder="Cari Tahun"></b-form-input>
 					    </b-input-group>
 					</div>
 				</div>
 			</div>
 		</div>
-		<Tables :table_data_head = "table_data.head" :table_data_body="table_data.body" :table_content="tableContent"></Tables>
+		<Tables :table_data_head = "table_data.head" :table_data_body="filteredData" :table_content="tableContent"></Tables>
 	</div>
 </template>
 
@@ -39,18 +39,48 @@ export default {
 		return {
 			table_data: [],
 			
+			filterTahun:'',
+			filterJudul:'',
 
 			// DATA YANG DIGUNAKAN UNTUK HAPUS DATA DALAM DATABASE
 			tableContent: {
 				namaTable: "penelitian_jurnal",
 				namaId: "jurnal_id",
+				componentName: "tambah-penelitian-jurnal"
 			},
 		};
 	},
 	components:{
 		Tables
 	},
+
+	computed:{
+		filteredData(){
+				if(this.table_data.body==null){
+					return null;
+				}
+				else{
+					let table_data = this.filteredTahun(this.table_data.body);
+					return table_data.filter(data => {
+						let datas = data[2].title.toLowerCase().includes(this.filterTahun);
+						console.log(datas);
+						return datas;
+					});
+				}
+			}
+	},
+
 	methods: {
+		filteredTahun(value){ 
+			if(value == null){ 
+				return this.table_data_body; 
+			}
+			else{
+				return value.filter(data=>{ let datas =
+				data[3].title.toLowerCase().includes(this.filterJudul.toLowerCase()); return datas; }); 
+			} 
+		},
+
 		getData() {
 			var app = this;
 			axios

@@ -50,7 +50,7 @@
 				<div v-if="data.type == 'penulis'" class="mb-3">
 					<b-form-group
 						:label-for="data.name + index"
-						:label="data.label"
+						:label="data.label +j +' :'"
 						v-for="j in penulisCounter"
 						class="fadeInput"
 					>
@@ -239,6 +239,10 @@ export default {
 		if (this.formData["dana"]) {
 			this.numberWithCommas(this.formData["dana"]);
 		}
+
+		if(this.fieldId){
+			this.penulisCounter = this.formData["penulis"].length;
+		}
 	},
 
 	methods: {
@@ -269,9 +273,7 @@ export default {
 		// JIKA INGIN CEK DATA AKTIFKAN INI
 		cetak() {
 			console.log(this.formData);
-			this.formData['jenisJurnal'] = null;
-			this.resetForm();
-			this.penulisCounter = 1;
+			console.log(this.fieldId);
 		},
 
 		dismissAlert() {
@@ -377,21 +379,24 @@ export default {
 						"Content-Type": "multipart/form-data",
 					},
 				})
-				.then((response) => {
+				.then(async (response) => {
 					console.log(response.data);
 					if (response.data.status == "berhasil") {
 						// SETELAH BERHASIL MEMASUKKAN DATA ALERT DAN RESET FORM
 						this.alertStatus = false;
 						this.sucessStatus = true;
+
+						setTimeout(()=>{
 						this.formData = {};
 						if(this.fieldId != null){
 							this.fieldId = null;
 						}
-						
 
 						this.penulisCounter = 1;
 						this.resetForm();
 						document.documentElement.scrollTop = 0;
+						},100);
+						
 					} else {
 						this.sucessStatus = false;
 						this.alertStatus = true;

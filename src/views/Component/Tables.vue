@@ -84,7 +84,7 @@
 									v-for="item_data in item.title"
 									class="item"
 								>
-									<li><b-icon icon="dot"></b-icon>{{item_data}}</li>
+									<li><b-icon icon="dot"></b-icon>{{item_data}}</li><br>
 								</span>
 							</span>
 							
@@ -291,7 +291,7 @@ export default {
 <style scoped>
 body h3 {
 	text-align: center;
-	font-size: 18px;
+	font-size: 1.125rem;
 	margin: 10px 0 0 0;
 	line-height: 1;
 }
@@ -301,7 +301,7 @@ li{
 }
 
 table {
-	font-size: 13px;
+	font-size: 	0.8125rem;
 }
 
 .item {
@@ -310,7 +310,7 @@ table {
 
 .aksi {
 	font-weight: normal;
-	font-size: 16px;
+	font-size: 1rem;
 }
 
 .icon {
@@ -318,11 +318,11 @@ table {
 	margin-right: 5px;
 }
 .export-tombol {
-	font-size: 12px;
+	font-size: 	0.75rem;
 }
 
 .nama-jurnal{
-	font-size: 11px;
+	font-size: 0.6875rem;
 }
 .nama-jurnal hr{
 	margin: 6px 0;
