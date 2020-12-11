@@ -14,7 +14,7 @@
 		</span>
 
 		<div v-if="table_data_head == null">
-			<hr />
+			<hr/>
 			<h3>
 				<b-icon icon="arrow-return-left" class="mr-4"></b-icon
 				><i>Data kosong</i
@@ -84,17 +84,25 @@
 									v-for="item_data in item.title"
 									class="item"
 								>
-									<li><b-icon icon="dot"></b-icon>{{item_data}}</li><br>
+									<li>
+										<b-icon icon="dot"></b-icon
+										>{{ item_data }}
+									</li>
+									<br />
 								</span>
 							</span>
-							
-							<span v-else-if ="item.type =='jurnal'" class="item nama-jurnal">
-								<b>{{item.title.nama }}</b><hr>
+
+							<span
+								v-else-if="item.type == 'jurnal'"
+								class="item nama-jurnal"
+							>
+								<b>{{ item.title.nama }}</b>
+								<hr />
 								<span class="item-jurnal">
-									ISSN : {{item.title.issn }}<br>
-									Volume :  {{item.title.volume }}<br>
-									Halaman :  {{item.title.halaman }}<br>
-									Nomor :  {{item.title.nomor }}
+									ISSN : {{ item.title.issn }}<br />
+									Volume : {{ item.title.volume }}<br />
+									Halaman : {{ item.title.halaman }}<br />
+									Nomor : {{ item.title.nomor }}
 								</span>
 							</span>
 
@@ -123,7 +131,12 @@
 								></a>
 
 								<router-link
-									:to="{ name: table_content.componentName, params: {editData : table_data_body[index]} }"
+									:to="{
+										name: table_content.componentName,
+										params: {
+											editData: table_data_body[index],
+										},
+									}"
 									><b-icon
 										class="icon text-success"
 										icon="arrow-up-right-square-fill"
@@ -160,6 +173,7 @@
 			</thead>
 			<tbody>
 				<!-- DATA DALAM DATABASE -->
+
 				<tr v-for="(body, index) in table_data_body">
 					<th
 						v-for="item in body"
@@ -205,20 +219,32 @@ import { API_ENDPOINT } from "../../functions/universal.js";
 const axios = require("axios");
 
 export default {
-	props: ["table_data_head", "table_data_body", "table_content"],
+	props: ["table_data_head", "table_data_body", "table_content","export_body"],
 	data() {
 		return {
 			sucessStatus: false,
+			jurnalHeadExport:["Jenis Jurnal", "Tahun", "Judul","Penulis", "Nama Jurnal", "ISSN", "Volume", "Halaman", "Nomor", "Url"],
 		};
 	},
 
 	methods: {
 		downloadPdf() {
-			let doc = new jspdf("p", "pt");
-			doc.autoTable({ html: "#my-table" });
+			let doc = new jspdf("p", "pt",[ 595.28,  841.89]);
+			doc.autoTable({ 
+				html: "#my-table",
+				margin: {
+					right:4,
+					left:4,
+				}, 
+				styles:{
+					fontSize: 9,
+					cellWidth: 'auto'
+				},
+				
+			});
 			doc.save("Generated.pdf");
 		},
-		
+
 		downloadXls() {
 			let worksheet = xlsx.utils.table_to_book(
 				document.getElementById("my-table")
@@ -295,13 +321,13 @@ body h3 {
 	margin: 10px 0 0 0;
 	line-height: 1;
 }
-li{
+li {
 	white-space: nowrap;
-    display:table-cell;
+	display: table-cell;
 }
 
 table {
-	font-size: 	0.8125rem;
+	font-size: 0.8125rem;
 }
 
 .item {
@@ -318,18 +344,16 @@ table {
 	margin-right: 5px;
 }
 .export-tombol {
-	font-size: 	0.75rem;
+	font-size: 0.75rem;
 }
 
-.nama-jurnal{
+.nama-jurnal {
 	font-size: 0.6875rem;
 }
-.nama-jurnal hr{
+.nama-jurnal hr {
 	margin: 6px 0;
 }
-.item-jurnal{
+.item-jurnal {
 	white-space: nowrap;
 }
-
-
 </style>

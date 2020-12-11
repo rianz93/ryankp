@@ -25,7 +25,7 @@
 				</div>
 			</div>
 		</div>
-		<Tables :table_data_head = "table_data.head" :table_data_body="filteredData" :table_content="tableContent"></Tables>
+		<Tables :table_data_head = "table_data.head" :table_data_body="filteredData" :table_content="tableContent" :export_body="filteredDataExport"></Tables>
 	</div>
 </template>
 
@@ -55,6 +55,21 @@ export default {
 	},
 
 	computed:{
+		filteredDataExport(){
+				if(this.table_data.bodyExport==null){
+					return null;
+				}
+				else{
+					let table_export = this.filteredTahunExport(this.table_data.bodyExport);
+					return table_export.filter(data => {
+						let datas = data[1].title.toLowerCase().includes(this.filterTahun);
+						console.log(datas);
+						return datas;
+					});
+				}
+			},
+	
+
 		filteredData(){
 				if(this.table_data.body==null){
 					return null;
@@ -73,11 +88,21 @@ export default {
 	methods: {
 		filteredTahun(value){ 
 			if(value == null){ 
-				return this.table_data_body; 
+				return table_data.body; 
 			}
 			else{
 				return value.filter(data=>{ let datas =
 				data[3].title.toLowerCase().includes(this.filterJudul.toLowerCase()); return datas; }); 
+			} 
+		},
+
+		filteredTahunExport(value){ 
+			if(value == null){ 
+				return this.table_data.bodyExport; 
+			}
+			else{
+				return value.filter(data=>{ let datas =
+				data[2].title.toLowerCase().includes(this.filterJudul.toLowerCase()); return datas; }); 
 			} 
 		},
 
