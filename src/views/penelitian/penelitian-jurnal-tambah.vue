@@ -1,6 +1,6 @@
 <template>
 <div>
-	<b-button @click="check">Check</b-button>
+	<!-- <b-button @click="check">Check</b-button> -->
 	<h3> Data Publikasi Jurnal </h3>
 	<FormData :inputTypes="inputTypes" :url="url" :fieldId="fieldId"></FormData>
 </div>	

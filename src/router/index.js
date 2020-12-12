@@ -9,8 +9,9 @@ import Akun from "../views/Component/akun.vue";
 import penelitianJurnalTambah from "../views/penelitian/penelitian-jurnal-tambah.vue";
 import penelitiAsingTambah from "../views/penelitian/peneliti-asing-tambah.vue";
 import penelitianHkiTambah from "../views/penelitian/penelitian-hki-tambah.vue";
-import penelitianBukuAjarTambah from "../views/penelitian/penelitian-bukuAjar-tambah.vue";
+import penelitianBukuAjarTambah from "../views/penelitian/penelitian-bukuajar-tambah.vue";
 import hibahDitlitabmasTambah from "../views/penelitian/hibah-ditlitabmas-tambah.vue";
+import penyelenggaraanForum from "../views/penelitian/penyelenggaraan-forum-tambah.vue";
 
 // PELAPORAN PENELITIAN LIHAT
 import penelitianHkiLihat from "../views/penelitian/penelitian-hki-lihat.vue";
@@ -18,6 +19,7 @@ import penelitiAsingLihat from "../views/penelitian/peneliti-asing-lihat.vue";
 import hibahDitlitabmasLihat from "../views/penelitian/hibah-ditlitabmas-lihat.vue";
 import hibahNonditlitabmasLihat from "../views/penelitian/hibah-nonditlitabmas-lihat.vue";
 import penelitianJurnalLihat from "../views/penelitian/penelitian-jurnal-lihat.vue";
+import penelitianBukuAjarLihat from "../views/penelitian/penelitian-bukuajar-lihat.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -51,8 +53,18 @@ const routes = [
 		path: "/penelitian-lihat/publikasi-jurnal",
 		component: penelitianJurnalLihat,
 	},
+	{
+		path: "/penelitian-lihat/buku-ajar",
+		component: penelitianBukuAjarLihat,
+	},
 
 	// PATH TAMBAH
+	{
+		path: "/penelitian-tambah/penyelenggaraan-forum",
+		name: "tambah-penyelenggaraan-forum",
+		component: penyelenggaraanForum,
+		props: true,
+	},
 	{
 		path: "/penelitian-tambah/hibah-ditlitabmas",
 		name: "tambah-hibah-ditlitabmas",
@@ -73,7 +85,7 @@ const routes = [
 	},
 	{
 		path: "/penelitian-tambah/bukuAjar",
-		name: "tambah-penelitian-bukuAjar",
+		name: "tambah-penelitian-bukuajar",
 		component:penelitianBukuAjarTambah,
 		props:true,
 	},

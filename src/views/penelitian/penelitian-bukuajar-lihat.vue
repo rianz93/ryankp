@@ -3,8 +3,8 @@
 		<div class="container">
 			<div class="row">
 				<div class="col">
-					<h3>Hak Kekayaan Intelektual</h3>
-					<p>Kelola data HKI.</p>
+					<h3>Buku Ajar</h3>
+					<p>Kelola data Buku Ajar.</p>
 				</div>
 				<div class="col mt-3"">
 					<div class="row">
@@ -46,9 +46,9 @@ export default {
 
 			// DATA YANG DIGUNAKAN UNTUK HAPUS DATA DALAM DATABASE
 			tableContent: {
-				namaTable: "penelitian_hki",
-				namaId: "hki_id",
-				componentName: "tambah-penelitian-hki",
+				namaTable: "penelitian_buku_ajar",
+				namaId: "buku_ajar_id",
+				componentName: "tambah-penelitian-bukuajar",
 			},
 		};
 	},
@@ -59,7 +59,7 @@ export default {
 		getData() {
 			var app = this;
 			axios
-				.get(API_ENDPOINT + "/penelitian/getHki.php")
+				.get(API_ENDPOINT + "/penelitian/getBuku.php")
 				.then(function(response) {
 					app.table_data = response.data;
 					console.log(app.table_data);

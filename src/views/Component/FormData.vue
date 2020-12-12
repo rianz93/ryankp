@@ -205,7 +205,7 @@
 			<!-- JIKA INGIN CEK DATA AKTIFKAN INI -->
 			
 		</b-form>
-		<b-button @click="cetak()" icon="box-arrow-in-up-right">test</b-button>
+		<!-- <b-button @click="cetak()" icon="box-arrow-in-up-right">test</b-button> -->
 	</div>
 </template>
 
@@ -272,8 +272,10 @@ export default {
 		},
 		// JIKA INGIN CEK DATA AKTIFKAN INI
 		cetak() {
-			console.log(this.formData);
-			console.log(this.fieldId);
+			this.$refs.formAny.reset();
+			this.formData = {};
+			this.getExt();
+			this.$refs.formAny.reset();
 		},
 
 		dismissAlert() {
@@ -310,7 +312,7 @@ export default {
 		// SIMPAN FILE DALAM OBJECT
 		onChangeFileSelected(event, modelName) {
 			this.formData[modelName] = event.target.files[0];
-			if (event.target.files[0]["name"].split(".").pop() != "pdf") {
+			if (event.target.files[0]["name"].split(".").pop() != "pdf" && event.target.files[0]["name"].split(".").pop() != "PDF") {
 				this.formData[modelName] = null;
 				this.alertText = "Hanya menerima ekstensi PDF";
 				this.alertStatus = true;
@@ -379,20 +381,26 @@ export default {
 						"Content-Type": "multipart/form-data",
 					},
 				})
-				.then(async (response) => {
+				.then((response) => {
 					console.log(response.data);
 					if (response.data.status == "berhasil") {
 						// SETELAH BERHASIL MEMASUKKAN DATA ALERT DAN RESET FORM
 						this.alertStatus = false;
 						this.sucessStatus = true;
 
+						// RESET PLACEHOLDER FILE
+						if(this.formData["berkas"]){
+							this.formData["berkas"] = null;
+						}
+
+						this.penulisCounter = 1;
+						// DI DELAY AGAR MENGHINDARI WARN DARI VUE
 						setTimeout(()=>{
+						this.resetForm();
 						this.formData = {};
 						if(this.fieldId != null){
 							this.fieldId = null;
 						}
-
-						this.penulisCounter = 1;
 						this.resetForm();
 						document.documentElement.scrollTop = 0;
 						},100);
@@ -409,7 +417,7 @@ export default {
 </script>
 
 <style scoped>
-@keyframes slideInFromLeft {
+@keyframes penulisTransition {
   0% {
     opacity: 0
   }
@@ -423,7 +431,7 @@ export default {
 }
 
 .fadeInput{
-	 animation: 0.5s ease-out 0s 1 slideInFromLeft;
+	 animation: 0.5s ease-out 0s 1 penulisTransition;
 }
 
 
