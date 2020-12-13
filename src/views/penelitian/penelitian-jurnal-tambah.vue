@@ -14,7 +14,7 @@
 			return{
 					inputTypes: [
 					{
-						label: "Jenis Jurnal",
+						label: "Jenis Jurnal :",
 						name: "jenisJurnal",
 						type: "select",
 						options:["Jurnal Internasional", "Jurnal Nasional Terakreditasi", "Jurnal Nasional tidak Terakreditasi"],

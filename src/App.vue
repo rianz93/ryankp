@@ -78,7 +78,7 @@
           </span>
         </div>
       </div>
-      <div class="col-lg-10" style="margin-left: 270px">
+      <div class="col-lg-10" style="margin-left: 280px;">
         <div style="margin-top:90px;"></div>
         <transition name="fade" mode="out-in">
           <router-view></router-view>
