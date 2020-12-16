@@ -321,7 +321,7 @@ export default {
 <style>
 .active::before {
   width: 4px;
-  height: 20px;
+  height: 36px;
   content: "1";
   color: transparent;
   background-color: #2ecc71;

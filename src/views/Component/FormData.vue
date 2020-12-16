@@ -191,7 +191,7 @@
 					>
 					</b-form-file>
 					<div class="errorText mt-1">
-						<i>{{ errorText }}</i>
+						<i>{{errorText}}</i>
 					</div>
 				</b-form-group>
 			</span>
@@ -319,8 +319,8 @@ export default {
 				this.errorText = "Mohon untuk memasukkan file berekstensi PDF";
 				document.documentElement.scrollTop = 0;
 
-				console.log("DATA TIDAK BENAR");
 			} else {
+				console.log(event);
 				this.errorText = null;
 				this.alertStatus = false;
 			}
@@ -375,11 +375,14 @@ export default {
 					fd.append(item, this.formData[item]);
 				}
 			}
+			console.log(fd);
 			axios
 				.post(API_ENDPOINT + this.url, fd, {
 					headers: {
 						"Content-Type": "multipart/form-data",
 					},
+					maxContentLength: 100000000,
+       				maxBodyLength: 1000000000
 				})
 				.then((response) => {
 					console.log(response.data);

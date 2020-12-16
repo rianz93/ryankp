@@ -11,7 +11,7 @@ import penelitiAsingTambah from "../views/penelitian/peneliti-asing-tambah.vue";
 import penelitianHkiTambah from "../views/penelitian/penelitian-hki-tambah.vue";
 import penelitianBukuAjarTambah from "../views/penelitian/penelitian-bukuajar-tambah.vue";
 import hibahDitlitabmasTambah from "../views/penelitian/hibah-ditlitabmas-tambah.vue";
-import penyelenggaraanForum from "../views/penelitian/penyelenggaraan-forum-tambah.vue";
+import penyelenggaraanForumTambah from "../views/penelitian/penyelenggaraan-forum-tambah.vue";
 
 // PELAPORAN PENELITIAN LIHAT
 import penelitianHkiLihat from "../views/penelitian/penelitian-hki-lihat.vue";
@@ -20,6 +20,7 @@ import hibahDitlitabmasLihat from "../views/penelitian/hibah-ditlitabmas-lihat.v
 import hibahNonditlitabmasLihat from "../views/penelitian/hibah-nonditlitabmas-lihat.vue";
 import penelitianJurnalLihat from "../views/penelitian/penelitian-jurnal-lihat.vue";
 import penelitianBukuAjarLihat from "../views/penelitian/penelitian-bukuajar-lihat.vue";
+import penyelenggaraanForumLihat from "../views/penelitian/penyelenggaraan-forum-lihat.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -32,7 +33,10 @@ const routes = [
 		component: Akun,
 	},
 	// PATH LIHAT
-	
+	{
+		path:"/penelitian-lihat/penyelenggaraan-forum",
+		component: penyelenggaraanForumLihat,
+	},
 	{
 		path:"/penelitian-lihat/hki",
 		component: penelitianHkiLihat,
@@ -62,7 +66,7 @@ const routes = [
 	{
 		path: "/penelitian-tambah/penyelenggaraan-forum",
 		name: "tambah-penyelenggaraan-forum",
-		component: penyelenggaraanForum,
+		component: penyelenggaraanForumTambah,
 		props: true,
 	},
 	{
@@ -80,13 +84,13 @@ const routes = [
 	{
 		path: "/penelitian-tambah/hki",
 		name: "tambah-penelitian-hki",
-		component:penelitianHkiTambah,
+		component: penelitianHkiTambah,
 		props:true,
 	},
 	{
 		path: "/penelitian-tambah/bukuAjar",
 		name: "tambah-penelitian-bukuajar",
-		component:penelitianBukuAjarTambah,
+		component: penelitianBukuAjarTambah,
 		props:true,
 	},
 	{
