@@ -5,15 +5,10 @@ import vSelect from 'vue-select'
 import VCalendar from 'v-calendar'
 import VueSweetalert2 from 'vue-sweetalert2'
 
-
-
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'vue-select/dist/vue-select.css'
-
-
-
 
 // Install BootstrapVue
 Vue.use(BootstrapVue)
@@ -22,7 +17,7 @@ Vue.use(IconsPlugin)
 Vue.use(VueSweetalert2);
 Vue.component('v-select', vSelect)
 Vue.use(VCalendar);
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
 
 new Vue({

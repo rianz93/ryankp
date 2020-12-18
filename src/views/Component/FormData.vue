@@ -26,7 +26,7 @@
 		</span>
 
 		<!-- FORM -->
-		<b-form @submit.prevent="onSubmit" ref="formAny">
+		<b-form ref="formAny" @submit.prevent="sendDataPost">
 			<span v-for="(data, index) in inputTypes">
 				<!-- DATA TAHUN -->
 				<b-form-group
@@ -35,42 +35,62 @@
 					:label="data.label"
 					required
 				>
-					<b-input
+					<b-form-input
 						:id="data.name + index"
 						type="text"
 						pattern="\d*"
 						v-model="formData[data.name]"
 						maxlength="4"
+						title="Mohon Untuk Memasukkan Tahun"
 						placeholder="TTTT"
 					>
-					</b-input>
+					</b-form-input>
 				</b-form-group>
 
 				<!-- DATA PENULIS -->
 				<div v-if="data.type == 'penulis'" class="mb-3">
 					<b-form-group
 						:label-for="data.name + index"
-						:label="data.label +j +' :'"
+						:label="data.label + j + ' :'"
+						description="Nama lengkap beserta gelar"
 						v-for="j in penulisCounter"
 						class="fadeInput"
+						
 					>
-					
 						<span style="display: flex">
-							<b-input
+							<b-form-input
+								pattern="[^0-9]*"
+								title="Nama tidak bisa berisi angka"
 								:id="data.name + index"
 								type="text"
-								v-model="formData[data.name][j-1]"
+								v-model="formData[data.name][j - 1]"
 								required
 								:placeholder="'Penulis ' + j"
-							></b-input>
+							></b-form-input>
+							<b-button
+						variant="danger"
+						class="btn-sm ml-2"
+						@click="hapusPenulis(j)"
+						:disabled ="penulisCounter == 1 ? true : false"
+						>
+						<b-icon icon="trash"></b-icon
+					></b-button>
 						</span>
+
 					</b-form-group>
 					<b-button
 						variant="success"
 						class="btn-sm"
-						@click="++penulisCounter"
+						@click="penulisCounter++"
 						>Tambah Penulis <b-icon icon="plus-circle"></b-icon
 					></b-button>
+					<!-- <b-button
+						variant="danger"
+						class="btn-sm ml-2"
+						@click="kurangiPenulis"
+						>Kurangi Penulis
+						<b-icon icon="dash-circle"></b-icon
+					></b-button> -->
 					<b-button
 						variant="danger"
 						class="btn-sm ml-2"
@@ -85,13 +105,21 @@
 					v-if="data.type == 'text'"
 					:label-for="data.name + index"
 					:label="data.label"
+					:description="data.name == 'nama' ? 'Nama lengkap beserta gelar' : null"
 				>
-					<b-input
+					<b-form-input
 						:id="data.name + index"
 						type="text"
+						:class="errorState[data.name] ? 'errorValidate' : null"
+						:maxlength="data.name == 'issn' ? 9 : 150"
+						@blur="validateError(data.name)"
+						:placeholder="data.placeholder"
 						v-model="formData[data.name]"
 						required
-					></b-input>
+					></b-form-input>
+					<b-form-invalid-feedback>
+						Mohon untuk mengisi data
+					</b-form-invalid-feedback>
 				</b-form-group>
 
 				<!-- DATA INT -->
@@ -100,12 +128,13 @@
 					:label-for="data.name + index"
 					:label="data.label"
 				>
-					<b-input
+					<b-form-input
 						:id="data.name + index"
 						type="number"
+						min="1"
 						v-model="formData[data.name]"
 						required
-					></b-input>
+					></b-form-input>
 				</b-form-group>
 
 				<!-- DATA SELECT -->
@@ -132,7 +161,7 @@
 						<b-form-input
 							:id="data.name + index"
 							v-model="formData[data.name]"
-							required
+							min="1"
 							type="number"
 							@change="numberWithCommas(formData[data.name])"
 							@keyup="numberWithCommas(formData[data.name])"
@@ -160,7 +189,7 @@
 					>
 						<template v-slot="{ inputValue, togglePopover }">
 							<div class="flex items-center">
-								<b-input
+								<b-form-input
 									:value="tanggalSampaiDengan(inputValue)"
 									placeholder="Pilih jarak tanggal .. s/d .."
 									class="bg-white"
@@ -171,7 +200,7 @@
 										})
 									"
 									readonly
-								></b-input>
+								></b-form-input>
 							</div>
 						</template>
 					</v-date-picker>
@@ -187,36 +216,37 @@
 						ref="file"
 						:placeholder="getExt(formData['berkas'])"
 						:id="data.name + index"
+						:state="errorText == null ? true : false"
 						@change="onChangeFileSelected($event, data.name)"
 					>
 					</b-form-file>
-					<div class="errorText mt-1">
-						<i>{{errorText}}</i>
+					<div class="errorText ">
+						{{ errorText }}
 					</div>
 				</b-form-group>
 			</span>
-			<b-button
-				variant="success"
-				type="submit"
-				class="mb-4 btn-block"
-				@click="sendDataPost"
+			<b-button variant="success" type="submit" class="mb-4 btn-block"
 				>Simpan Data <b-icon icon="box-arrow-in-up-right"></b-icon>
 			</b-button>
 			<!-- JIKA INGIN CEK DATA AKTIFKAN INI -->
-			
 		</b-form>
-		<!-- <b-button @click="cetak()" icon="box-arrow-in-up-right">test</b-button> -->
+		<b-button @click="cetak()" icon="box-arrow-in-up-right">test</b-button>
 	</div>
 </template>
 
 <script>
 import { API_ENDPOINT } from "../../functions/universal.js";
 const axios = require("axios");
-
 export default {
 	props: ["inputTypes", "url", "fieldId"],
 	data() {
 		return {
+			errorState: {
+				dana: false,
+				penulis: false,
+				issn: false,
+			},
+
 			formData: {},
 			alertStatus: false,
 			sucessStatus: false,
@@ -240,15 +270,48 @@ export default {
 			this.numberWithCommas(this.formData["dana"]);
 		}
 
-		if(this.fieldId){
+		if (this.fieldId) {
 			this.penulisCounter = this.formData["penulis"].length;
 		}
 	},
 
 	methods: {
-		resetPenulis(){
-			this.formData['penulis'] = [];
-			this.penulisCounter=1;
+		validateError(modelName) {
+			const letters = /^[A-Za-z]+$/;
+			const numbers = /^[0-9]+$/;
+
+			if (modelName == "issn") {
+				this.errorState["issn"] =
+					this.formData["issn"].test(letters) ||
+					this.formData["issn"].length != 9
+						? true
+						: false;
+			}
+		},
+		hapusPenulis(index){
+			if(index>0){
+				this.formData["penulis"].splice(index-1,1);
+				this.penulisCounter -= 1;
+
+			}else{
+				return false;
+			}
+		},
+
+		resetPenulis() {
+			this.formData["penulis"] = [];
+			this.penulisCounter = 1;
+		},
+
+		kurangiPenulis(){
+			let index = this.penulisCounter-1;
+			if(index>0){
+				this.formData["penulis"].splice(index,1);
+				this.penulisCounter -= 1;
+
+			}else{
+				return false;
+			}
 		},
 
 		resetForm() {
@@ -259,7 +322,7 @@ export default {
 			if (value != null && typeof this.formData["berkas"] == "string") {
 				return this.formData["berkas"].split("/").pop();
 			} else {
-				return "Mohon untuk mengisi berkas..";
+				return "Mohon untuk mengisi berkas PDF..";
 			}
 		},
 
@@ -272,10 +335,7 @@ export default {
 		},
 		// JIKA INGIN CEK DATA AKTIFKAN INI
 		cetak() {
-			this.$refs.formAny.reset();
-			this.formData = {};
-			this.getExt();
-			this.$refs.formAny.reset();
+			console.log(this.formData);
 		},
 
 		dismissAlert() {
@@ -298,7 +358,7 @@ export default {
 		convertTanggalToString(str) {
 			var date = new Date(str),
 				mnth = ("0" + (date.getMonth() + 1)).slice(-2),
-				day  = ("0" + date.getDate()).slice(-2);
+				day = ("0" + date.getDate()).slice(-2);
 
 			// MASUKKAN KE DALAM ARRAY DAN JOIN LEWAT '-'
 			return [date.getFullYear(), mnth, day].join("-");
@@ -312,22 +372,23 @@ export default {
 		// SIMPAN FILE DALAM OBJECT
 		onChangeFileSelected(event, modelName) {
 			this.formData[modelName] = event.target.files[0];
-			if (event.target.files[0]["name"].split(".").pop() != "pdf" && event.target.files[0]["name"].split(".").pop() != "PDF") {
+			if (
+				event.target.files[0]["name"].split(".").pop() != "pdf" &&
+				event.target.files[0]["name"].split(".").pop() != "PDF"
+			) {
 				this.formData[modelName] = null;
 				this.alertText = "Hanya menerima ekstensi PDF";
 				this.alertStatus = true;
 				this.errorText = "Mohon untuk memasukkan file berekstensi PDF";
 				document.documentElement.scrollTop = 0;
-
 			} else {
 				console.log(event);
 				this.errorText = null;
 				this.alertStatus = false;
 			}
 		},
-
 		// KIRIM DATA
-		sendDataPost() {
+		sendDataPost(e) {
 			let fd = new FormData();
 			// MELAKUKAN CEK JIKA ADA FIELD YANG BELUM TERISI
 
@@ -363,10 +424,9 @@ export default {
 							)
 						);
 					}
-				}
-				else if(item == "penulis"){
-					for(let list in this.formData[item]){
-						fd.append("penulis"+list,this.formData[item][list]);
+				} else if (item == "penulis") {
+					for (let list in this.formData[item]) {
+						fd.append("penulis" + list, this.formData[item][list]);
 					}
 					fd.append("totalPenulis", this.formData[item].length);
 				}
@@ -382,7 +442,7 @@ export default {
 						"Content-Type": "multipart/form-data",
 					},
 					maxContentLength: 100000000,
-       				maxBodyLength: 1000000000
+					maxBodyLength: 1000000000,
 				})
 				.then((response) => {
 					console.log(response.data);
@@ -392,22 +452,21 @@ export default {
 						this.sucessStatus = true;
 
 						// RESET PLACEHOLDER FILE
-						if(this.formData["berkas"]){
+						if (this.formData["berkas"]) {
 							this.formData["berkas"] = null;
 						}
 
 						this.penulisCounter = 1;
 						// DI DELAY AGAR MENGHINDARI WARN DARI VUE
-						setTimeout(()=>{
-						this.resetForm();
-						this.formData = {};
-						if(this.fieldId != null){
-							this.fieldId = null;
-						}
-						this.resetForm();
-						document.documentElement.scrollTop = 0;
-						},100);
-						
+						setTimeout(() => {
+							this.resetForm();
+							this.formData = {};
+							if (this.fieldId != null) {
+								this.fieldId = null;
+							}
+							this.resetForm();
+							document.documentElement.scrollTop = 0;
+						}, 100);
 					} else {
 						this.sucessStatus = false;
 						this.alertStatus = true;
@@ -421,21 +480,25 @@ export default {
 
 <style scoped>
 @keyframes penulisTransition {
-  0% {
-    opacity: 0
-  }
-  100% {
-    opacity: 1;
-  }
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
 }
 
 .errorText {
 	color: red;
-}
-
-.fadeInput{
-	 animation: 0.5s ease-out 0s 1 penulisTransition;
+	font-size: 0.845rem;
 }
 
 
+
+.errorValidate {
+	border: 1px solid red;
+}
+.fadeInput {
+	animation: 0.5s ease-out 0s 1 penulisTransition;
+}
 </style>

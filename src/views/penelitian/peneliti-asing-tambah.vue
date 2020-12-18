@@ -29,25 +29,31 @@ export default {
 					label: "Nama :",
 					name: "nama",
 					type: "text",
+					placeholder: "Nama dosen..",
 					value: null,
 				},
 				{
 					label: "Jenis Kelamin :",
 					name: "jenisKelamin",
 					type: "select",
-					options: ["Pria", "Wanita"],
+					options: [
+					{ 	value : null, text: "Pilih Jenis Kelamin.."},
+						"Pria", 
+						"Wanita"],
 					value: null,
 				},
 				{
 					label: "Akademik :",
 					name: "akademik",
 					type: "text",
+					placeholder:"Contoh : Asisten Ahli",
 					value: null,
 				},
 				{
 					label: "Negara :",
 					name: "negara",
 					type: "text",
+					placeholder:"Contoh : Perancis",
 					value: null,
 				},
 				{

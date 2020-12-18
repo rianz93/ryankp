@@ -14,7 +14,7 @@
 		</span>
 
 		<div v-if="table_data_head == null">
-			<hr/>
+			<hr />
 			<h3>
 				<b-icon icon="arrow-return-left" class="mr-4"></b-icon
 				><i>Data kosong</i
@@ -51,7 +51,7 @@
 					</b-button>
 				</span>
 			</div>
-			<table class="table table-striped mt-4">
+			<table class="table table-striped mt-4" >
 				<thead>
 					<tr>
 						<!-- HEADER -->
@@ -125,6 +125,7 @@
 										]['title']
 									"
 									><b-icon
+										:id="'download'+index"
 										class="icon text-primary"
 										icon="file-earmark-arrow-down-fill"
 									></b-icon
@@ -138,19 +139,32 @@
 										},
 									}"
 									><b-icon
+										:id="'edit'+index"
 										class="icon text-success"
 										icon="arrow-up-right-square-fill"
 									></b-icon
 								></router-link>
 								<b-icon
+									:id="'hapus'+index"
 									class="icon text-danger"
 									icon="trash-fill"
+									title="Tooltip directive content"
 									@click="
 										hapusData(
 											table_data_body[index][0]['title']
 										)
 									"
 								></b-icon>
+
+								<b-tooltip :target="'hapus'+index" placement="top">
+								   	<i>Hapus</i>
+								</b-tooltip>
+								<b-tooltip :target="'edit'+index" placement="top">
+								    <i>Edit</i>
+								</b-tooltip>
+								<b-tooltip :target="'download'+index" placement="top">
+								    <i>Unduh berkas</i>
+								</b-tooltip>
 							</span>
 						</th>
 					</tr>
@@ -164,7 +178,7 @@
 			style="display: none"
 		>
 			<thead>
-				<tr v-if="export_body !=null">
+				<tr v-if="export_body != null">
 					<!-- HEADER -->
 					<th scope="col" v-for="head in jurnalHeadExport">
 						{{ head }}
@@ -179,7 +193,10 @@
 			</thead>
 			<tbody>
 				<!-- DATA DALAM DATABASE -->
-				<tr v-if="export_body!=null" v-for="(body, index) in export_body">
+				<tr
+					v-if="export_body != null"
+					v-for="(body, index) in export_body"
+				>
 					<th
 						v-for="item in body"
 						v-if="item.type != 'id' && item.type != 'file'"
@@ -208,7 +225,10 @@
 					</th>
 				</tr>
 
-				<tr v-if="export_body==null" v-for="(body, index) in table_data_body">
+				<tr
+					v-if="export_body == null"
+					v-for="(body, index) in table_data_body"
+				>
 					<th
 						v-for="item in body"
 						v-if="item.type != 'id' && item.type != 'file'"
@@ -253,28 +273,43 @@ import { API_ENDPOINT } from "../../functions/universal.js";
 const axios = require("axios");
 
 export default {
-	props: ["table_data_head", "table_data_body", "table_content","export_body"],
+	props: [
+		"table_data_head",
+		"table_data_body",
+		"table_content",
+		"export_body",
+	],
 	data() {
 		return {
 			sucessStatus: false,
-			jurnalHeadExport:["Jenis Jurnal", "Tahun", "Judul","Penulis", "Nama Jurnal", "ISSN", "Volume", "Halaman", "Nomor", "Url"],
+			jurnalHeadExport: [
+				"Jenis Jurnal",
+				"Tahun",
+				"Judul",
+				"Penulis",
+				"Nama Jurnal",
+				"ISSN",
+				"Volume",
+				"Halaman",
+				"Nomor",
+				"Url",
+			],
 		};
 	},
 
 	methods: {
 		downloadPdf() {
-			let doc = new jspdf("p", "pt",[ 595.28,  841.89]);
-			doc.autoTable({ 
+			let doc = new jspdf("p", "pt", "a4");
+			doc.autoTable({
 				html: "#my-table",
 				margin: {
-					right:4,
-					left:4,
-				}, 
-				styles:{
-					fontSize: 9,
-					cellWidth: 'auto'
+					right: 4,
+					left: 4,
 				},
-				
+				styles: {
+					fontSize: 9,
+				},
+				columnStyles: { 9: { cellWidth: 55 } },
 			});
 			doc.save("Generated.pdf");
 		},

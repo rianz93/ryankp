@@ -1,7 +1,9 @@
 <template>
   <div id="app container">
     <div class="lnavbar">
+
       <b-navbar toggleable="lg" type="dark" variant="success">
+        <h4 class="namaApp">Aplikasi Manajemen dan Pelaporan Kegiatan Penelitian dan Pengabdian Dosen </h4 class="ml-4">
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
         <b-collapse id="nav-collapse" is-nav>
           <!-- Right aligned nav items -->
@@ -414,5 +416,11 @@ export default {
 
 .first-child{
   width: 20px; height: 20px
+}
+
+.namaApp{
+  margin-left:270px; 
+  color: white; padding: 5px 0 0;
+  font-weight: normal;
 }
 </style>
