@@ -51,7 +51,7 @@
 					</b-button>
 				</span>
 			</div>
-			<table class="table table-striped mt-4" >
+			<table class="table table-striped mt-4">
 				<thead>
 					<tr>
 						<!-- HEADER -->
@@ -125,7 +125,7 @@
 										]['title']
 									"
 									><b-icon
-										:id="'download'+index"
+										:id="'download' + index"
 										class="icon text-primary"
 										icon="file-earmark-arrow-down-fill"
 									></b-icon
@@ -139,13 +139,13 @@
 										},
 									}"
 									><b-icon
-										:id="'edit'+index"
+										:id="'edit' + index"
 										class="icon text-success"
 										icon="arrow-up-right-square-fill"
 									></b-icon
 								></router-link>
 								<b-icon
-									:id="'hapus'+index"
+									:id="'hapus' + index"
 									class="icon text-danger"
 									icon="trash-fill"
 									title="Tooltip directive content"
@@ -156,14 +156,23 @@
 									"
 								></b-icon>
 
-								<b-tooltip :target="'hapus'+index" placement="top">
-								   	<i>Hapus</i>
+								<b-tooltip
+									:target="'hapus' + index"
+									placement="top"
+								>
+									<i>Hapus</i>
 								</b-tooltip>
-								<b-tooltip :target="'edit'+index" placement="top">
-								    <i>Edit</i>
+								<b-tooltip
+									:target="'edit' + index"
+									placement="top"
+								>
+									<i>Edit</i>
 								</b-tooltip>
-								<b-tooltip :target="'download'+index" placement="top">
-								    <i>Unduh berkas</i>
+								<b-tooltip
+									:target="'download' + index"
+									placement="top"
+								>
+									<i>Unduh berkas</i>
 								</b-tooltip>
 							</span>
 						</th>
@@ -260,6 +269,9 @@
 		</table>
 		<!-- TABLE CLONE UNTUK EXPORT -->
 		<!-- <button @click="test"></button> -->
+		<datalist id="my-list-id">
+			<option v-for="nama in nama">{{ nama }}</option>
+		</datalist>
 	</div>
 </template>
 

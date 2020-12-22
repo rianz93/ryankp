@@ -1,6 +1,10 @@
 <template>
 	<div>
 		<!-- ALERT JIKA DATA GAGAL DI SIMPAN -->
+		<datalist id="my-list-id" >
+			<option v-for="nama in datalistNama">{{nama.peneliti_nama}}</option>
+		</datalist>
+
 		<span>
 			<b-alert
 				variant="danger"
@@ -59,6 +63,7 @@
 					>
 						<span style="display: flex">
 							<b-form-input
+								list="my-list-id"
 								pattern="[^0-9]*"
 								title="Nama tidak bisa berisi angka"
 								:id="data.name + index"
@@ -211,16 +216,18 @@
 					v-if="data.type == 'file'"
 					:label-for="data.name + index"
 					:label="data.label"
+					:description="errorText == null ? 'Maksimum ukuran berkas 5MB' : null"
 				>
 					<b-form-file
 						ref="file"
 						:placeholder="getExt(formData['berkas'])"
 						:id="data.name + index"
 						:state="errorText == null ? true : false"
+
 						@change="onChangeFileSelected($event, data.name)"
 					>
 					</b-form-file>
-					<div class="errorText ">
+					<div class="errorText mt-1">
 						{{ errorText }}
 					</div>
 				</b-form-group>
@@ -230,7 +237,7 @@
 			</b-button>
 			<!-- JIKA INGIN CEK DATA AKTIFKAN INI -->
 		</b-form>
-		<b-button @click="cetak()" icon="box-arrow-in-up-right">test</b-button>
+		<b-button @click="getDataListNama" icon="box-arrow-in-up-right">test</b-button>
 	</div>
 </template>
 
@@ -246,7 +253,7 @@ export default {
 				penulis: false,
 				issn: false,
 			},
-
+			datalistNama: [],
 			formData: {},
 			alertStatus: false,
 			sucessStatus: false,
@@ -258,6 +265,7 @@ export default {
 	},
 
 	created() {
+		this.getDataListNama();
 		for (var data in this.inputTypes) {
 			this.formData[this.inputTypes[data]["name"]] = this.inputTypes[
 				data
@@ -296,6 +304,18 @@ export default {
 			}else{
 				return false;
 			}
+		},
+
+		getDataListNama(){
+			var app = this;
+			axios
+				.get(API_ENDPOINT + "/datalist.php")
+				.then(function(response) {
+					app.datalistNama = response.data;
+					console.log(app.dataListNama);
+					console.log(app.datalistNama);	
+				})
+				.catch(function(error) {});
 		},
 
 		resetPenulis() {
@@ -369,8 +389,9 @@ export default {
 			if (value.start != null) return value.start + " s/d " + value.end;
 		},
 
-		// SIMPAN FILE DALAM OBJECT
+		// SIMPAN FILE DALAM OBJECT DAN VALIDASI FILE
 		onChangeFileSelected(event, modelName) {
+			console.log(event);
 			this.formData[modelName] = event.target.files[0];
 			if (
 				event.target.files[0]["name"].split(".").pop() != "pdf" &&
@@ -379,8 +400,12 @@ export default {
 				this.formData[modelName] = null;
 				this.alertText = "Hanya menerima ekstensi PDF";
 				this.alertStatus = true;
-				this.errorText = "Mohon untuk memasukkan file berekstensi PDF";
-				document.documentElement.scrollTop = 0;
+				// this.errorText = "Mohon untuk memasukkan file berekstensi PDF";
+				// document.documentElement.scrollTop = 0;
+			}else if(event.target.files[0]["size"] > (1024 * 1024 * 5)){
+				this.formData[modelName] = null;
+				this.errorText = "Ukuran berkas terlalu besar ( > 5MB )";
+				
 			} else {
 				console.log(event);
 				this.errorText = null;
