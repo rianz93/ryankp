@@ -35,6 +35,7 @@ export default {
 					type: "text",
 					value: null,
 				},
+		
 				{
 					label: "Penerbit :",
 					name: "penerbit",

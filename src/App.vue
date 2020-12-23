@@ -1,7 +1,6 @@
 <template>
   <div id="app container">
-    <div class="lnavbar">
-
+    <div class="lnavbar" >
       <b-navbar toggleable="lg" type="dark" variant="success">
         <h4 class="namaApp">Aplikasi Manajemen dan Pelaporan Kegiatan Penelitian dan Pengabdian Dosen </h4 class="ml-4">
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -387,6 +386,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+
 }
 
 #nav {

@@ -4,6 +4,7 @@ import VueRouter from "vue-router";
 // KOMPONEN UTAMA
 import dashboard from "../views/Component/Dashboard.vue";
 import Akun from "../views/Component/akun.vue";
+import Login from "../views/Component/login.vue";
 
 // PELAPORAN PENELITIAN TAMBAH
 import penelitianJurnalTambah from "../views/penelitian/penelitian-jurnal-tambah.vue";
@@ -31,6 +32,10 @@ const routes = [
 	{
 		path:"/akun",
 		component: Akun,
+	},
+	{
+		path:"/login",
+		component: Login,
 	},
 	// PATH LIHAT
 	{
