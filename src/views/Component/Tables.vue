@@ -169,7 +169,7 @@
 									<i>Edit</i>
 								</b-tooltip>
 								<b-tooltip
-									:target="'download' + index"
+									:target="'unduh' + index"
 									placement="top"
 								>
 									<i>Unduh berkas</i>

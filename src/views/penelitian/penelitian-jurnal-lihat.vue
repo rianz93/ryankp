@@ -19,7 +19,10 @@
 					      <b-input-group-prepend is-text>
 					        <b-icon icon="filter-circle" size="sm"></b-icon>
 					      </b-input-group-prepend>
-					      <b-form-input type="search" v-model="filterTahun" placeholder="Cari Tahun"></b-form-input>
+					      <b-form-select type="search" v-model="filterTahun">
+					      	<option :value="''">Pilih Tahun</option>
+					      	<option v-for="index in 21" :value="2000+index"> {{ 2000+index }} </option>
+					      </b-form-select>
 					    </b-input-group>
 					</div>
 				</div>

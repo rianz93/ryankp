@@ -45,6 +45,7 @@ export default {
 					label: "Dana :",
 					name: "dana",
 					type: "currency",
+					placeholder: "Masukkan Nominal Dana..",
 					value: null,
 				}
 				

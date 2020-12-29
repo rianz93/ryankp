@@ -45,7 +45,7 @@
 						pattern="\d*"
 						v-model="formData[data.name]"
 						maxlength="4"
-						title="Mohon Untuk Memasukkan Tahun"
+						title="Mohon untuk memasukkan format tahun (contoh : 2017)"
 						placeholder="TTTT"
 					>
 					</b-form-input>
@@ -167,6 +167,7 @@
 							:id="data.name + index"
 							v-model="formData[data.name]"
 							min="1"
+							:placeholder="data.placeholder"
 							type="number"
 							@change="numberWithCommas(formData[data.name])"
 							@keyup="numberWithCommas(formData[data.name])"
@@ -237,7 +238,7 @@
 			</b-button>
 			<!-- JIKA INGIN CEK DATA AKTIFKAN INI -->
 		</b-form>
-		<b-button @click="getDataListNama" icon="box-arrow-in-up-right">test</b-button>
+		<!-- <b-button @click="getDataListNama" icon="box-arrow-in-up-right">test</b-button> -->
 	</div>
 </template>
 
@@ -259,7 +260,7 @@ export default {
 			sucessStatus: false,
 			alertText: "Data Gagal di Simpan!",
 			errorText: null,
-			currency: null,
+			currency: 'Rp.',
 			penulisCounter: 1,
 		};
 	},

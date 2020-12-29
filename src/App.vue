@@ -1,8 +1,12 @@
 <template>
   <div id="app container">
-    <div class="lnavbar" >
+    <div class="overlay" v-if="!loginStatus"></div>
+    <div class="lnavbar" v-if="loginStatus">
       <b-navbar toggleable="lg" type="dark" variant="success">
-        <h4 class="namaApp">Aplikasi Manajemen dan Pelaporan Kegiatan Penelitian dan Pengabdian Dosen </h4 class="ml-4">
+        <h4 class="namaApp">
+          Aplikasi Manajemen dan Pelaporan Kegiatan Penelitian dan Pengabdian
+          Dosen
+        </h4>
         <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
         <b-collapse id="nav-collapse" is-nav>
           <!-- Right aligned nav items -->
@@ -10,49 +14,65 @@
             <b-nav-item-dropdown right>
               <!-- Using 'button-content' slot -->
               <template #button-content>
-                <b-avatar icon="star-fill"></b-avatar>
+                <b-avatar icon="star-fill" ></b-avatar>
               </template>
               <b-dropdown-item href="#/akun">
                 <div>
                   <p style="text-align:center" class="mb-2 mt-2">
-                    <b-avatar variant="primary" text="RES"></b-avatar>
+                    <b-avatar variant="primary" :text="userData.nick"></b-avatar>
                   </p>
                   <p style="text-align:center" class="mb-0">
-                    <b>Ryan Erlando Supit</b>
+                    <b>{{ userData.nama }}</b>
                   </p>
-                  <p style="text-align:center" class="mb-2">17013047</p>
                 </div>
               </b-dropdown-item>
-              <b-dropdown-item href="#" variant="danger"> <b-icon icon="power" variant="danger" class="mr-2"></b-icon>Keluar </b-dropdown-item>
+              <b-dropdown-item @click="keluar">
+                <b-button class="btn-block btn-sm" variant="danger">
+                Keluar
+                <b-icon icon="power" class="ml-2"></b-icon>
+                </b-button>
+              </b-dropdown-item>
             </b-nav-item-dropdown>
           </b-navbar-nav>
         </b-collapse>
       </b-navbar>
     </div>
     <div class="row mr-5" style="z-index:99">
-      <div class="col-lg-3" style="max-width: 20%;">
+      <div class="col-lg-3" style="max-width: 20%;" v-if="loginStatus">
         <div class="sidebar">
           <div class="m-1 mt-4 ml-4">
-            <p><img src="./assets/logo.png" style="width:80px;" class="ml-2" /></p>
+            <p>
+              <img src="./assets/logo.png" style="width:80px;" class="ml-2" />
+            </p>
             <h5 class="mb-4">LPPM DLSU</h5>
           </div>
 
           <span v-for="(item, index) in sidebar_item">
-            <div class="sidebar-item" :class="item.class" @click="changeRoute(index)" v-if="item.icon">
+            <div
+              class="sidebar-item"
+              :class="item.class"
+              @click="changeRoute(index)"
+              v-if="item.icon"
+            >
               <!-- dropdown -->
               <div v-if="item.dropdown">
                 <div>
-                  <b-dropdown variant="link" toggle-class="text-decoration-none" no-caret dropright>
+                  <b-dropdown
+                    variant="link"
+                    toggle-class="text-decoration-none"
+                    no-caret
+                    dropright
+                  >
                     <!-- tombol dropdown -->
-                    <template#button-content>
+                    <template #button-content>
                       <b-link :class="item.class + '-text'" class="item ml-2">
-                          <b-icon :icon="item.icon"></b-icon>
-                          <span class="ml-3">{{item.title}}</span>
+                        <b-icon :icon="item.icon"></b-icon>
+                        <span class="ml-3">{{ item.title }}</span>
                       </b-link>
                     </template>
 
                     <!-- isi dropdown -->
-                    <span v-for="list in item.dropdownList" >
+                    <span v-for="list in item.dropdownList">
                       <b-dropdown-item :href="list.ref" style="z-index: 100;">
                         <b-link class="-text item" :href="list.ref">
                           <b-icon :icon="list.icon"></b-icon>
@@ -64,7 +84,12 @@
                 </div>
               </div>
 
-              <b-link v-else :class="item.class + '-text'" class="item ml-4" :href="item.ref">
+              <b-link
+                v-else
+                :class="item.class + '-text'"
+                class="item ml-4"
+                :href="item.ref"
+              >
                 <b-icon :icon="item.icon" class="first-child"></b-icon>
                 <span class="ml-3">{{ item.title }}</span>
               </b-link>
@@ -74,13 +99,15 @@
               <b>{{ item.title }}</b>
               <b-icon icon="arrow90deg-right" rotate="90" class="ml-2"></b-icon>
             </p>
-
             <!-- keterangan -->
           </span>
         </div>
       </div>
-      <div class="col-lg-10" style="margin-left: 280px;">
-        <div style="margin-top:90px;"></div>
+      <div
+        :class="loginStatus ? 'col-lg-10' : 'absolute-center'"
+        :style="loginStatus ? 'margin-left: 280px;' : ''"
+      >
+        <div style="margin-top:90px;" v-if="loginStatus"></div>
         <transition name="fade" mode="out-in">
           <router-view></router-view>
         </transition>
@@ -90,10 +117,22 @@
 </template>
 
 <script>
+import {
+  API_ENDPOINT,
+  validateLogin,
+  loginStatus,
+} from "./functions/universal.js";
 export default {
   data() {
     return {
       auth_level: 1,
+      loginStatus: false,
+      userData:
+      {
+        nama:'',
+        nick:'',
+        priority:'',
+      },
       sidebar_item: [
         {
           title: "Beranda",
@@ -113,57 +152,57 @@ export default {
             {
               title: "Peneliti Asing",
               ref: "/#/penelitian-tambah/peneliti-asing",
-              icon:"arrow-bar-right",
+              icon: "arrow-bar-right",
             },
             {
               title: "Publikasi Jurnal",
               ref: "/#/penelitian-tambah/publikasi-jurnal",
-              icon:"arrow-bar-right",
+              icon: "arrow-bar-right",
             },
             {
               title: "Pemakalah Forum Ilmiah Seminar/Lokakarya",
               ref: "/#/penelitian-tambah/pemakalah-forum",
-              icon:"arrow-bar-right",
+              icon: "arrow-bar-right",
             },
             {
               title: "Hibah Ditlitabmas",
               ref: "/#/penelitian-tambah/hibah-ditlitabmas",
-              icon:"arrow-bar-right",
+              icon: "arrow-bar-right",
             },
             {
               title: "Hibah nonditlitabmas",
               ref: "/#/penelitian-tambah/hibah-nonditlitabmas",
-              icon:"arrow-bar-right",
+              icon: "arrow-bar-right",
             },
             {
               title: "Penyelenggaraan Forum Ilmiah Seminar/Lokakarya",
               ref: "/#/penelitian-tambah/penyelenggaraan-forum",
-              icon:"arrow-bar-right",
+              icon: "arrow-bar-right",
             },
             {
               title: "Buku Ajar",
               ref: "/#/penelitian-tambah/bukuAjar",
-              icon:"arrow-bar-right",
+              icon: "arrow-bar-right",
             },
             {
               title: "Hak Kekayaan Intelektual/HKI",
               ref: "/#/penelitian-tambah/hki",
-              icon:"arrow-bar-right",
+              icon: "arrow-bar-right",
             },
             {
               title: "Kontrak Kerja",
               ref: "/#/penelitian-tambah/kontrak-kerja",
-              icon:"arrow-bar-right",
+              icon: "arrow-bar-right",
             },
             {
               title: "Unit Bisnis Hasil Riset",
               ref: "/#/penelitian-tambah/unit-bhr",
-              icon:"arrow-bar-right",
+              icon: "arrow-bar-right",
             },
             {
               title: "Luaran Lainnya",
               ref: "/#/penelitian-tambah/luaran-lainnya",
-              icon:"arrow-bar-right",
+              icon: "arrow-bar-right",
             },
           ],
         },
@@ -177,60 +216,59 @@ export default {
             {
               title: "Peneliti Asing",
               ref: "/#/penelitian-lihat/peneliti-asing",
-              icon:"arrow-bar-left",
+              icon: "arrow-bar-left",
             },
             {
               title: "Publikasi Jurnal",
               ref: "/#/penelitian-lihat/publikasi-jurnal",
-              icon:"arrow-bar-left",
+              icon: "arrow-bar-left",
             },
             {
               title: "Pemakalah Forum Ilmiah Seminar/Lokakarya",
               ref: "/#/penelitian-lihat/pemakalah-forum",
-              icon:"arrow-bar-left",
+              icon: "arrow-bar-left",
             },
             {
               title: "Hibah Ditlitabmas",
               ref: "/#/penelitian-lihat/hibah-ditlitabmas",
-              icon:"arrow-bar-left",
+              icon: "arrow-bar-left",
             },
             {
               title: "Hibah nonditlitabmas",
               ref: "/#/penelitian-lihat/hibah-nonditlitabmas",
-              icon:"arrow-bar-left",
+              icon: "arrow-bar-left",
             },
             {
               title: "Penyelenggaraan Forum Ilmiah Seminar/Lokakarya",
               ref: "/#/penelitian-lihat/penyelenggaraan-forum",
-              icon:"arrow-bar-left",
+              icon: "arrow-bar-left",
             },
             {
               title: "Buku Ajar",
               ref: "/#/penelitian-lihat/buku-ajar",
-              icon:"arrow-bar-left",
+              icon: "arrow-bar-left",
             },
             {
               title: "Hak Kekayaan Intelektual/HKI",
               ref: "/#/penelitian-lihat/hki",
-              icon:"arrow-bar-left",
+              icon: "arrow-bar-left",
             },
             {
               title: "Kontrak Kerja",
               ref: "/#/penelitian-lihat/kontrak-kerja",
-              icon:"arrow-bar-left",
+              icon: "arrow-bar-left",
             },
             {
               title: "Unit Bisnis Hasil Riset",
               ref: "/#/penelitian-lihat/unit-bhr",
-              icon:"arrow-bar-left",
+              icon: "arrow-bar-left",
             },
             {
               title: "Luaran Lainnya",
               ref: "/#/penelitian-lihat/luaran-lainnya",
-              icon:"arrow-bar-left",
+              icon: "arrow-bar-left",
             },
           ],
-
         },
         {
           title: "Pelaporan PkM",
@@ -244,24 +282,24 @@ export default {
             {
               title: "peneliti asing",
               ref: "/#/penelitian/peneliti-asing",
-              icon:"arrow-bar-right",
+              icon: "arrow-bar-right",
             },
             {
               title: "publikasi jurnal",
               ref: "/#/petualang2",
-              icon:"plus",
+              icon: "plus",
             },
             {
               title: "test3",
-              icon:"arrow-bar-right",
+              icon: "arrow-bar-right",
             },
             {
               title: "test42",
-              icon:"arrow-bar-right",
+              icon: "arrow-bar-right",
             },
             {
               title: "test5",
-              icon:"arrow-bar-right",
+              icon: "arrow-bar-right",
             },
           ],
         },
@@ -274,24 +312,24 @@ export default {
             {
               title: "peneliti asing",
               ref: "/#/penelitian/peneliti-asing",
-              icon:"arrow-bar-right",
+              icon: "arrow-bar-right",
             },
             {
               title: "publikasi jurnal",
               ref: "/#/petualang2",
-              icon:"plus",
+              icon: "plus",
             },
             {
               title: "test3",
-              icon:"arrow-bar-right",
+              icon: "arrow-bar-right",
             },
             {
               title: "test42",
-              icon:"arrow-bar-right",
+              icon: "arrow-bar-right",
             },
             {
               title: "test5",
-              icon:"arrow-bar-right",
+              icon: "arrow-bar-right",
             },
           ],
         },
@@ -315,6 +353,30 @@ export default {
         }
       }
     },
+
+    passUserData(){
+      this.userData.nama     = sessionStorage.getItem("nama");
+      this.userData.nick     = sessionStorage.getItem("nick");
+      this.userData.priority = sessionStorage.getItem("priority");
+      console.log(this.userData);
+    },
+
+    keluar(){
+      sessionStorage.clear();
+      this.loginStatus = loginStatus();
+      validateLogin(this.$router);
+    }
+  },
+
+  created() {
+    this.passUserData();
+    validateLogin(this.$router);
+    this.loginStatus = loginStatus();
+  },
+
+  updated() {
+    this.passUserData();
+    validateLogin(this.$router);
   },
 };
 </script>
@@ -386,7 +448,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-
 }
 
 #nav {
@@ -414,13 +475,36 @@ export default {
   opacity: 0;
 }
 
-.first-child{
-  width: 20px; height: 20px
+.first-child {
+  width: 20px;
+  height: 20px;
 }
 
-.namaApp{
-  margin-left:270px; 
-  color: white; padding: 5px 0 0;
+.namaApp {
+  margin-left: 270px;
+  color: white;
+  padding: 5px 0 0;
   font-weight: normal;
+}
+
+.absolute-center {
+  top: 15%;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  position: absolute;
+  z-index: 1001;
+}
+.overlay {
+  background-image: url("assets/bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  z-index: 1000;
 }
 </style>
