@@ -10,7 +10,7 @@
 					<div class="row">
 					    <b-input-group size="md" class="col" >
 					      <b-input-group-prepend is-text>
-					        <b-icon icon="filter-circle" size="sm"></b-icon>
+					        <b-icon icon="calendar2-date" size="sm"></b-icon>
 					      </b-input-group-prepend>
 					      <b-form-select type="search" placeholder="Cari Tahun" v-model="filterTahun">
 					      	<option :value="''">Pilih Tahun</option>

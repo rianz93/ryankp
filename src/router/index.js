@@ -1,26 +1,27 @@
-import Vue from "vue";
+import Vue 		 from "vue";
 import VueRouter from "vue-router";
 
 // KOMPONEN UTAMA
-import dashboard from "../views/Component/Dashboard.vue";
-import Akun from "../views/Component/akun.vue";
-import Login from "../views/Component/login.vue";
+import dashboard 	  from "../views/Component/Dashboard.vue";
+import Akun 		  from "../views/Component/akun.vue";
+import Login 		  from "../views/Component/login.vue";
+import DaftarPengguna from "../views/Component/daftarPengguna.vue";
 
 // PELAPORAN PENELITIAN TAMBAH
-import penelitianJurnalTambah from "../views/penelitian/penelitian-jurnal-tambah.vue";
-import penelitiAsingTambah from "../views/penelitian/peneliti-asing-tambah.vue";
-import penelitianHkiTambah from "../views/penelitian/penelitian-hki-tambah.vue";
-import penelitianBukuAjarTambah from "../views/penelitian/penelitian-bukuajar-tambah.vue";
-import hibahDitlitabmasTambah from "../views/penelitian/hibah-ditlitabmas-tambah.vue";
+import penelitianJurnalTambah 	  from "../views/penelitian/penelitian-jurnal-tambah.vue";
+import penelitiAsingTambah 		  from "../views/penelitian/peneliti-asing-tambah.vue";
+import penelitianHkiTambah 		  from "../views/penelitian/penelitian-hki-tambah.vue";
+import penelitianBukuAjarTambah   from "../views/penelitian/penelitian-bukuajar-tambah.vue";
+import hibahDitlitabmasTambah 	  from "../views/penelitian/hibah-ditlitabmas-tambah.vue";
 import penyelenggaraanForumTambah from "../views/penelitian/penyelenggaraan-forum-tambah.vue";
 
 // PELAPORAN PENELITIAN LIHAT
-import penelitianHkiLihat from "../views/penelitian/penelitian-hki-lihat.vue";
-import penelitiAsingLihat from "../views/penelitian/peneliti-asing-lihat.vue";
-import hibahDitlitabmasLihat from "../views/penelitian/hibah-ditlitabmas-lihat.vue";
-import hibahNonditlitabmasLihat from "../views/penelitian/hibah-nonditlitabmas-lihat.vue";
-import penelitianJurnalLihat from "../views/penelitian/penelitian-jurnal-lihat.vue";
-import penelitianBukuAjarLihat from "../views/penelitian/penelitian-bukuajar-lihat.vue";
+import penelitianHkiLihat 		 from "../views/penelitian/penelitian-hki-lihat.vue";
+import penelitiAsingLihat 		 from "../views/penelitian/peneliti-asing-lihat.vue";
+import hibahDitlitabmasLihat 	 from "../views/penelitian/hibah-ditlitabmas-lihat.vue";
+import hibahNonditlitabmasLihat  from "../views/penelitian/hibah-nonditlitabmas-lihat.vue";
+import penelitianJurnalLihat 	 from "../views/penelitian/penelitian-jurnal-lihat.vue";
+import penelitianBukuAjarLihat 	 from "../views/penelitian/penelitian-bukuajar-lihat.vue";
 import penyelenggaraanForumLihat from "../views/penelitian/penyelenggaraan-forum-lihat.vue";
 Vue.use(VueRouter);
 
@@ -36,6 +37,10 @@ const routes = [
 	{
 		path:"/login",
 		component: Login,
+	},
+	{
+		path:'/daftar-pengguna',
+		component: DaftarPengguna,
 	},
 	// PATH LIHAT
 	{

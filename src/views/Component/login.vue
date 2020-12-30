@@ -73,9 +73,9 @@ export default {
 			.then((response) => {
 				if(response.data.status == "berhasil"){
 					this.$swal("Berhasil Login", "Selamat Datang "+response.data.nama,"success");
-					sessionStorage.setItem("id", response.data.id);
-					sessionStorage.setItem("nama", response.data.nama);
-					sessionStorage.setItem("nick", response.data.nick);
+					sessionStorage.setItem("id", 	   response.data.id);
+					sessionStorage.setItem("nama", 	   response.data.nama);
+					sessionStorage.setItem("nick", 	   response.data.nick);
 					sessionStorage.setItem("priority", response.data.priority);
 					this.$router.replace("/");
 					this.$parent.loginStatus = true;

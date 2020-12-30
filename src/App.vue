@@ -14,12 +14,15 @@
             <b-nav-item-dropdown right>
               <!-- Using 'button-content' slot -->
               <template #button-content>
-                <b-avatar icon="star-fill" ></b-avatar>
+                <b-avatar icon="person-fill"></b-avatar>
               </template>
               <b-dropdown-item href="#/akun">
                 <div>
                   <p style="text-align:center" class="mb-2 mt-2">
-                    <b-avatar variant="primary" :text="userData.nick"></b-avatar>
+                    <b-avatar
+                      variant="primary"
+                      :text="userData.nick"
+                    ></b-avatar>
                   </p>
                   <p style="text-align:center" class="mb-0">
                     <b>{{ userData.nama }}</b>
@@ -28,8 +31,8 @@
               </b-dropdown-item>
               <b-dropdown-item @click="keluar">
                 <b-button class="btn-block btn-sm" variant="danger">
-                Keluar
-                <b-icon icon="power" class="ml-2"></b-icon>
+                  Keluar
+                  <b-icon icon="power" class="ml-2"></b-icon>
                 </b-button>
               </b-dropdown-item>
             </b-nav-item-dropdown>
@@ -97,9 +100,28 @@
 
             <p v-else class="ml-2 mt-4 sidebar-title">
               <b>{{ item.title }}</b>
-              <b-icon icon="arrow90deg-right" rotate="90" class="ml-2"></b-icon>
+              <b-icon
+                icon="arrow90deg-right"
+                rotate="90"
+                class="ml-2"
+              ></b-icon>
             </p>
+
             <!-- keterangan -->
+          </span>
+          <!-- MANAJEMEN PENGGUNA -->
+          <p class="ml-2 mt-4 sidebar-title" v-if="userData.priority =='admin'">
+            <b>Manajemen Pengguna</b>
+            <b-icon icon="gear" class="ml-2"></b-icon>
+          </p>
+          <span class="sidebar-item" v-if="userData.priority =='admin'">
+            <b-link class="item ml-4" href="/#/daftar-pengguna" @click="changeRoute('manajemen')" :class="manajemen">
+              <b-icon
+                icon="file-earmark-person-fill"
+                class="first-child"
+              ></b-icon>
+              <span class="ml-3">Daftar Pengguna</span>
+            </b-link>
           </span>
         </div>
       </div>
@@ -127,11 +149,11 @@ export default {
     return {
       auth_level: 1,
       loginStatus: false,
-      userData:
-      {
-        nama:'',
-        nick:'',
-        priority:'',
+      manajemen:'-text',
+      userData: {
+        nama: "",
+        nick: "",
+        priority: "",
       },
       sidebar_item: [
         {
@@ -272,6 +294,7 @@ export default {
         },
         {
           title: "Pelaporan PkM",
+          icon: "",
         },
         {
           title: "Tambah Pelaporan",
@@ -334,38 +357,36 @@ export default {
           ],
         },
       ],
-
-      notification: [
-        {
-          icon: "journals",
-          text: "Jurnal Realtech Berhasil Ditambah",
-        },
-      ],
     };
   },
   methods: {
-    changeRoute: function(index) {
+    changeRoute(index) {
+      if(index == "manajemen"){
+        this.manajemen = "active-text"
+      }
       for (var i = 0; i < this.sidebar_item.length; i++) {
         if (i == index) {
           this.sidebar_item[i].class = "active";
+          this.manajemen = "-text"
         } else {
           this.sidebar_item[i].class = "";
         }
       }
+
+
     },
 
-    passUserData(){
-      this.userData.nama     = sessionStorage.getItem("nama");
-      this.userData.nick     = sessionStorage.getItem("nick");
+    passUserData() {
+      this.userData.nama = sessionStorage.getItem("nama");
+      this.userData.nick = sessionStorage.getItem("nick");
       this.userData.priority = sessionStorage.getItem("priority");
-      console.log(this.userData);
     },
 
-    keluar(){
+    keluar() {
       sessionStorage.clear();
       this.loginStatus = loginStatus();
       validateLogin(this.$router);
-    }
+    },
   },
 
   created() {
@@ -382,15 +403,6 @@ export default {
 </script>
 
 <style>
-.active::before {
-  width: 4px;
-  height: 36px;
-  content: "1";
-  color: transparent;
-  background-color: #2ecc71;
-  position: absolute;
-}
-
 .active-text {
   color: #2ecc71;
 }
