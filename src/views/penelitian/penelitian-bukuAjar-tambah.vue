@@ -20,6 +20,8 @@ export default {
 				{
 					label: "Nama Dosen :",
 					name: "nama",
+					placeholder:"Nama Dosen..",	
+					description:"Nama lengkap beserta gelar",
 					type: "text",
 					value: null,
 				},

@@ -109,9 +109,10 @@ export default {
 
 }
 .card p{
-	margin: 0 ;
-	font-size: 20px;
-	font-weight: bold;
+	margin: 0;
+	margin-bottom: 8px;
+	font-size: 22px;
+	font-weight: normal;
 }
 .card-header{
 	background-color: #28A745;
@@ -126,7 +127,7 @@ export default {
 	font-size: 14px;
 	color: black;
 	position: absolute;
-	bottom: 10px;
+	bottom: 4px;
 	opacity: 0.6;
 }
 </style>

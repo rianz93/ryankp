@@ -145,6 +145,7 @@
 									></b-icon
 								></router-link>
 								<b-icon
+									v-if="priority=='admin'"
 									:id="'hapus' + index"
 									class="icon text-danger"
 									icon="trash-fill"
@@ -269,9 +270,6 @@
 		</table>
 		<!-- TABLE CLONE UNTUK EXPORT -->
 		<!-- <button @click="test"></button> -->
-		<datalist id="my-list-id">
-			<option v-for="nama in nama">{{ nama }}</option>
-		</datalist>
 	</div>
 </template>
 
@@ -285,6 +283,10 @@ import { API_ENDPOINT } from "../../functions/universal.js";
 const axios = require("axios");
 
 export default {
+	created(){
+		this.priority = sessionStorage.getItem("priority");
+
+	},
 	props: [
 		"table_data_head",
 		"table_data_body",
@@ -293,6 +295,8 @@ export default {
 	],
 	data() {
 		return {
+			priority:'',
+
 			sucessStatus: false,
 			jurnalHeadExport: [
 				"Jenis Jurnal",

@@ -110,7 +110,7 @@
 					v-if="data.type == 'text'"
 					:label-for="data.name + index"
 					:label="data.label"
-					:description="data.name == 'nama' ? 'Nama lengkap beserta gelar' : null"
+					:description="data.description"
 				>
 					<b-form-input
 						:id="data.name + index"
@@ -461,7 +461,10 @@ export default {
 					fd.append(item, this.formData[item]);
 				}
 			}
-			console.log(fd);
+			// UNTUK MEMBEDAKAN ISIAN USER
+			let isAdmin = sessionStorage.getItem("id");
+			fd.append("user_id", isAdmin);
+
 			axios
 				.post(API_ENDPOINT + this.url, fd, {
 					headers: {
@@ -518,8 +521,6 @@ export default {
 	color: red;
 	font-size: 0.845rem;
 }
-
-
 
 .errorValidate {
 	border: 1px solid red;

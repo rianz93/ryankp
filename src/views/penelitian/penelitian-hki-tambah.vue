@@ -21,12 +21,15 @@ export default {
 					label: "Nama :",
 					name: "nama",
 					type: "text",
+					placeholder:"Nama Dosen..",
+					description:"Nama lengkap beserta gelar",
 					value: null,
 				},
 				{
 					label: "NIDN :",
 					name: "nidn",
 					type: "text",
+					placeholder:"Masukkan NIDN..",
 					value: null,
 				},
 				{

@@ -111,8 +111,11 @@ export default {
 
 		getData() {
 			var app = this;
+			var id  = sessionStorage.getItem("id");
+			var isAdmin = sessionStorage.getItem("priority")
+			var idParam = isAdmin != 'admin' ? '?id=' + id : '';
 			axios
-				.get(API_ENDPOINT + "/penelitian/getJurnal.php")
+				.get(API_ENDPOINT + "/penelitian/getJurnal.php"+idParam)
 				.then(function(response) {
 					console.log(response.data);
 					app.table_data = response.data;

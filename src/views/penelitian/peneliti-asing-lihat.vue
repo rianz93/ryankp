@@ -74,9 +74,7 @@ export default {
 					return null;
 				}else
 				return this.table_data.body.filter(data => {
-
 					let datas = data[1].title.toLowerCase().includes(this.filterTahun);
-
 					return datas;
 				});
 			

@@ -6,6 +6,7 @@ import dashboard 	  from "../views/Component/Dashboard.vue";
 import Akun 		  from "../views/Component/akun.vue";
 import Login 		  from "../views/Component/login.vue";
 import DaftarPengguna from "../views/Component/daftarPengguna.vue";
+import tambahPengguna from "../views/Component/tambahPengguna.vue";
 
 // PELAPORAN PENELITIAN TAMBAH
 import penelitianJurnalTambah 	  from "../views/penelitian/penelitian-jurnal-tambah.vue";
@@ -41,6 +42,12 @@ const routes = [
 	{
 		path:'/daftar-pengguna',
 		component: DaftarPengguna,
+	},
+	{
+		path:'/tambah-pengguna',
+		component:tambahPengguna,
+		name:'tambah-pengguna',
+		props:true,
 	},
 	// PATH LIHAT
 	{

@@ -29,7 +29,8 @@ export default {
 					label: "Nama :",
 					name: "nama",
 					type: "text",
-					placeholder: "Nama dosen..",
+					placeholder: "Nama peneliti..",
+					description:"Nama lengkap beserta gelar",
 					value: null,
 				},
 				{

@@ -27,7 +27,7 @@ export default {
 				},
 				{
 					label: "Nama Kegiatan :",
-					name: "nama",
+					name: "namaKegiatan",
 					type: "text",
 					value: null,
 				},
@@ -35,7 +35,12 @@ export default {
 					label: "Level :",
 					name: "level",
 					type: "select",
-					options: ["Regional", "Nasional","International"],
+					options: [
+						{ value: null, text: "Pilih level kegiatan.." },
+						"Regional",
+						"Nasional",
+						"International",
+					],
 					value: null,
 				},
 				{
@@ -63,6 +68,7 @@ export default {
 					label: "Tempat :",
 					name: "tempat",
 					type: "text",
+					placeholder: "Contoh : Universitas Katolik De La Salle Manado",
 					value: null,
 				},
 			],
