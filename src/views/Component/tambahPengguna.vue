@@ -3,7 +3,11 @@
 		<b-jumbotron class="adjust-jumbotron" border-variant="light">
 			<template #lead>
 				<h3 style="font-weight: normal;">
-					{{userData.id == null ? 'Tambah Pengguna':'Ubah Data Pengguna'}}
+					{{
+						userData.id == null
+							? "Tambah Pengguna"
+							: "Ubah Data Pengguna"
+					}}
 					<b-icon icon="file-earmark-person"></b-icon>
 				</h3>
 			</template>
@@ -66,7 +70,11 @@
 						>
 						</b-form-input>
 					</b-form-group>
-					<b-form-group class="col" label="Kata Sandi :" v-if="userData.id == null">
+					<b-form-group
+						class="col fadeInput"
+						label="Kata Sandi :"
+						v-if="showPasswordField"
+					>
 						<b-form-input
 							:type="type ? 'password' : 'text'"
 							v-model="userData.password"
@@ -79,6 +87,21 @@
 							@click="changeType"
 						></b-icon>
 					</b-form-group>
+					<span
+						class="mt-3"
+						id="b-password-change"
+						v-if="!showPasswordField"
+						><b-button
+							variant="danger"
+							@click="showPasswordField = true"
+							size="sm"
+							class="col mt-3 p-2"
+							>Atur Kembali Password
+							<b-icon icon="unlock"></b-icon></b-button
+					></span>
+					<b-tooltip target="b-password-change">
+						<i>Tekan tombol untuk mengatur ulang password</i>
+					</b-tooltip>
 					<b-form-group class="col" label="Tingkat Pengguna :">
 						<span class="row ml-1">
 							<b-form-radio
@@ -107,7 +130,11 @@
 					</b-form-group>
 				</div>
 				<b-button type="submit" variant="success" class="mt-3 btn-block"
-					>{{userData.id == null ? 'Tambah Pengguna':'Ubah Data Pengguna'}}
+					>{{
+						userData.id == null
+							? "Tambah Pengguna"
+							: "Ubah Data Pengguna"
+					}}
 					<b-icon icon="box-arrow-in-up-right"></b-icon
 				></b-button>
 			</b-form>
@@ -118,13 +145,14 @@
 import { API_ENDPOINT } from "../../functions/universal.js";
 const axios = require("axios");
 export default {
-	props:["editData"],
+	props: ["editData"],
 	data() {
 		return {
 			type: true,
-			duplicationAlert:false,
+			duplicationAlert: false,
+			showPasswordField: true,
 			userData: {
-				id:null,
+				id: null,
 				namaLengkap: "",
 				namaPengguna: "",
 				password: null,
@@ -133,7 +161,6 @@ export default {
 		};
 	},
 	methods: {
-
 		sendDataPost() {
 			let fd = new FormData();
 			console.log(this.userData);
@@ -166,7 +193,7 @@ export default {
 					);
 				});
 		},
-		preventAccess(){
+		preventAccess() {
 			if (this.$parent.userData.priority != "admin") {
 				this.$swal(
 					"Akses Ditolak",
@@ -180,16 +207,17 @@ export default {
 			this.type = !this.type;
 			console.log(this.type);
 		},
-		preEditData(){
+		preEditData() {
 			let app = this;
-			if(app.editData){
-				app.userData.id				 = app.editData.id;
-				app.userData.namaLengkap  	 = app.editData.nama;
-				app.userData.namaPengguna 	 = app.editData.nick;
+			if (app.editData) {
+				app.showPasswordField = false;
+				app.userData.id = app.editData.id;
+				app.userData.namaLengkap = app.editData.nama;
+				app.userData.namaPengguna = app.editData.nick;
 				app.userData.tingkatPengguna = app.editData.priority;
 			}
 			console.log(app.userData);
-		}
+		},
 	},
 	created() {
 		this.preventAccess();
@@ -200,5 +228,16 @@ export default {
 <style scoped>
 .password-eye {
 	cursor: pointer;
+}
+@keyframes passwordTransition {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+.fadeInput{
+	animation: 0.5s ease-out 0s 1 passwordTransition;
 }
 </style>
