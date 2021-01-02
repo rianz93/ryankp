@@ -303,25 +303,63 @@ export default {
           dropdown: true,
           dropdownList: [
             {
-              title: "peneliti asing",
-              ref: "/#/penelitian/peneliti-asing",
+              title: "Pengabdian dana DRPM",
+              ref: "/#/pkm-tambah/dana-drpm",
+              icon: "arrow-bar-right",
+            }, 
+            {
+              title: "Pengabdian dana non-DRPM",
+              ref: "/#/pkm-tambah/dana-nondrpm",
+              icon: "arrow-bar-right",
+            },  
+            {
+              title: "Unit usaha kampus",
+              ref: "/#/pkm-tambah/unit-usaha",
               icon: "arrow-bar-right",
             },
             {
-              title: "publikasi jurnal",
-              ref: "/#/petualang2",
-              icon: "plus",
-            },
-            {
-              title: "test3",
+              title: "Publikasi jurnal",
+              ref: "/#/pkm-tambah/publikasi-jurnal",
               icon: "arrow-bar-right",
             },
             {
-              title: "test42",
+              title: "Publikasi media massa",
+              ref: "/#/pkm-tambah/publikasi-media-massa",
               icon: "arrow-bar-right",
             },
             {
-              title: "test5",
+              title: "Pemakalah forum ilmiah",
+              ref: "/#/pkm-tambah/pemakalah-forum",
+              icon: "arrow-bar-right",
+            },
+            {
+              title: "Hak Kekayaan Intelektual/HKI",
+              ref: "/#/pkm-tambah/hki",
+              icon: "arrow-bar-right",
+              },
+            {
+              title: "Luaran iptek lainnya",
+              ref: "/#/pkm-tambah/luaran-iptek",
+              icon: "arrow-bar-right",
+            },
+            {
+              title: "Produk terstandarisasi",
+              ref: "/#/pkm-tambah/produk-terstandarisasi",
+              icon: "arrow-bar-right",
+            },
+            {
+              title: "Produk tersertifikasi",
+              ref: "/#/pkm-tambah/produk-tersertifikasi",
+              icon: "arrow-bar-right",
+            },
+            {
+              title: "Mitra berbadan hukum",
+              ref: "/#/pkm-tambah/mbh",
+              icon: "arrow-bar-right",
+            },
+            {
+              title: "Buku",
+              ref: "/#/pkm-tambah/buku",
               icon: "arrow-bar-right",
             },
           ],
@@ -333,25 +371,63 @@ export default {
           dropdown: true,
           dropdownList: [
             {
-              title: "peneliti asing",
-              ref: "/#/penelitian/peneliti-asing",
+              title: "Pengabdian dana DRPM",
+              ref: "/#/pkm-lihat/dana-drpm",
+              icon: "arrow-bar-right",
+            }, 
+            {
+              title: "Pengabdian dana non-DRPM",
+              ref: "/#/pkm-lihat/dana-nondrpm",
+              icon: "arrow-bar-right",
+            },  
+            {
+              title: "Unit usaha kampus",
+              ref: "/#/pkm-lihat/unit-usaha",
               icon: "arrow-bar-right",
             },
             {
-              title: "publikasi jurnal",
-              ref: "/#/petualang2",
-              icon: "plus",
-            },
-            {
-              title: "test3",
+              title: "Publikasi jurnal",
+              ref: "/#/pkm-lihat/publikasi-jurnal",
               icon: "arrow-bar-right",
             },
             {
-              title: "test42",
+              title: "Publikasi media massa",
+              ref: "/#/pkm-lihat/publikasi-media-massa",
               icon: "arrow-bar-right",
             },
             {
-              title: "test5",
+              title: "Pemakalah forum ilmiah",
+              ref: "/#/pkm-lihat/pemakalah-forum",
+              icon: "arrow-bar-right",
+            },
+            {
+              title: "Hak Kekayaan Intelektual/HKI",
+              ref: "/#/pkm-lihat/hki",
+              icon: "arrow-bar-right",
+              },
+            {
+              title: "Luaran iptek lainnya",
+              ref: "/#/pkm-lihat/luaran-iptek",
+              icon: "arrow-bar-right",
+            },
+            {
+              title: "Produk terstandarisasi",
+              ref: "/#/pkm-lihat/produk-terstandarisasi",
+              icon: "arrow-bar-right",
+            },
+            {
+              title: "Produk tersertifikasi",
+              ref: "/#/pkm-lihat/produk-tersertifikasi",
+              icon: "arrow-bar-right",
+            },
+            {
+              title: "Mitra berbadan hukum",
+              ref: "/#/pkm-lihat/mbh",
+              icon: "arrow-bar-right",
+            },
+            {
+              title: "Buku",
+              ref: "/#/pkm-lihat/buku",
               icon: "arrow-bar-right",
             },
           ],
