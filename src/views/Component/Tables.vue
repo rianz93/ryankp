@@ -58,7 +58,7 @@
 						<th scope="col" v-for="head in table_data_head">
 							{{ head }}
 						</th>
-						<th scope="col">Aksi</th>
+						<th scope="col" style="width: 90px">Aksi</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -109,6 +109,7 @@
 							<span v-else class="item">{{
 								numberWithCommas(item.title, item.type)
 							}}</span>
+
 						</th>
 						<th>
 							<span class="aksi">

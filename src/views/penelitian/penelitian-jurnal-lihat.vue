@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div class="container">
-			<div class="row">
+			<div class="row"> 
 				<div class="col">
 					<h3>Publikasi jurnal</h3>
 					<p>Kelola data Publikasi jurnal.</p>
@@ -110,10 +110,10 @@ export default {
 		},
 
 		getData() {
-			var app = this;
-			var id  = sessionStorage.getItem("id");
-			var isAdmin = sessionStorage.getItem("priority")
-			var idParam = isAdmin != 'admin' ? '?id=' + id : '';
+			let app = this;
+			let id  = sessionStorage.getItem("id");
+			let isAdmin = sessionStorage.getItem("priority")
+			let idParam = isAdmin != 'admin' ? '?id=' + id : '';
 			axios
 				.get(API_ENDPOINT + "/penelitian/getJurnal.php"+idParam)
 				.then(function(response) {

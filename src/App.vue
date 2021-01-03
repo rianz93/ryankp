@@ -43,13 +43,18 @@
     <div class="row mr-5" style="z-index:99">
       <div class="col-lg-3" style="max-width: 20%;" v-if="loginStatus">
         <div class="sidebar">
-          <div class="m-1 mt-4 ml-4">
+          <div class=" mt-4 ml-4 mb-2">
             <p>
-              <img src="./assets/logo.png" style="width:80px;" class="ml-2" />
+              <img
+                src="./assets/logo.png"
+                style="width:80px;"
+                class="ml-5 "
+              />
             </p>
-            <h5 class="mb-4">LPPM DLSU</h5>
+            <b-badge class="ml-5 p-2" pill :variant="userData.priority == 'admin' ? 'primary' : 'secondary'" style="width:80px;">{{userData.priority == "admin" ? "Admin" : "Dosen"}} <b-icon icon="person-fill"></b-icon></b-badge>
           </div>
 
+          <hr />
           <span v-for="(item, index) in sidebar_item">
             <div
               class="sidebar-item"
@@ -100,22 +105,26 @@
 
             <p v-else class="ml-2 mt-4 sidebar-title">
               <b>{{ item.title }}</b>
-              <b-icon
-                icon="arrow90deg-right"
-                rotate="90"
-                class="ml-2"
-              ></b-icon>
+              <b-icon icon="arrow90deg-right" rotate="90" class="ml-2"></b-icon>
             </p>
 
             <!-- keterangan -->
           </span>
           <!-- MANAJEMEN PENGGUNA -->
-          <p class="ml-2 mt-4 sidebar-title" v-if="userData.priority =='admin'">
+          <p
+            class="ml-2 mt-4 sidebar-title"
+            v-if="userData.priority == 'admin'"
+          >
             <b>Manajemen Pengguna</b>
             <b-icon icon="gear" class="ml-2"></b-icon>
           </p>
-          <span class="sidebar-item" v-if="userData.priority =='admin'">
-            <b-link class="item ml-4" href="/#/daftar-pengguna" @click="changeRoute('manajemen')" :class="manajemen">
+          <span class="sidebar-item" v-if="userData.priority == 'admin'">
+            <b-link
+              class="item ml-4"
+              href="/#/daftar-pengguna"
+              @click="changeRoute('manajemen')"
+              :class="manajemen"
+            >
               <b-icon
                 icon="file-earmark-person-fill"
                 class="first-child"
@@ -149,7 +158,7 @@ export default {
     return {
       auth_level: 1,
       loginStatus: false,
-      manajemen:'-text',
+      manajemen: "-text",
       userData: {
         nama: "",
         nick: "",
@@ -211,11 +220,11 @@ export default {
               ref: "/#/penelitian-tambah/hki",
               icon: "arrow-bar-right",
             },
-            {
-              title: "Kontrak Kerja",
-              ref: "/#/penelitian-tambah/kontrak-kerja",
-              icon: "arrow-bar-right",
-            },
+            // {
+            //   title: "Kontrak Kerja",
+            //   ref: "/#/penelitian-tambah/kontrak-kerja",
+            //   icon: "arrow-bar-right",
+            // },
             {
               title: "Unit Bisnis Hasil Riset",
               ref: "/#/penelitian-tambah/unit-bhr",
@@ -275,11 +284,11 @@ export default {
               ref: "/#/penelitian-lihat/hki",
               icon: "arrow-bar-left",
             },
-            {
-              title: "Kontrak Kerja",
-              ref: "/#/penelitian-lihat/kontrak-kerja",
-              icon: "arrow-bar-left",
-            },
+            // {
+            //   title: "Kontrak Kerja",
+            //   ref: "/#/penelitian-lihat/kontrak-kerja",
+            //   icon: "arrow-bar-left",
+            // },
             {
               title: "Unit Bisnis Hasil Riset",
               ref: "/#/penelitian-lihat/unit-bhr",
@@ -306,12 +315,12 @@ export default {
               title: "Pengabdian dana DRPM",
               ref: "/#/pkm-tambah/dana-drpm",
               icon: "arrow-bar-right",
-            }, 
+            },
             {
               title: "Pengabdian dana non-DRPM",
               ref: "/#/pkm-tambah/dana-nondrpm",
               icon: "arrow-bar-right",
-            },  
+            },
             {
               title: "Unit usaha kampus",
               ref: "/#/pkm-tambah/unit-usaha",
@@ -336,7 +345,7 @@ export default {
               title: "Hak Kekayaan Intelektual/HKI",
               ref: "/#/pkm-tambah/hki",
               icon: "arrow-bar-right",
-              },
+            },
             {
               title: "Luaran iptek lainnya",
               ref: "/#/pkm-tambah/luaran-iptek",
@@ -374,12 +383,12 @@ export default {
               title: "Pengabdian dana DRPM",
               ref: "/#/pkm-lihat/dana-drpm",
               icon: "arrow-bar-right",
-            }, 
+            },
             {
               title: "Pengabdian dana non-DRPM",
               ref: "/#/pkm-lihat/dana-nondrpm",
               icon: "arrow-bar-right",
-            },  
+            },
             {
               title: "Unit usaha kampus",
               ref: "/#/pkm-lihat/unit-usaha",
@@ -404,7 +413,7 @@ export default {
               title: "Hak Kekayaan Intelektual/HKI",
               ref: "/#/pkm-lihat/hki",
               icon: "arrow-bar-right",
-              },
+            },
             {
               title: "Luaran iptek lainnya",
               ref: "/#/pkm-lihat/luaran-iptek",
@@ -437,19 +446,17 @@ export default {
   },
   methods: {
     changeRoute(index) {
-      if(index == "manajemen"){
-        this.manajemen = "active-text"
+      if (index == "manajemen") {
+        this.manajemen = "active-text";
       }
       for (var i = 0; i < this.sidebar_item.length; i++) {
         if (i == index) {
           this.sidebar_item[i].class = "active";
-          this.manajemen = "-text"
+          this.manajemen = "-text";
         } else {
           this.sidebar_item[i].class = "";
         }
       }
-
-
     },
 
     passUserData() {

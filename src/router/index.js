@@ -16,6 +16,17 @@ import penelitianBukuAjarTambah   from "../views/penelitian/penelitian-bukuajar-
 import hibahDitlitabmasTambah 	  from "../views/penelitian/hibah-ditlitabmas-tambah.vue";
 import penyelenggaraanForumTambah from "../views/penelitian/penyelenggaraan-forum-tambah.vue";
 
+//PELAPORAN PKM TAMBAH
+import pkmUnitUsahaTambah 		  from "../views/pkm/pkm-unit-usaha-kampus-tambah.vue";
+import pkmMbhTambah		  		  from "../views/pkm/pkm-mbh-tambah.vue";
+import produkTersertifikasiTambah from "../views/pkm/produk-tersertifikasi-tambah.vue";
+import produkTerstandarisasiTambah from "../views/pkm/produk-terstandarisasi-tambah.vue";
+//PELAPORAN PKM LIHAT
+import pkmUnitUsahaLihat 		 from "../views/pkm/pkm-unit-usaha-kampus-lihat.vue"
+import pkmMbhLihat		 		 from "../views/pkm/pkm-mbh-lihat.vue";
+import produkTersertifikasiLihat from "../views/pkm/produk-tersertifikasi-lihat";
+import produkTerstandarisasiLihat from "../views/pkm/produk-terstandarisasi-lihat";
+
 // PELAPORAN PENELITIAN LIHAT
 import penelitianHkiLihat 		 from "../views/penelitian/penelitian-hki-lihat.vue";
 import penelitiAsingLihat 		 from "../views/penelitian/peneliti-asing-lihat.vue";
@@ -49,7 +60,24 @@ const routes = [
 		name:'tambah-pengguna',
 		props:true,
 	},
-	// PATH LIHAT
+	// PATH LIHAT PKM
+	{
+		path:'/pkm-lihat/produk-tersertifikasi',
+		component: produkTersertifikasiLihat,
+	},
+	{
+		path:'/pkm-lihat/produk-terstandarisasi',
+		component: produkTerstandarisasiLihat,
+	},
+	{
+		path:'/pkm-lihat/unit-usaha',
+		component:pkmUnitUsahaLihat,
+	},
+	{
+		path:'/pkm-lihat/mbh',
+		component:pkmMbhLihat,
+	},
+	// PATH LIHAT PENELITIAN
 	{
 		path:"/penelitian-lihat/penyelenggaraan-forum",
 		component: penyelenggaraanForumLihat,
@@ -78,8 +106,32 @@ const routes = [
 		path: "/penelitian-lihat/buku-ajar",
 		component: penelitianBukuAjarLihat,
 	},
-
-	// PATH TAMBAH
+	// PATH TAMBAH PKM
+	{
+		path: "/pkm-tambah/unit-usaha",
+		component: pkmUnitUsahaTambah,
+		name: "pkm-unit-usaha-tambah",
+		props: true,
+	},
+	{
+		path: "/pkm-tambah/produk-tersertifikasi",
+		component: produkTersertifikasiTambah,
+		name: "produk-tersertifikasi-tambah",
+		props: true,
+	},
+	{
+		path: "/pkm-tambah/produk-terstandarisasi",
+		component: produkTerstandarisasiTambah,
+		name: "produk-terstandarisasi-tambah",
+		props: true,
+	},
+	{
+		path: "/pkm-tambah/mbh",
+		component: pkmMbhTambah,
+		name: "pkm-mbh-tambah",
+		props: true,
+	},
+	// PATH TAMBAH PENELITIAN
 	{
 		path: "/penelitian-tambah/penyelenggaraan-forum",
 		name: "tambah-penyelenggaraan-forum",

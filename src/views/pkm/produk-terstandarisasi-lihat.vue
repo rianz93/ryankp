@@ -3,24 +3,17 @@
 		<div class="container">
 			<div class="row">
 				<div class="col">
-					<h3>Buku Ajar</h3>
-					<p>Kelola data Buku Ajar.</p>
+					<h3>Produk Tersertifikasi</h3>
+					<p>Kelola data produk terserfikasi.</p>
 				</div>
 				<div class="col mt-3"">
 					<div class="row">
-						<b-input-group size="md" class="col" >
-					      <b-input-group-prepend is-text>
-					        <b-icon icon="search" size="sm"></b-icon>
-					      </b-input-group-prepend>
-					      <b-form-input type="search" v-model= "filterJudul"placeholder="Cari Judul"></b-form-input>
-					    </b-input-group>
-
 					    <b-input-group size="md" class="col" >
 					      <b-input-group-prepend is-text>
-					      	<b-icon icon="calendar2-date" size="sm"></b-icon>
+					        <b-icon icon="calendar2-date" size="sm"></b-icon>
 					      </b-input-group-prepend>
 					      <b-form-select type="search" v-model="filterTahun">
-					      	<option :value="''">Pilih Tahun</option>
+					      	<option :value="''">Pilih Tahun..</option>
 					      	<option v-for="index in 21" :value="2000+index"> {{ 2000+index }} </option>
 					      </b-form-select>
 					    </b-input-group>
@@ -29,7 +22,7 @@
 			</div>
 		</div>
 
-		<Tables :table_data_head = "table_data.head" :table_data_body="table_data.body" :table_content="tableContent" ></Tables>
+		<Tables :table_data_head = "table_data.head" :table_data_body="filteredData" :table_content="tableContent" ></Tables>
 	</div>
 
 </template>
@@ -49,9 +42,9 @@ export default {
 
 			// DATA YANG DIGUNAKAN UNTUK HAPUS DATA DALAM DATABASE
 			tableContent: {
-				namaTable: "penelitian_buku_ajar",
-				namaId: "buku_ajar_id",
-				componentName: "tambah-penelitian-bukuajar",
+				namaTable: "produk_terstandarisasi",
+				namaId: "produk_terstandarisasi_id",
+				componentName: "produk-terstandarisasi-tambah",
 			},
 		};
 	},
@@ -60,9 +53,12 @@ export default {
 	},
 	methods: {
 		getData() {
-			var app = this;
+			let app = this;
+			let id  = sessionStorage.getItem("id");
+			let isAdmin = sessionStorage.getItem("priority")
+			let idParam = isAdmin != 'admin' ? '?id=' + id : '';
 			axios
-				.get(API_ENDPOINT + "/penelitian/getBuku.php")
+				.get(API_ENDPOINT + "/pkm/getProdukTerstandarisasi.php" + idParam)
 				.then(function(response) {
 					app.table_data = response.data;
 					console.log(app.table_data);

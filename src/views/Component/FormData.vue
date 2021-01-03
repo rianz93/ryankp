@@ -14,7 +14,10 @@
 				@dismissed="dismissAlert()"
 				ref="alert"
 			>
-				{{ alertText }}
+				{{ alertText }} <b-icon
+							icon="exclamation-circle-fill"
+							variant="danger"
+						></b-icon>
 			</b-alert>
 
 			<!-- ALERT JIKA DATA BERHASIL DI SIMPAN -->
@@ -25,7 +28,7 @@
 				fade
 				@dismissed="dismissSuccess()"
 			>
-				Data Berhasil di Simpan!
+				Data Berhasil di Simpan <b-icon icon="check-circle-fill" variant="success"></b-icon>
 			</b-alert>
 		</span>
 
@@ -217,13 +220,13 @@
 					v-if="data.type == 'file'"
 					:label-for="data.name + index"
 					:label="data.label"
-					:description="errorText == null ? 'Maksimum ukuran berkas 5MB' : null"
+					:description="errorText == null ? 'Maksimum ukuran berkas 5MB' : ''"
 				>
 					<b-form-file
 						ref="file"
 						:placeholder="getExt(formData['berkas'])"
 						:id="data.name + index"
-						:state="errorText == null ? true : false"
+						:state="alertText == null ? true : false"
 
 						@change="onChangeFileSelected($event, data.name)"
 					>
@@ -258,7 +261,7 @@ export default {
 			formData: {},
 			alertStatus: false,
 			sucessStatus: false,
-			alertText: "Data Gagal di Simpan!",
+			alertText: null,
 			errorText: null,
 			currency: 'Rp.',
 			penulisCounter: 1,
@@ -267,7 +270,7 @@ export default {
 
 	created() {
 		this.getDataListNama();
-		for (var data in this.inputTypes) {
+		for (let data in this.inputTypes) {
 			this.formData[this.inputTypes[data]["name"]] = this.inputTypes[
 				data
 			]["value"];
@@ -308,7 +311,7 @@ export default {
 		},
 
 		getDataListNama(){
-			var app = this;
+			let app = this;
 			axios
 				.get(API_ENDPOINT + "/datalist.php")
 				.then(function(response) {
@@ -360,7 +363,7 @@ export default {
 		},
 
 		dismissAlert() {
-			if (this.alertText === "Mohon untuk melengkapi data!") {
+			if (this.alertText === "Mohon untuk melengkapi data") {
 				this.alertText = "Data Gagal di Simpan!";
 			}
 			this.alertStatus = false;
@@ -400,15 +403,18 @@ export default {
 			) {
 				this.formData[modelName] = null;
 				this.alertText = "Hanya menerima ekstensi PDF";
+				this.errorText = "Mohon untuk memasukkan file berekstensi .pdf";
 				this.alertStatus = true;
 				// this.errorText = "Mohon untuk memasukkan file berekstensi PDF";
 				// document.documentElement.scrollTop = 0;
 			}else if(event.target.files[0]["size"] > (1024 * 1024 * 5)){
 				this.formData[modelName] = null;
+				this.alertText = "Ukuran berkas terlalu besar ( > 5MB )";
 				this.errorText = "Ukuran berkas terlalu besar ( > 5MB )";
 				
 			} else {
 				console.log(event);
+				this.alertText = null;
 				this.errorText = null;
 				this.alertStatus = false;
 			}
@@ -417,7 +423,6 @@ export default {
 		sendDataPost(e) {
 			let fd = new FormData();
 			// MELAKUKAN CEK JIKA ADA FIELD YANG BELUM TERISI
-
 			for (let item in this.formData) {
 				if (this.formData[item] == null || this.formData[item] == "") {
 					this.alertText = "Mohon untuk melengkapi data!";
@@ -477,7 +482,7 @@ export default {
 					console.log(response.data);
 					if (response.data.status == "berhasil") {
 						// SETELAH BERHASIL MEMASUKKAN DATA ALERT DAN RESET FORM
-						this.alertStatus = false;
+						this.alertStatus  = false;
 						this.sucessStatus = true;
 
 						// RESET PLACEHOLDER FILE
@@ -498,7 +503,7 @@ export default {
 						}, 100);
 					} else {
 						this.sucessStatus = false;
-						this.alertStatus = true;
+						this.alertStatus  = true;
 						document.documentElement.scrollTop = 0;
 					}
 				});
@@ -519,7 +524,7 @@ export default {
 
 .errorText {
 	color: red;
-	font-size: 0.845rem;
+	font-size: 80%;
 }
 
 .errorValidate {

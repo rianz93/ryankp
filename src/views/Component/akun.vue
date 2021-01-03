@@ -12,9 +12,10 @@
 				<hr class="mb-3" />
 
 				<p style="margin:0;">Kelola akun anda disini</p>
+				<b-button @click="test">test</b-button>
 			</b-jumbotron>
 		</div>
-		<p>{{userData}}</p>
+		
 	</div>
 </template>
 <script>
@@ -31,6 +32,9 @@ export default{
 		}
 	},
 	methods:{
+		test(){
+			console.log(this.$parent);
+		},
 		getUserData(){
 			this.userData.id		= sessionStorage.getItem("id");
 			this.userData.nama 		= sessionStorage.getItem("nama");
