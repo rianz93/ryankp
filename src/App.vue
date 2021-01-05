@@ -163,6 +163,7 @@ export default {
         nama: "",
         nick: "",
         priority: "",
+        password:"",
       },
       sidebar_item: [
         {
@@ -196,7 +197,7 @@ export default {
               icon: "arrow-bar-right",
             },
             {
-              title: "Hibah Ditlitabmas",
+              title: "Hibah ditlitabmas",
               ref: "/#/penelitian-tambah/hibah-ditlitabmas",
               icon: "arrow-bar-right",
             },
@@ -260,7 +261,7 @@ export default {
               icon: "arrow-bar-left",
             },
             {
-              title: "Hibah Ditlitabmas",
+              title: "Hibah ditlitabmas",
               ref: "/#/penelitian-lihat/hibah-ditlitabmas",
               icon: "arrow-bar-left",
             },
@@ -311,16 +312,16 @@ export default {
           class: "",
           dropdown: true,
           dropdownList: [
-            {
-              title: "Pengabdian dana DRPM",
-              ref: "/#/pkm-tambah/dana-drpm",
-              icon: "arrow-bar-right",
-            },
-            {
-              title: "Pengabdian dana non-DRPM",
-              ref: "/#/pkm-tambah/dana-nondrpm",
-              icon: "arrow-bar-right",
-            },
+            // {
+            //   title: "Pengabdian dana DRPM",
+            //   ref: "/#/pkm-tambah/dana-drpm",
+            //   icon: "arrow-bar-right",
+            // },
+            // {
+            //   title: "Pengabdian dana non-DRPM",
+            //   ref: "/#/pkm-tambah/dana-nondrpm",
+            //   icon: "arrow-bar-right",
+            // },
             {
               title: "Unit usaha kampus",
               ref: "/#/pkm-tambah/unit-usaha",
@@ -379,16 +380,16 @@ export default {
           class: "",
           dropdown: true,
           dropdownList: [
-            {
-              title: "Pengabdian dana DRPM",
-              ref: "/#/pkm-lihat/dana-drpm",
-              icon: "arrow-bar-right",
-            },
-            {
-              title: "Pengabdian dana non-DRPM",
-              ref: "/#/pkm-lihat/dana-nondrpm",
-              icon: "arrow-bar-right",
-            },
+            // {
+            //   title: "Pengabdian dana DRPM",
+            //   ref: "/#/pkm-lihat/dana-drpm",
+            //   icon: "arrow-bar-right",
+            // },
+            // {
+            //   title: "Pengabdian dana non-DRPM",
+            //   ref: "/#/pkm-lihat/dana-nondrpm",
+            //   icon: "arrow-bar-right",
+            // },
             {
               title: "Unit usaha kampus",
               ref: "/#/pkm-lihat/unit-usaha",
@@ -463,6 +464,7 @@ export default {
       this.userData.nama = sessionStorage.getItem("nama");
       this.userData.nick = sessionStorage.getItem("nick");
       this.userData.priority = sessionStorage.getItem("priority");
+      this.userData.password = sessionStorage.getItem("password");
     },
 
     keluar() {

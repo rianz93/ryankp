@@ -9,7 +9,9 @@
 				dismissible
 				@dismissed="dismissSuccess()"
 			>
-				Data Berhasil di Hapus!
+				Data Berhasil di Hapus 
+				<b-icon icon="exclamation-circle-fill" variant="primary">
+				</b-icon>
 			</b-alert>
 		</span>
 
@@ -126,7 +128,7 @@
 										]['title']
 									"
 									><b-icon
-										:id="'download' + index"
+										:id="'unduh' + index"
 										class="icon text-primary"
 										icon="file-earmark-arrow-down-fill"
 									></b-icon
@@ -279,7 +281,7 @@ import xlsx from "xlsx";
 import jspdf from "jspdf";
 import html2canvas from "html2canvas";
 import autoTable from "jspdf-autotable";
-
+let md5 = require('md5');
 import { API_ENDPOINT } from "../../functions/universal.js";
 const axios = require("axios");
 
@@ -362,22 +364,38 @@ export default {
 				showCloseButton: true,
 			}).then((result) => {
 				if (result.value) {
-					let valueId = dataId;
-					let namaId = this.table_content["namaId"];
-					let namaTable = this.table_content["namaTable"];
-					axios
-						.get(
-							API_ENDPOINT +
-								"/deleteData.php?id=" +
-								valueId +
-								"&namaId=" +
-								namaId +
-								"&namaTable=" +
-								namaTable
-						)
-						.then((response) => console.log(response.data));
-					this.sucessStatus = true;
-					setTimeout(() => this.$parent.getData(), 300);
+					const {value : password} = this.$swal({
+						title: 'Konfirmasi Password',
+						showCancelButton: true,
+						input: 'password',
+						icon: "question",
+						confirmButtonText: "Konfirmasi",
+						cancelButtonText: "Batal",
+					}).then((result)=>{
+						let adminPassword = sessionStorage.getItem("password");
+						if(md5(result.value) == adminPassword){
+							let valueId = dataId;
+							let namaId = this.table_content["namaId"];
+							let namaTable = this.table_content["namaTable"];
+							axios
+								.get(
+									API_ENDPOINT +
+										"/deleteData.php?id=" +
+										valueId +
+										"&namaId=" +
+										namaId +
+										"&namaTable=" +
+										namaTable
+								)
+								.then((response) => console.log(response.data));
+							this.sucessStatus = true;
+							setTimeout(() => this.$parent.getData(), 300);
+						}else{
+							this.$swal("Password salah!", "", "error");							
+						}
+					})
+					
+					
 				}
 			});
 		},

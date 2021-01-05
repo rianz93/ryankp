@@ -77,6 +77,7 @@ export default {
 					sessionStorage.setItem("nama", 	   response.data.nama);
 					sessionStorage.setItem("nick", 	   response.data.nick);
 					sessionStorage.setItem("priority", response.data.priority);
+					sessionStorage.setItem("password", response.data.password);
 					this.$router.replace("/");
 					this.$parent.loginStatus = true;
 				}else{

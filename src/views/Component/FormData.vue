@@ -220,7 +220,7 @@
 					v-if="data.type == 'file'"
 					:label-for="data.name + index"
 					:label="data.label"
-					:description="errorText == null ? 'Maksimum ukuran berkas 5MB' : ''"
+					:description="errorText == null ? 'Maksimum ukuran berkas 8MB' : ''"
 				>
 					<b-form-file
 						ref="file"
@@ -407,10 +407,10 @@ export default {
 				this.alertStatus = true;
 				// this.errorText = "Mohon untuk memasukkan file berekstensi PDF";
 				// document.documentElement.scrollTop = 0;
-			}else if(event.target.files[0]["size"] > (1024 * 1024 * 5)){
+			}else if(event.target.files[0]["size"] > (1024 * 1024 * 1)){
 				this.formData[modelName] = null;
-				this.alertText = "Ukuran berkas terlalu besar ( > 5MB )";
-				this.errorText = "Ukuran berkas terlalu besar ( > 5MB )";
+				this.alertText = "Ukuran berkas terlalu besar ( > 8MB )";
+				this.errorText = "Ukuran berkas terlalu besar ( > 8MB )";
 				
 			} else {
 				console.log(event);
@@ -503,6 +503,7 @@ export default {
 						}, 100);
 					} else {
 						this.sucessStatus = false;
+						this.alertText 	  = "Gagal menyimpan data"
 						this.alertStatus  = true;
 						document.documentElement.scrollTop = 0;
 					}

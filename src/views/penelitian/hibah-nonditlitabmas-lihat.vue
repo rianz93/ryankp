@@ -44,6 +44,7 @@ export default {
 			tableContent:{
 				namaTable: "hibah_nonditlitabmas",
 				namaId: "hibah_nonditlitabmas_id",
+				componentName: "tambah-hibah-nonditlitabmas",
 			}
 		};
 	},

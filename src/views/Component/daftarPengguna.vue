@@ -90,6 +90,7 @@
 </template>
 <script>
 const axios = require("axios");
+let md5 	= require("md5");
 import { API_ENDPOINT } from "../../functions/universal.js";
 export default {
 	data() {
@@ -139,16 +140,34 @@ export default {
 				showCloseButton: true,
 			}).then((result) => {
 				if (result.value) {
-					axios
-						.get(
-							API_ENDPOINT +
-								"/deleteData.php?id=" +
-								value +
-								"&namaId=user_id&namaTable=user"
-						)
-						.then((response) => console.log(response.data));
-					this.$swal("Sukses", "Data telah terhapus", "success");
-					setTimeout(() => this.getUserList(), 300);
+					const { value: password } = this.$swal({
+						title: "Konfirmasi Password",
+						showCancelButton: true,
+						input: "password",
+						icon: "question",
+						confirmButtonText: "Konfirmasi",
+						cancelButtonText: "Batal",
+					}).then((result) => {
+						let adminPassword = sessionStorage.getItem("password");
+						if (md5(result.value) == adminPassword) {
+							axios
+								.get(
+									API_ENDPOINT +
+										"/deleteData.php?id=" +
+										value +
+										"&namaId=user_id&namaTable=user"
+								)
+								.then((response) => console.log(response.data));
+							this.$swal(
+								"Sukses",
+								"Data telah terhapus",
+								"success"
+							);
+							setTimeout(() => this.getUserList(), 300);
+						} else {
+							this.$swal("Password salah!", "", "error");
+						}
+					});
 				}
 			});
 		},
