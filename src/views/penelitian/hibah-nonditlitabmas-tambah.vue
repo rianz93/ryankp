@@ -25,12 +25,13 @@ export default {
 					label: "Judul Penelitian :",
 					name: "judul",
 					type: "text",
+					placeholder:"Contoh : Marketing and Entrepreneurship Reflection",
 					value: null,
 				},
 				{
 					label: "Personil Penelitian:",
 					name: "personil",
-					type: "text",
+					type: "personil",
 					value: null,
 				},
 				{
@@ -59,6 +60,7 @@ export default {
 					label: "Bidang Penelitian :",
 					name: "bidang",
 					type: "text",
+					placeholder:"Masukkan bidang penelitian..",
 					value: null,
 				},
 				{
@@ -77,7 +79,7 @@ export default {
 					name: "institusi",
 					type: "select",
 					options: [
-						{ value: null, text: "Pilih sumber dana.." },
+						{ value: null, text: "Pilih institusi.." },
 						"Internal PT",
 						"Pribadi Peneliti",
 					],

@@ -28,6 +28,7 @@ export default {
 				{
 					label: "Nama Kegiatan :",
 					name: "namaKegiatan",
+					placeholder:"Masukkan nama kegiatan..",
 					type: "text",
 					value: null,
 				},
@@ -47,12 +48,14 @@ export default {
 					label: "Pelaksana :",
 					name: "pelaksana",
 					type: "text",
+					placeholder: "Contoh : Fakultas Teknik",
 					value: null,
 				},
 				{
 					label: "Mitra/Sponsorship :",
 					name: "mitra",
 					type: "text",
+					placeholder:"Masukkan mitra atau sponsorship..",	
 					value: null,
 				},
 				{
@@ -68,7 +71,7 @@ export default {
 					label: "Tempat :",
 					name: "tempat",
 					type: "text",
-					placeholder: "Contoh : Universitas Katolik De La Salle Manado",
+					placeholder: "Contoh : Rome, Italy",
 					value: null,
 				},
 			],

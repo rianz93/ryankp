@@ -15,6 +15,7 @@ import penelitianHkiTambah 		  from "../views/penelitian/penelitian-hki-tambah.v
 import penelitianBukuAjarTambah   from "../views/penelitian/penelitian-bukuajar-tambah.vue";
 import hibahDitlitabmasTambah 	  from "../views/penelitian/hibah-ditlitabmas-tambah.vue";
 import penyelenggaraanForumTambah from "../views/penelitian/penyelenggaraan-forum-tambah.vue";
+import penelitianLuaranTambah	  from "../views/penelitian/penelitian-luaran-tambah.vue";
 
 //PELAPORAN PKM TAMBAH
 import pkmUnitUsahaTambah 		  	from "../views/pkm/pkm-unit-usaha-kampus-tambah.vue";
@@ -22,13 +23,15 @@ import pkmMbhTambah		  		  	from "../views/pkm/pkm-mbh-tambah.vue";
 import produkTersertifikasiTambah 	from "../views/pkm/produk-tersertifikasi-tambah.vue";
 import produkTerstandarisasiTambah 	from "../views/pkm/produk-terstandarisasi-tambah.vue";
 import publikasiMediaMassaTambah   	from "../views/pkm/publikasi-media-massa-tambah.vue";
+import pkmJurnalTambah				from "../views/pkm/pkm-jurnal-tambah.vue";
 
 //PELAPORAN PKM LIHAT
-import publikasiMediaMassaLihat		 from "../views/pkm/publikasi-media-massa-lihat.vue";
-import pkmUnitUsahaLihat 		 from "../views/pkm/pkm-unit-usaha-kampus-lihat.vue";
-import pkmMbhLihat		 		 from "../views/pkm/pkm-mbh-lihat.vue";
-import produkTersertifikasiLihat from "../views/pkm/produk-tersertifikasi-lihat";
-import produkTerstandarisasiLihat from "../views/pkm/produk-terstandarisasi-lihat";
+import publikasiMediaMassaLihat		from "../views/pkm/publikasi-media-massa-lihat.vue";
+import pkmUnitUsahaLihat 		 	from "../views/pkm/pkm-unit-usaha-kampus-lihat.vue";
+import pkmMbhLihat		 		 	from "../views/pkm/pkm-mbh-lihat.vue";
+import produkTersertifikasiLihat 	from "../views/pkm/produk-tersertifikasi-lihat";
+import produkTerstandarisasiLihat 	from "../views/pkm/produk-terstandarisasi-lihat";
+import pkmJurnalLihat				from "../views/pkm/pkm-jurnal-lihat.vue";
 
 // PELAPORAN PENELITIAN LIHAT
 import unitHasilRisetLihat		 from "../views/penelitian/unit-hasil-riset-lihat.vue";
@@ -41,6 +44,7 @@ import penelitianBukuAjarLihat 	 from "../views/penelitian/penelitian-bukuajar-l
 import penyelenggaraanForumLihat from "../views/penelitian/penyelenggaraan-forum-lihat.vue";
 import hibahNonditlitabmasTambah from "../views/penelitian/hibah-nonditlitabmas-tambah.vue";
 import unitHasilRisetTambah		 from "../views/penelitian/unit-hasil-riset-tambah.vue"
+import penelitianLuaranLihat	 from "../views/penelitian/penelitian-luaran-lihat.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -67,6 +71,10 @@ const routes = [
 		props:true,
 	},
 	// PATH LIHAT PKM
+	{
+		path:"/pkm-lihat/publikasi-jurnal",
+		component:pkmJurnalLihat,
+	},
 	{
 		path:"/pkm-lihat/publikasi-media-massa",
 		component: publikasiMediaMassaLihat,
@@ -121,6 +129,18 @@ const routes = [
 		component: penelitianBukuAjarLihat,
 	},
 	// PATH TAMBAH PKM
+	{
+		path:"/penelitian-tambah/luaran-lainnya",
+		component: penelitianLuaranTambah,
+		name:"penelitian-luaran-tambah",
+		props:true,
+	},
+	{
+		path:"/pkm-tambah/publikasi-jurnal",
+		component:pkmJurnalTambah,
+		name:"pkm-jurnal-tambah",
+		props:true
+	},
 	{
 		path:"/pkm-tambah/publikasi-media-massa",
 		component: publikasiMediaMassaTambah,

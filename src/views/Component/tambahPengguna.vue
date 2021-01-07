@@ -76,6 +76,7 @@
 						v-if="showPasswordField"
 					>
 						<b-form-input
+							placeholder="Masukkan kata sandi.."
 							:type="type ? 'password' : 'text'"
 							v-model="userData.password"
 							required
@@ -96,11 +97,11 @@
 							@click="showPasswordField = true"
 							size="sm"
 							class="col mt-3 p-2"
-							>Atur Kembali Password
+							>Atur kembali kata sandi
 							<b-icon icon="unlock"></b-icon></b-button
 					></span>
 					<b-tooltip target="b-password-change">
-						<i>Tekan tombol untuk mengatur ulang password</i>
+						<i>Tekan tombol untuk mengatur ulang kata sandi</i>
 					</b-tooltip>
 					<b-form-group class="col" label="Tingkat Pengguna :">
 						<span class="row ml-1">

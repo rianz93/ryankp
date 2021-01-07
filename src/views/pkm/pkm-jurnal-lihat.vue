@@ -1,10 +1,10 @@
 <template>
 	<div>
 		<div class="container">
-			<div class="row">
+			<div class="row"> 
 				<div class="col">
-					<h3>Hibah Ditlitabmas</h3>
-					<p>Kelola data hibah ditlitabmas.</p>
+					<h3>Publikasi jurnal</h3>
+					<p>Kelola data Publikasi jurnal.</p>
 				</div>
 				<div class="col mt-3"">
 					<div class="row">
@@ -12,7 +12,7 @@
 					      <b-input-group-prepend is-text>
 					        <b-icon icon="search" size="sm"></b-icon>
 					      </b-input-group-prepend>
-					      <b-form-input type="search" placeholder="Cari Judul" v-model="filterJudul"></b-form-input>
+					      <b-form-input type="search" v-model= "filterJudul" placeholder="Cari Judul"></b-form-input>
 					    </b-input-group>
 
 					    <b-input-group size="md" class="col" >
@@ -24,11 +24,11 @@
 					      	<option v-for="index in 21" :value="2000+index"> {{ 2000+index }} </option>
 					      </b-form-select>
 					    </b-input-group>
-					</div>	
+					</div>
 				</div>
 			</div>
 		</div>
-		<Tables :table_data_head = "table_data.head" :table_data_body="filteredData" :table_content="tableContent"></Tables>
+		<Tables :table_data_head = "table_data.head" :table_data_body="filteredData" :table_content="tableContent" :export_body="filteredDataExport"></Tables>
 	</div>
 </template>
 
@@ -41,53 +41,81 @@ export default {
 	data() {
 		return {
 			table_data: [],
-
+			
 			filterTahun:'',
 			filterJudul:'',
 
+			// DATA YANG DIGUNAKAN UNTUK HAPUS DATA DALAM DATABASE
 			tableContent: {
-				namaTable: "hibah_ditlitabmas",
-				namaId: "hibah_id",
-				componentName: "tambah-hibah-ditlitabmas",
+				namaTable: "pkm_jurnal",
+				namaId: "jurnal_id",
+				componentName: "pkm-jurnal-tambah"
 			},
 		};
 	},
 	components:{
 		Tables
 	},
+
 	computed:{
+		filteredDataExport(){
+				if(this.table_data.bodyExport==null){
+					return null;
+				}
+				else{
+					let table_export = this.filteredTahunExport(this.table_data.bodyExport);
+					return table_export.filter(data => {
+						let datas = data[1].title.toLowerCase().includes(this.filterTahun);
+						console.log(datas);
+						return datas;
+					});
+				}
+			},
+	
+
 		filteredData(){
 				if(this.table_data.body==null){
 					return null;
 				}
 				else{
-				let table_data = this.filteredTahun(this.table_data.body);
-				return table_data.filter(data => {
-					let datas = data[1].title.toLowerCase().includes(this.filterTahun);
-					console.log(datas);
-					return datas;
-				});
+					let table_data = this.filteredTahun(this.table_data.body);
+					return table_data.filter(data => {
+						let datas = data[2].title.toLowerCase().includes(this.filterTahun);
+						console.log(datas);
+						return datas;
+					});
 				}
 			}
 	},
+
 	methods: {
 		filteredTahun(value){ 
 			if(value == null){ 
-				return this.table_data_body; 
+				return table_data.body; 
 			}
 			else{
 				return value.filter(data=>{ let datas =
-				data[2].title.toLowerCase().includes(this.filterJudul); return datas; }); 
+				data[3].title.toLowerCase().includes(this.filterJudul.toLowerCase()); return datas; }); 
 			} 
 		},
 
-		getData: function() {
+		filteredTahunExport(value){ 
+			if(value == null){ 
+				return this.table_data.bodyExport; 
+			}
+			else{
+				return value.filter(data=>{ let datas =
+				data[2].title.toLowerCase().includes(this.filterJudul.toLowerCase()); return datas; }); 
+			} 
+		},
+
+		getData() {
 			let app = this;
 			let id  = sessionStorage.getItem("id");
 			let isAdmin = sessionStorage.getItem("priority")
 			let idParam = isAdmin != 'admin' ? '?id=' + id : '';
 			axios
-				.get(API_ENDPOINT + "/penelitian/getHibahDitlitabmas.php"+idParam)
+				.get(API_ENDPOINT + "/pkm/getJurnal.php"+idParam)
 				.then(function(response) {
 					console.log(response.data);
 					app.table_data = response.data;
@@ -95,6 +123,8 @@ export default {
 				.catch(function(error) {});
 		},
 	},
+	
+
 	created() {
 		this.getData();
 	},
@@ -102,7 +132,7 @@ export default {
 </script>
 
 <style scoped>	
-		.filter{
+		/*filter{
 			display:flex;
-		}
+		}*/
 </style>

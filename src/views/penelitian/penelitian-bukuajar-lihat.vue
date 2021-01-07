@@ -60,9 +60,12 @@ export default {
 	},
 	methods: {
 		getData() {
-			var app = this;
+			let app = this;
+			let id  = sessionStorage.getItem("id");
+			let isAdmin = sessionStorage.getItem("priority")
+			let idParam = isAdmin != 'admin' ? '?id=' + id : '';
 			axios
-				.get(API_ENDPOINT + "/penelitian/getBuku.php")
+				.get(API_ENDPOINT + "/penelitian/getBuku.php" + idParam)
 				.then(function(response) {
 					app.table_data = response.data;
 					console.log(app.table_data);

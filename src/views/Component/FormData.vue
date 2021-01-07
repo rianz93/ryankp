@@ -1,8 +1,10 @@
 <template>
 	<div>
 		<!-- ALERT JIKA DATA GAGAL DI SIMPAN -->
-		<datalist id="my-list-id" >
-			<option v-for="nama in datalistNama">{{nama.peneliti_nama}}</option>
+		<datalist id="my-list-id">
+			<option v-for="nama in datalistNama">{{
+				nama.peneliti_nama
+			}}</option>
 		</datalist>
 
 		<span>
@@ -14,10 +16,11 @@
 				@dismissed="dismissAlert()"
 				ref="alert"
 			>
-				{{ alertText }} <b-icon
-							icon="exclamation-circle-fill"
-							variant="danger"
-						></b-icon>
+				{{ alertText }}
+				<b-icon
+					icon="exclamation-circle-fill"
+					variant="danger"
+				></b-icon>
 			</b-alert>
 
 			<!-- ALERT JIKA DATA BERHASIL DI SIMPAN -->
@@ -28,7 +31,8 @@
 				fade
 				@dismissed="dismissSuccess()"
 			>
-				Data Berhasil di Simpan <b-icon icon="check-circle-fill" variant="success"></b-icon>
+				Data Berhasil di Simpan
+				<b-icon icon="check-circle-fill" variant="success"></b-icon>
 			</b-alert>
 		</span>
 
@@ -62,7 +66,6 @@
 						description="Nama lengkap beserta gelar"
 						v-for="j in penulisCounter"
 						class="fadeInput"
-						
 					>
 						<span style="display: flex">
 							<b-form-input
@@ -76,15 +79,14 @@
 								:placeholder="'Penulis ' + j"
 							></b-form-input>
 							<b-button
-						variant="danger"
-						class="btn-sm ml-2"
-						@click="hapusPenulis(j)"
-						:disabled ="penulisCounter == 1 ? true : false"
-						>
-						<b-icon icon="trash"></b-icon
-					></b-button>
+								variant="danger"
+								class="btn-sm ml-2"
+								@click="hapusPenulis(j)"
+								:disabled="penulisCounter == 1 ? true : false"
+							>
+								<b-icon icon="trash"></b-icon
+							></b-button>
 						</span>
-
 					</b-form-group>
 					<b-button
 						variant="success"
@@ -107,6 +109,7 @@
 						<b-icon icon="arrow-counterclockwise"></b-icon
 					></b-button>
 				</div>
+
 
 				<!-- DATA TEXT -->
 				<b-form-group
@@ -138,6 +141,7 @@
 				>
 					<b-form-input
 						:id="data.name + index"
+						:placeholder="data.placeholder"
 						type="number"
 						min="1"
 						v-model="formData[data.name]"
@@ -220,14 +224,15 @@
 					v-if="data.type == 'file'"
 					:label-for="data.name + index"
 					:label="data.label"
-					:description="errorText == null ? 'Maksimum ukuran berkas 8MB' : ''"
+					:description="
+						errorText == null ? 'Maksimum ukuran berkas 8MB' : ''
+					"
 				>
 					<b-form-file
 						ref="file"
 						:placeholder="getExt(formData['berkas'])"
 						:id="data.name + index"
 						:state="alertText == null ? true : false"
-
 						@change="onChangeFileSelected($event, data.name)"
 					>
 					</b-form-file>
@@ -263,7 +268,7 @@ export default {
 			sucessStatus: false,
 			alertText: null,
 			errorText: null,
-			currency: 'Rp.',
+			currency: "Rp.",
 			penulisCounter: 1,
 		};
 	},
@@ -300,24 +305,23 @@ export default {
 						: false;
 			}
 		},
-		hapusPenulis(index){
-			if(index>0){
-				this.formData["penulis"].splice(index-1,1);
+		hapusPenulis(index) {
+			if (index > 0) {
+				this.formData["penulis"].splice(index - 1, 1);
 				this.penulisCounter -= 1;
-
-			}else{
+			} else {
 				return false;
 			}
 		},
 
-		getDataListNama(){
+		getDataListNama() {
 			let app = this;
 			axios
 				.get(API_ENDPOINT + "/datalist.php")
 				.then(function(response) {
 					app.datalistNama = response.data;
 					console.log(app.dataListNama);
-					console.log(app.datalistNama);	
+					console.log(app.datalistNama);
 				})
 				.catch(function(error) {});
 		},
@@ -327,13 +331,12 @@ export default {
 			this.penulisCounter = 1;
 		},
 
-		kurangiPenulis(){
-			let index = this.penulisCounter-1;
-			if(index>0){
-				this.formData["penulis"].splice(index,1);
+		kurangiPenulis() {
+			let index = this.penulisCounter - 1;
+			if (index > 0) {
+				this.formData["penulis"].splice(index, 1);
 				this.penulisCounter -= 1;
-
-			}else{
+			} else {
 				return false;
 			}
 		},
@@ -407,11 +410,10 @@ export default {
 				this.alertStatus = true;
 				// this.errorText = "Mohon untuk memasukkan file berekstensi PDF";
 				// document.documentElement.scrollTop = 0;
-			}else if(event.target.files[0]["size"] > (1024 * 1024 * 1)){
+			} else if (event.target.files[0]["size"] > 1024 * 1024 * 8) {
 				this.formData[modelName] = null;
 				this.alertText = "Ukuran berkas terlalu besar ( > 8MB )";
 				this.errorText = "Ukuran berkas terlalu besar ( > 8MB )";
-				
 			} else {
 				console.log(event);
 				this.alertText = null;
@@ -482,7 +484,7 @@ export default {
 					console.log(response.data);
 					if (response.data.status == "berhasil") {
 						// SETELAH BERHASIL MEMASUKKAN DATA ALERT DAN RESET FORM
-						this.alertStatus  = false;
+						this.alertStatus = false;
 						this.sucessStatus = true;
 
 						// RESET PLACEHOLDER FILE
@@ -503,8 +505,8 @@ export default {
 						}, 100);
 					} else {
 						this.sucessStatus = false;
-						this.alertText 	  = "Gagal menyimpan data"
-						this.alertStatus  = true;
+						this.alertText = "Gagal menyimpan data";
+						this.alertStatus = true;
 						document.documentElement.scrollTop = 0;
 					}
 				});

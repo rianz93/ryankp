@@ -51,28 +51,21 @@ export default {
 		Tables
 	},
 	methods: {
-		getData(cancel) {
-			
+		getData() {
 			let app = this;
-			if(cancel == null){
-			this.recall = setInterval(()=>{
-					axios
-					.get(API_ENDPOINT + "/penelitian/getPenelitiAsing.php")
-					.then(function(response) {
-						// console.log(response);
-						
-						app.table_data = response.data;
-						console.log(app.table_data);
-						
-					})
-					.catch(function(error) {});	
-				}, 5000);
-			}
+			let id  = sessionStorage.getItem("id");
+			let isAdmin = sessionStorage.getItem("priority")
+			let idParam = isAdmin != 'admin' ? '?id=' + id : '';
 			
-			else{
-				clearInterval(this.recall);
-			}
+			axios
+			.get(API_ENDPOINT + "/penelitian/getPenelitiAsing.php"+idParam)
+			.then(function(response) {
+				// console.log(response);
 				
+				app.table_data = response.data;
+				console.log(app.table_data);
+			})
+			.catch(function(error) {});	
 		},
 	},
 	computed: {
@@ -95,10 +88,7 @@ export default {
 		this.getData();
 		
 	},
-	destroyed(){
-		console.log("DESTROYED")
-		this.getData("cancel");
-	}
+
 };
 </script>
 

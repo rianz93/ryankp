@@ -21,24 +21,32 @@ export default {
 					label: "Judul Penelitian :",
 					name: "judul",
 					type: "text",
+					placeholder: "Masukkan judul penelitian..",
 					value: null,
 				},
 				{
 					label: "Personil :",
 					name: "personil",
+					placeholder:"Masukkan nama personil..",
 					type: "text",
 					value: null,
 				},
 				{
 					label: "Jabatan :",
 					name: "jabatan",
-					type: "text",
+					type: "select",
+					options: [
+						{ value: null, text: "Pilih jabatan.." },
+						"Ketua Pengusul",
+						"Anggota Pengusul",
+					],
 					value: null,
 				},
 				{
 					label: "Bidang Penelitian :",
 					name: "bidang",
 					type: "text",
+					placeholder:"Masukkan bidang penelitian..",
 					value: null,
 				},
 				{

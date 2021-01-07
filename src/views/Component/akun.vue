@@ -49,7 +49,7 @@
 				>
 				<b-list-group-item class="p-3">
 					<div class="title">
-						Ubah Password
+						Ubah kata sandi
 						<b-icon
 							class="down"
 							icon="caret-down"
@@ -64,17 +64,17 @@
 					v-if="showUbahPassword"
 				>
 					<b-form @submit.prevent="sendDataPost" inline>
-						<b-form-group label="Password Lama">
+						<b-form-group label="Kata sandi Lama">
 							<b-form-input
-								placeholder="Password lama.."
+								placeholder="Kata sandi lama.."
 								type="password"
 								v-model="passwordLama"
 								required
 							></b-form-input>
 						</b-form-group>
-						<b-form-group class="ml-3" label="Password Baru">
+						<b-form-group class="ml-3" label="Kata sandi Baru">
 							<b-form-input
-								placeholder="Password baru.."
+								placeholder="Kata sandi baru.."
 								type="password"
 								v-model="passwordBaru"
 								required
@@ -86,7 +86,7 @@
 								class="ml-2 button-submit"
 								type="submit"
 								><b-icon class="mr-1" icon="key-fill"></b-icon
-								>Ubah Password</b-button
+								>Ubah kata sandi</b-button
 							>
 						</b-form-group>
 					</b-form>

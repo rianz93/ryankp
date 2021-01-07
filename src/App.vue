@@ -191,11 +191,11 @@ export default {
               ref: "/#/penelitian-tambah/publikasi-jurnal",
               icon: "arrow-bar-right",
             },
-            {
-              title: "Pemakalah Forum Ilmiah Seminar/Lokakarya",
-              ref: "/#/penelitian-tambah/pemakalah-forum",
-              icon: "arrow-bar-right",
-            },
+            // {
+            //   title: "Pemakalah Forum Ilmiah Seminar/Lokakarya",
+            //   ref: "/#/penelitian-tambah/pemakalah-forum",
+            //   icon: "arrow-bar-right",
+            // },
             {
               title: "Hibah ditlitabmas",
               ref: "/#/penelitian-tambah/hibah-ditlitabmas",
@@ -231,11 +231,11 @@ export default {
               ref: "/#/penelitian-tambah/unit-bhr",
               icon: "arrow-bar-right",
             },
-            {
-              title: "Luaran Lainnya",
-              ref: "/#/penelitian-tambah/luaran-lainnya",
-              icon: "arrow-bar-right",
-            },
+            // {
+            //   title: "Luaran Lainnya",
+            //   ref: "/#/penelitian-tambah/luaran-lainnya",
+            //   icon: "arrow-bar-right",
+            // },
           ],
         },
         {
@@ -255,11 +255,11 @@ export default {
               ref: "/#/penelitian-lihat/publikasi-jurnal",
               icon: "arrow-bar-left",
             },
-            {
-              title: "Pemakalah Forum Ilmiah Seminar/Lokakarya",
-              ref: "/#/penelitian-lihat/pemakalah-forum",
-              icon: "arrow-bar-left",
-            },
+            // {
+            //   title: "Pemakalah Forum Ilmiah Seminar/Lokakarya",
+            //   ref: "/#/penelitian-lihat/pemakalah-forum",
+            //   icon: "arrow-bar-left",
+            // },
             {
               title: "Hibah ditlitabmas",
               ref: "/#/penelitian-lihat/hibah-ditlitabmas",
@@ -295,11 +295,11 @@ export default {
               ref: "/#/penelitian-lihat/unit-bhr",
               icon: "arrow-bar-left",
             },
-            {
-              title: "Luaran Lainnya",
-              ref: "/#/penelitian-lihat/luaran-lainnya",
-              icon: "arrow-bar-left",
-            },
+            // {
+            //   title: "Luaran Lainnya",
+            //   ref: "/#/penelitian-lihat/luaran-lainnya",
+            //   icon: "arrow-bar-left",
+            // },
           ],
         },
         {
@@ -337,21 +337,21 @@ export default {
               ref: "/#/pkm-tambah/publikasi-media-massa",
               icon: "arrow-bar-right",
             },
-            {
-              title: "Pemakalah forum ilmiah",
-              ref: "/#/pkm-tambah/pemakalah-forum",
-              icon: "arrow-bar-right",
-            },
-            {
-              title: "Hak Kekayaan Intelektual/HKI",
-              ref: "/#/pkm-tambah/hki",
-              icon: "arrow-bar-right",
-            },
-            {
-              title: "Luaran iptek lainnya",
-              ref: "/#/pkm-tambah/luaran-iptek",
-              icon: "arrow-bar-right",
-            },
+            // {
+            //   title: "Pemakalah forum ilmiah",
+            //   ref: "/#/pkm-tambah/pemakalah-forum",
+            //   icon: "arrow-bar-right",
+            // },
+            // {
+            //   title: "Hak Kekayaan Intelektual/HKI",
+            //   ref: "/#/pkm-tambah/hki",
+            //   icon: "arrow-bar-right",
+            // },
+            // {
+            //   title: "Luaran iptek lainnya",
+            //   ref: "/#/pkm-tambah/luaran-iptek",
+            //   icon: "arrow-bar-right",
+            // },
             {
               title: "Produk terstandarisasi",
               ref: "/#/pkm-tambah/produk-terstandarisasi",
@@ -367,11 +367,11 @@ export default {
               ref: "/#/pkm-tambah/mbh",
               icon: "arrow-bar-right",
             },
-            {
-              title: "Buku",
-              ref: "/#/pkm-tambah/buku",
-              icon: "arrow-bar-right",
-            },
+            // {
+            //   title: "Buku",
+            //   ref: "/#/pkm-tambah/buku",
+            //   icon: "arrow-bar-right",
+            // },
           ],
         },
         {
@@ -405,21 +405,21 @@ export default {
               ref: "/#/pkm-lihat/publikasi-media-massa",
               icon: "arrow-bar-right",
             },
-            {
-              title: "Pemakalah forum ilmiah",
-              ref: "/#/pkm-lihat/pemakalah-forum",
-              icon: "arrow-bar-right",
-            },
-            {
-              title: "Hak Kekayaan Intelektual/HKI",
-              ref: "/#/pkm-lihat/hki",
-              icon: "arrow-bar-right",
-            },
-            {
-              title: "Luaran iptek lainnya",
-              ref: "/#/pkm-lihat/luaran-iptek",
-              icon: "arrow-bar-right",
-            },
+            // {
+            //   title: "Pemakalah forum ilmiah",
+            //   ref: "/#/pkm-lihat/pemakalah-forum",
+            //   icon: "arrow-bar-right",
+            // },
+            // {
+            //   title: "Hak Kekayaan Intelektual/HKI",
+            //   ref: "/#/pkm-lihat/hki",
+            //   icon: "arrow-bar-right",
+            // },
+            // {
+            //   title: "Luaran iptek lainnya",
+            //   ref: "/#/pkm-lihat/luaran-iptek",
+            //   icon: "arrow-bar-right",
+            // },
             {
               title: "Produk terstandarisasi",
               ref: "/#/pkm-lihat/produk-terstandarisasi",
@@ -435,11 +435,11 @@ export default {
               ref: "/#/pkm-lihat/mbh",
               icon: "arrow-bar-right",
             },
-            {
-              title: "Buku",
-              ref: "/#/pkm-lihat/buku",
-              icon: "arrow-bar-right",
-            },
+            // {
+            //   title: "Buku",
+            //   ref: "/#/pkm-lihat/buku",
+            //   icon: "arrow-bar-right",
+            // },
           ],
         },
       ],
