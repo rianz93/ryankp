@@ -2,11 +2,12 @@ import Vue 		 from "vue";
 import VueRouter from "vue-router";
 
 // KOMPONEN UTAMA
-import dashboard 	  from "../views/Component/Dashboard.vue";
-import Akun 		  from "../views/Component/akun.vue";
-import Login 		  from "../views/Component/login.vue";
-import DaftarPengguna from "../views/Component/daftarPengguna.vue";
-import tambahPengguna from "../views/Component/tambahPengguna.vue";
+import dashboard 	  		from "../views/Component/Dashboard.vue";
+import Akun 		  		from "../views/Component/akun.vue";
+import Login 		 		from "../views/Component/login.vue";
+import DaftarPengguna 		from "../views/Component/daftarPengguna.vue";
+import tambahPengguna 		from "../views/Component/tambahPengguna.vue";
+import aktivitasPengguna 	from "../views/Component/aktivitasPengguna.vue";
 
 // PELAPORAN PENELITIAN TAMBAH
 import penelitianJurnalTambah 	  from "../views/penelitian/penelitian-jurnal-tambah.vue";
@@ -63,6 +64,10 @@ const routes = [
 	{
 		path:'/daftar-pengguna',
 		component: DaftarPengguna,
+	},
+	{
+		path:'/aktivitas-pengguna',
+		component:aktivitasPengguna,
 	},
 	{
 		path:'/tambah-pengguna',

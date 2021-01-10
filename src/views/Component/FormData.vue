@@ -469,8 +469,10 @@ export default {
 				}
 			}
 			// UNTUK MEMBEDAKAN ISIAN USER
-			let isAdmin = sessionStorage.getItem("id");
+			let isAdmin 	= sessionStorage.getItem("id");
+			let namaLengkap = sessionStorage.getItem("nama")
 			fd.append("user_id", isAdmin);
+			fd.append("user_name", namaLengkap);
 
 			axios
 				.post(API_ENDPOINT + this.url, fd, {

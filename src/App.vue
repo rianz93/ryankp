@@ -45,13 +45,16 @@
         <div class="sidebar">
           <div class=" mt-4 ml-4 mb-2">
             <p>
-              <img
-                src="./assets/logo.png"
-                style="width:80px;"
-                class="ml-5 "
-              />
+              <img src="./assets/logo.png" style="width:80px;" class="ml-5 " />
             </p>
-            <b-badge class="ml-5 p-2" pill :variant="userData.priority == 'admin' ? 'primary' : 'secondary'" style="width:80px;">{{userData.priority == "admin" ? "Admin" : "Dosen"}} <b-icon icon="person-fill"></b-icon></b-badge>
+            <b-badge
+              class="ml-5 p-2"
+              pill
+              :variant="userData.priority == 'admin' ? 'primary' : 'secondary'"
+              style="width:80px;"
+              >{{ userData.priority == "admin" ? "Admin" : "Dosen" }}
+              <b-icon icon="person-fill"></b-icon
+            ></b-badge>
           </div>
 
           <hr />
@@ -119,18 +122,34 @@
             <b-icon icon="gear" class="ml-2"></b-icon>
           </p>
           <span class="sidebar-item" v-if="userData.priority == 'admin'">
-            <b-link
-              class="item ml-4"
-              href="/#/daftar-pengguna"
-              @click="changeRoute('manajemen')"
-              :class="manajemen"
-            >
-              <b-icon
-                icon="file-earmark-person-fill"
-                class="first-child"
-              ></b-icon>
-              <span class="ml-3">Daftar Pengguna</span>
-            </b-link>
+            <div>
+              <b-link
+                class="item ml-4"
+                href="/#/daftar-pengguna"
+                @click="changeRoute('manajemen')"
+                :class="manajemen"
+              >
+                <b-icon
+                  icon="file-earmark-person-fill"
+                  class="first-child"
+                ></b-icon>
+                <span class="ml-3">Daftar Pengguna</span>
+              </b-link>
+            </div>
+            <div class="mt-3">
+              <b-link
+                class="item ml-4"
+                href="/#/aktivitas-pengguna"
+                @click="changeRoute('aktivitas')"
+                :class="aktivitas"
+              >
+                <b-icon
+                  icon="person-lines-fill"
+                  class="first-child"
+                ></b-icon>
+                <span class="ml-3">Aktivitas Pengguna</span>
+              </b-link>
+            </div>
           </span>
         </div>
       </div>
@@ -159,11 +178,12 @@ export default {
       auth_level: 1,
       loginStatus: false,
       manajemen: "-text",
+      aktivitas: "-text",
       userData: {
         nama: "",
         nick: "",
         priority: "",
-        password:"",
+        password: "",
       },
       sidebar_item: [
         {
@@ -449,10 +469,16 @@ export default {
     changeRoute(index) {
       if (index == "manajemen") {
         this.manajemen = "active-text";
+        this.aktivitas = "-text";
+      }
+      else if(index == "aktivitas"){
+        this.aktivitas = "active-text";
+        this.manajemen = "-text";
       }
       for (var i = 0; i < this.sidebar_item.length; i++) {
         if (i == index) {
           this.sidebar_item[i].class = "active";
+          this.aktivitas = "-text";
           this.manajemen = "-text";
         } else {
           this.sidebar_item[i].class = "";
