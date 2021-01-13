@@ -374,18 +374,25 @@ export default {
 					}).then((result)=>{
 						let adminPassword = sessionStorage.getItem("password");
 						if(md5(result.value) == adminPassword){
-							let valueId = dataId;
-							let namaId = this.table_content["namaId"];
-							let namaTable = this.table_content["namaTable"];
+							let valueId		= dataId;
+							let namaId		= this.table_content["namaId"];
+							let namaTable 	= this.table_content["namaTable"];
+							let user_id 	= sessionStorage.getItem("id");
+							let user_nama 	= sessionStorage.getItem("nama");
+
 							axios
 								.get(
-									API_ENDPOINT +
-										"/deleteData.php?id=" +
-										valueId +
-										"&namaId=" +
-										namaId +
-										"&namaTable=" +
-										namaTable
+									API_ENDPOINT 				+
+										"/deleteData.php?id=" 	+
+										valueId 				+
+										"&namaId=" 				+
+										namaId 					+
+										"&namaTable=" 			+
+										namaTable 				+
+										"&user_id=" 			+
+										user_id 				+
+										"&user_name=" 			+
+										user_nama
 								)
 								.then((response) => console.log(response.data));
 							this.sucessStatus = true;

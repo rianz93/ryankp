@@ -32,33 +32,18 @@ export default {
 				"Pengguna",
 				"Keterangan",
 			],
-			items: [
-				{
-					Waktu: "12",
-					Aktivitas: "Menghapus Pelaporan",
-					Pelaporan: "Peneliti Asing",
-					Pengguna: "Melani Adrian",
-					Keterangan: "Nama Peneliti : IOT makan semen",
-					_rowVariant: "danger",
-				},
-				{
-					Waktu: "12",
-					Aktivitas: "Menghapus Pelaporan",
-					Pelaporan: "Peneliti Asing",
-					Pengguna: "Melani Adrian",
-					Keterangan: "Nama Peneliti : IOT makan semen",
-					_rowVariant: "success",
-				},
-				{
-					Waktu: "12",
-					Aktivitas: "Menghapus Pelaporan",
-					Pelaporan: "Peneliti Asing",
-					Pengguna: "Melani Adrian",
-					Keterangan: "Nama Peneliti : IOT makan semen",
-					_rowVariant: "warning",
-				},
-			],
+			items: [],
 		};
+	},
+	methods: {
+		getData() {
+			axios.get(API_ENDPOINT + "/activity.php").then((response) => {
+				this.items = response.data;
+				console.log(response.data);
+			}).catch((error) =>{
+				console.log("error");
+			});
+		},
 	},
 	created() {
 		if (this.$parent.userData.priority != "admin") {
@@ -69,6 +54,7 @@ export default {
 			);
 			this.$router.replace("/");
 		}
+		this.getData();
 	},
 };
 </script>

@@ -466,6 +466,28 @@ export default {
     };
   },
   methods: {
+    // untuk membatasi dropdown dosen
+    isAdmin(){
+      if(this.userData.priority != 'admin'){
+        this.sidebar_item[2]['dropdownList'].splice(7,1);
+        this.sidebar_item[2]['dropdownList'].splice(0,1);
+        this.sidebar_item[3]['dropdownList'].splice(7,1);
+        this.sidebar_item[3]['dropdownList'].splice(0,1);
+
+        this.sidebar_item[5]['dropdownList'].splice(5,1);
+        this.sidebar_item[5]['dropdownList'].splice(4,1);
+        this.sidebar_item[5]['dropdownList'].splice(3,1);
+        this.sidebar_item[5]['dropdownList'].splice(0,1);
+        this.sidebar_item[6]['dropdownList'].splice(5,1);
+        this.sidebar_item[6]['dropdownList'].splice(4,1);
+        this.sidebar_item[6]['dropdownList'].splice(3,1);
+        this.sidebar_item[6]['dropdownList'].splice(0,1);
+      }
+    },
+
+    test(){
+      console.log(this.sidebar_item)
+    },
     changeRoute(index) {
       if (index == "manajemen") {
         this.manajemen = "active-text";
@@ -504,6 +526,8 @@ export default {
     this.passUserData();
     validateLogin(this.$router);
     this.loginStatus = loginStatus();
+    this.test();
+    this.isAdmin();
   },
 
   updated() {

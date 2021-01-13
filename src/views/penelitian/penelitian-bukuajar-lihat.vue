@@ -29,7 +29,7 @@
 			</div>
 		</div>
 
-		<Tables :table_data_head = "table_data.head" :table_data_body="table_data.body" :table_content="tableContent" ></Tables>
+		<Tables :table_data_head = "table_data.head" :table_data_body="filteredData" :table_content="tableContent" ></Tables>
 	</div>
 
 </template>

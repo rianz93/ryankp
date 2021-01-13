@@ -41,7 +41,7 @@ export default {
 	data() {
 		return {
 			table_data: [],
-
+			
 			filterTahun:'',
 			filterJudul:'',
 
