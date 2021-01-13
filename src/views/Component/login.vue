@@ -80,6 +80,7 @@ export default {
 					sessionStorage.setItem("password", response.data.password);
 					this.$router.replace("/");
 					this.$parent.loginStatus = true;
+					this.$parent.isAdminSidebar();
 				}else{
 					console.log(response.data);
 					this.$swal("Login Gagal", "Nama pengguna atau kata sandi tidak sesuai", "error");

@@ -9,7 +9,7 @@
 				Selamat datang di aplikasi Manajemen Pelaporan penelitian & PkM
 			</p>
 		</b-jumbotron>
-		<div v-if ="isAdmin">
+		<div>
 			<b-input-group size="md" class="mb-3">
 				<b-input-group-prepend is-text>
 					<b-icon icon="calendar2-date" size="sm"></b-icon>
@@ -22,7 +22,10 @@
 				</b-form-select>
 			</b-input-group>
 			<div class="penelitian mb-3">
-				<h4 class="head-penelitian mb-3" ><b-icon icon="journal-text"></b-icon> Rekap Pelaporan Penelitian {{tahun}}</h4>
+				<h4 class="head-penelitian mb-3">
+					<b-icon icon="journal-text"></b-icon> Rekap Pelaporan
+					Penelitian {{ tahun }}
+				</h4>
 				<b-card-group deck>
 					<b-card
 						:title="penelitiAsing.title"
@@ -91,7 +94,9 @@
 						header-tag="header"
 						footer-tag="footer"
 					>
-						<b-card-text>{{ penyelenggaraanForum.text }}</b-card-text>
+						<b-card-text>{{
+							penyelenggaraanForum.text
+						}}</b-card-text>
 						<b-button
 							:href="penyelenggaraanForum.href"
 							variant="outline-success"
@@ -131,7 +136,9 @@
 						header-tag="header"
 						footer-tag="footer"
 					>
-						<b-card-text>{{ hibahNonditlitabmas.text }}</b-card-text>
+						<b-card-text>{{
+							hibahNonditlitabmas.text
+						}}</b-card-text>
 						<b-button
 							:href="hibahNonditlitabmas.href"
 							variant="outline-success"
@@ -188,14 +195,14 @@
 						</template>
 					</b-card>
 
-					<b-card	
-					border-variant="white"
-					>
-					</b-card>
+					<b-card border-variant="white"> </b-card>
 				</b-card-group>
 			</div>
 			<div class="penelitian mb-5">
-				<h4 class="head-penelitian mb-3" ><b-icon icon="journal-text"></b-icon> Rekap Pelaporan PKM {{tahun}}</h4>
+				<h4 class="head-penelitian mb-3">
+					<b-icon icon="journal-text"></b-icon> Rekap Pelaporan PKM
+					{{ tahun }}
+				</h4>
 				<b-card-group deck>
 					<b-card
 						:title="unitUsahaKampus.title"
@@ -264,7 +271,9 @@
 						header-tag="header"
 						footer-tag="footer"
 					>
-						<b-card-text>{{ produkTerstandarisasi.text }}</b-card-text>
+						<b-card-text>{{
+							produkTerstandarisasi.text
+						}}</b-card-text>
 						<b-button
 							:href="produkTerstandarisasi.href"
 							variant="outline-success"
@@ -284,7 +293,9 @@
 						header-tag="header"
 						footer-tag="footer"
 					>
-						<b-card-text>{{ produkTersertifikasi.text }}</b-card-text>
+						<b-card-text>{{
+							produkTersertifikasi.text
+						}}</b-card-text>
 						<b-button
 							:href="produkTersertifikasi.href"
 							variant="outline-success"
@@ -330,23 +341,32 @@ export default {
 	methods: {
 		getDashboard() {
 			let tahun = this.tahun;
+			let isAdmin = sessionStorage.getItem("priority");
+			let user_id =
+				isAdmin != "admin" ? sessionStorage.getItem("id") : "";
 			axios
-				.get(API_ENDPOINT + "/getDashboard.php?tahun=" + tahun)
+				.get(
+					API_ENDPOINT +
+						"/getDashboard.php?tahun=" +
+						tahun +
+						"&user_id=" +
+						user_id
+				)
 				.then((response) => {
-					this.penelitiAsing.total		 = response.data.peneliti_asing;
-					this.publikasiJurnal.total 		 = response.data.publikasi_jurnal;
-					this.hibahDitlitabmas.total 	 = response.data.hibah_ditlitabmas;
-					this.hibahNonditlitabmas.total 	 = response.data.hibah_nonditlitabmas;
-					this.bukuAjar.total				 = response.data.buku_ajar;
-					this.penyelenggaraanForum.total	 = response.data.penyelenggaraan_forum;
-					this.hki.total					 = response.data.hki;
-					this.unitBisnisHr.total			 = response.data.unit_bisnis_hr;
-					this.produkTerstandarisasi.total = response.data.produk_terstandarisasi;
-					this.produkTersertifikasi.total  = response.data.produk_tersertifikasi;
-					this.publikasiJurnalPkm.total	 = response.data.pkm_jurnal;
-					this.publikasiMedia.total 		 = response.data.publikasi_media;
-					this.unitUsahaKampus.total		 = response.data.pkm_uhk;
-					this.mitraBerbadanHukum.total	 = response.data.pkm_mbh;
+					this.penelitiAsing.total 			= response.data.peneliti_asing;
+					this.publikasiJurnal.total 			= response.data.publikasi_jurnal;
+					this.hibahDitlitabmas.total 		= response.data.hibah_ditlitabmas;
+					this.hibahNonditlitabmas.total 		= response.data.hibah_nonditlitabmas;
+					this.bukuAjar.total 				= response.data.buku_ajar;
+					this.penyelenggaraanForum.total 	= response.data.penyelenggaraan_forum;
+					this.hki.total 						= response.data.hki;
+					this.unitBisnisHr.total 			= response.data.unit_bisnis_hr;
+					this.produkTerstandarisasi.total	= response.data.produk_terstandarisasi;
+					this.produkTersertifikasi.total 	= response.data.produk_tersertifikasi;
+					this.publikasiJurnalPkm.total 		= response.data.pkm_jurnal;
+					this.publikasiMedia.total			= response.data.publikasi_media;
+					this.unitUsahaKampus.total 			= response.data.pkm_uhk;
+					this.mitraBerbadanHukum.total 		= response.data.pkm_mbh;
 
 					console.log(response);
 				})
@@ -364,12 +384,13 @@ export default {
 
 	created() {
 		this.getDashboard();
-		this.isAdmin = sessionStorage.getItem("priority") == "admin" ? true : false;
+		this.isAdmin =
+			sessionStorage.getItem("priority") == "admin" ? true : false;
 	},
 
 	data() {
 		return {
-			isAdmin:"",
+			isAdmin: "",
 			tahun: "",
 			penelitiAsing: {
 				total: 0,
@@ -468,7 +489,6 @@ export default {
 				title: "Mitra Berbadan Hukum",
 				text: "Kelola data mitra berbadan hukum",
 			},
-
 		};
 	},
 };
@@ -478,13 +498,13 @@ export default {
 	float: right;
 	font-size: 14px;
 }
-.penelitian{
+.penelitian {
 	border: 0.5px solid #e8eae6;
-	border-radius:10px;
+	border-radius: 10px;
 	padding: 10px;
 }
 
-.penelitian .head-penelitian{
-	 text-align: center;
+.penelitian .head-penelitian {
+	text-align: center;
 }
 </style>
