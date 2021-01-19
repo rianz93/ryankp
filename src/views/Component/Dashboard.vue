@@ -31,6 +31,7 @@
 						:title="penelitiAsing.title"
 						header-tag="header"
 						footer-tag="footer"
+						v-if="isAdmin"
 					>
 						<b-card-text>{{ penelitiAsing.text }}</b-card-text>
 						<b-button
@@ -93,6 +94,7 @@
 						:title="penyelenggaraanForum.title"
 						header-tag="header"
 						footer-tag="footer"
+						v-if="isAdmin"
 					>
 						<b-card-text>{{
 							penyelenggaraanForum.text
@@ -179,9 +181,11 @@
 						:title="unitBisnisHr.title"
 						header-tag="header"
 						footer-tag="footer"
+						v-if="isAdmin"
 					>
 						<b-card-text>{{ unitBisnisHr.text }}</b-card-text>
 						<b-button
+							v-if="isAdmin"
 							variant="outline-success"
 							size="sm"
 							:href="unitBisnisHr.href"
@@ -208,12 +212,14 @@
 						:title="unitUsahaKampus.title"
 						header-tag="header"
 						footer-tag="footer"
+						v-if="isAdmin"
 					>
 						<b-card-text>{{ unitUsahaKampus.text }}</b-card-text>
 						<b-button
 							:href="unitUsahaKampus.href"
 							variant="outline-success"
 							size="sm"
+							
 							>Lihat Pelaporan</b-button
 						>
 						<template #footer>
@@ -270,6 +276,7 @@
 						:title="produkTerstandarisasi.title"
 						header-tag="header"
 						footer-tag="footer"
+						v-if="isAdmin"
 					>
 						<b-card-text>{{
 							produkTerstandarisasi.text
@@ -289,6 +296,7 @@
 					</b-card>
 
 					<b-card
+						v-if="isAdmin"
 						:title="produkTersertifikasi.title"
 						header-tag="header"
 						footer-tag="footer"
@@ -314,6 +322,7 @@
 						:title="mitraBerbadanHukum.title"
 						header-tag="header"
 						footer-tag="footer"
+						v-if="isAdmin"
 					>
 						<b-card-text>{{ mitraBerbadanHukum.text }}</b-card-text>
 						<b-button
@@ -353,20 +362,25 @@ export default {
 						user_id
 				)
 				.then((response) => {
-					this.penelitiAsing.total 			= response.data.peneliti_asing;
-					this.publikasiJurnal.total 			= response.data.publikasi_jurnal;
-					this.hibahDitlitabmas.total 		= response.data.hibah_ditlitabmas;
-					this.hibahNonditlitabmas.total 		= response.data.hibah_nonditlitabmas;
-					this.bukuAjar.total 				= response.data.buku_ajar;
-					this.penyelenggaraanForum.total 	= response.data.penyelenggaraan_forum;
-					this.hki.total 						= response.data.hki;
-					this.unitBisnisHr.total 			= response.data.unit_bisnis_hr;
-					this.produkTerstandarisasi.total	= response.data.produk_terstandarisasi;
-					this.produkTersertifikasi.total 	= response.data.produk_tersertifikasi;
-					this.publikasiJurnalPkm.total 		= response.data.pkm_jurnal;
-					this.publikasiMedia.total			= response.data.publikasi_media;
-					this.unitUsahaKampus.total 			= response.data.pkm_uhk;
-					this.mitraBerbadanHukum.total 		= response.data.pkm_mbh;
+					this.penelitiAsing.total = response.data.peneliti_asing;
+					this.publikasiJurnal.total = response.data.publikasi_jurnal;
+					this.hibahDitlitabmas.total =
+						response.data.hibah_ditlitabmas;
+					this.hibahNonditlitabmas.total =
+						response.data.hibah_nonditlitabmas;
+					this.bukuAjar.total = response.data.buku_ajar;
+					this.penyelenggaraanForum.total =
+						response.data.penyelenggaraan_forum;
+					this.hki.total = response.data.hki;
+					this.unitBisnisHr.total = response.data.unit_bisnis_hr;
+					this.produkTerstandarisasi.total =
+						response.data.produk_terstandarisasi;
+					this.produkTersertifikasi.total =
+						response.data.produk_tersertifikasi;
+					this.publikasiJurnalPkm.total = response.data.pkm_jurnal;
+					this.publikasiMedia.total = response.data.publikasi_media;
+					this.unitUsahaKampus.total = response.data.pkm_uhk;
+					this.mitraBerbadanHukum.total = response.data.pkm_mbh;
 
 					console.log(response);
 				})
